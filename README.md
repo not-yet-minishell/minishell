@@ -10,6 +10,7 @@
 ## 🌟 commit rule
 
 ### Tag : Description #issue_number
+ex ) Feat : Add tokenizer#2
 
 |Tag | Description|
 |-|-|
