@@ -1,8 +1,8 @@
 ---
-name: "[Feat]"
-about: 구현 및 설계를 위해 작성하는 템플릿
-title: ''
-labels: "✨ feature"
+name: Refactor report
+about: 리팩토링 시 작성하는 템플릿
+title: "[Refactor]"
+labels: "♻️ refactor"
 assignees: ''
 
 ---
@@ -14,7 +14,4 @@ assignees: ''
 - [ ] Labels에는 해당 이슈의 성향을 잘 나타내나요?
  -->
 # Description
-- 
-
-# To do
-- [ ]
+-
