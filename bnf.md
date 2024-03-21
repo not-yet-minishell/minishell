@@ -1,10 +1,10 @@
 ```
-<LIST>                  ::=  <SUBLIST> '&&' <SUBLIST>
-                        | <SUBLIST> '||' <SUBLIST>
-                        | <PIPELINE>
+<LIST>                  ::= <SUBLIST> '&&' <LIST>
+						| <SUBLIST> '||' <LIST>
+						| <PIPELIE>
 
-<SUBLIST>               ::= '(' <LIST> ')'
-		            	| <SIMPLE-COMMMAND>
+<SUBLIST>				::=  '(' <LIST> ')'
+							| <PIPELINE>
 
 <SIMPLE-COMMAND>        ::= <WORD>
 				        | <WORD> <SIMPLE-COMMAND>
@@ -14,6 +14,7 @@
 
 <COMMAND>               ::=  <SIMPLE-COMMAND-ELEMENT>
                         |  <SIMPLE-COMMAND-ELEMENT> <COMMAND>
+						| '(' <LIST> ')'
 
 <SIMPLE-COMMAND-ELEMENT>::= <WORD>
 						| <REDIRECTION>
