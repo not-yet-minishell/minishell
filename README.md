@@ -6,6 +6,7 @@
 - test-테스트기능요약 (ex: test-parsetest)
 - fix-주요수정된버그내용 (ex: fix-segfault)
 - style-주요수정내용
+- docs-문서내용
 
 ## 🌟 commit rule
 
@@ -22,6 +23,7 @@ ex ) Feat : Add tokenizer#2
 |Comment |	필요한 주석 추가 및 변경|
 |Test	| 테스트 코드, 리펙토링 테스트 코드 추가, Production Code(실제로 사용하는 코드) 변경 없음|
 |Rename |	파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우|
+|Docs | 문서 수정에 대한 커밋|
 
 ## 🌟 role
 
