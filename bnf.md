@@ -1,26 +1,22 @@
 ```
-<LIST>                  ::= <SUBLIST> '&&' <LIST>
-						| <SUBLIST> '||' <LIST>
-						| <PIPELIE>
+<LIST>          ::= <SUBLIST> '&&' <LIST>
+				| <SUBLIST> '||' <LIST>
+                | <SUBLIST>
 
-<SUBLIST>				::=  '(' <LIST> ')'
-							| <PIPELINE>
+<SUBLIST>       ::= '(' <LIST> ')'
+				| <PIPELINE>
 
-<SIMPLE-COMMAND>        ::= <WORD>
-				        | <WORD> <SIMPLE-COMMAND>
+<PIPELINE>      ::= <COMMAND>
+                | <COMMAND> '|' <PIPELINE>
 
-<PIPELINE>              ::= <COMMAND>
-                        | <COMMAND> '|' <PIPELINE>
+<COMMAND>       ::=  <SIMPLE-COMMAND>
+                |  <SIMPLE-COMMAND> <COMMAND>
 
-<COMMAND>               ::=  <SIMPLE-COMMAND-ELEMENT>
-                        |  <SIMPLE-COMMAND-ELEMENT> <COMMAND>
-						| '(' <LIST> ')'
+<SIMPLE-COMMAND>::= <WORD>
+				| <REDIRECTION>
 
-<SIMPLE-COMMAND-ELEMENT>::= <WORD>
-						| <REDIRECTION>
-
-<REDIRECTION>           ::=  '<'   <WORD>
-                        |  '<<'  <WORD>
-                        |  '>'   <WORD>
-                        |  '>>'  <WORD>
+<REDIRECTION>   ::= '<'   <WORD>
+                |  '<<'  <WORD>
+                |  '>'   <WORD>
+                |  '>>'  <WORD>
 ```
