@@ -2,7 +2,11 @@ NAME = minishell
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 SRCS = main.c\
-		ft_tokennew.c
+		ft_tokennew.c\
+		ft_add_token_node.c\
+		ft_del_token_node.c\
+		tokenizer_metachar.c\
+		tokenizer.c
 OBJS = $(SRCS:.c=.o)
 SUBDIRS = libft
 MAKE = make

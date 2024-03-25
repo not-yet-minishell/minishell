@@ -14,6 +14,7 @@ enum {
 #define ERROR 0
 
 #include "libft/libft.h"
+#include <stdio.h>
 
 typedef struct s_token {
 	char	*str;
@@ -28,3 +29,7 @@ typedef struct s_node {
 } t_node;
 
 t_token	*ft_tokennew(void *str, int tokennum);
+void	ft_del_token_node(t_token *node);
+void	ft_add_token_node(t_list *head, char *str, int tokennum);
+t_list *tokenizer(char *line, t_list *head);
+void		ft_tokenizer_metachar(char *line, int *i, int start, t_list *head);
