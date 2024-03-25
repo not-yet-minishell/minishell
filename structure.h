@@ -1,23 +1,17 @@
-#define AND_OPERATOR 1
-#define OR_OPERATOR 2
-#define L_PAREN 3
-#define R_PAREN 4
-#define PIPE 5
-#define REDIRECTION 6
-#define WORD 7
+enum {
+	AND_OPERATOR = 1,
+	OR_OPERATOR,
+	L_PAREN,
+	R_PAREN,
+	PIPE,
+	REDIRECT_IN,
+	REDIRECT_OUT,
+	REDIRECT_APPEND,
+	REDIRECT_HEREDOC,
+	WORD,
+};
 
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}	t_list;
-
-typedef struct s_token_list
-{
-	void			*token;
-	t_token_list	*next;
-} t_token_list;
-
+#include "libft/libft.h"
 
 typedef struct s_token {
 	char	*str;
@@ -25,8 +19,10 @@ typedef struct s_token {
 } t_token;
 
 typedef struct s_node {
-	char	*syntax;
-	t_token	*token;
-	t_node	*left;
-	t_node	*right;
+	char			*syntax;
+	t_token			*token;
+	struct s_node	*left;
+	struct s_node	*right;
 } t_node;
+
+t_token	*ft_tokennew(void *str, int tokennum);

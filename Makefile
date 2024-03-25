@@ -1,7 +1,8 @@
 NAME = minishell
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-SRCS = main.c
+SRCS = main.c\
+		ft_tokennew.c
 OBJS = $(SRCS:.c=.o)
 SUBDIRS = libft
 MAKE = make
