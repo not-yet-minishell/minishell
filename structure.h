@@ -11,6 +11,8 @@ enum {
 	WORD,
 };
 
+#define ERROR 0
+
 #include "libft/libft.h"
 
 typedef struct s_token {

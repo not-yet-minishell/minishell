@@ -17,7 +17,6 @@ int	is_metacharacter(char c)
 {
 	if (c == '|' || c == '&' || c == '(' || c ==')'
 	|| c == '>' || c == '<')
-	// >> 인 경우와 << 인경우 체크해줘야함!
 		return (1);
 	return (0);
 }
@@ -50,66 +49,51 @@ void	ft_tokenadd(t_list *head, char *str, int tokennum)
 		ft_lstadd_back(&head, new_node);
 }
 
-// void ft_token_metaadd(char *line, int *i, int start, t_list *head, int tokennum)
-// {
-
-// }
+int ft_token_num(char *line, int i)
+{
+	if (line[i] == '<' && line[i + 1] == '<')
+		return (REDIRECT_HEREDOC);
+	else if (line[i] == '<')
+		return (REDIRECT_IN);
+	else if (line[i] == '>' && line[i + 1] == '>')
+		return (REDIRECT_APPEND);
+	else if (line[i] == '>')
+		return (REDIRECT_OUT);
+	else if (line[i] == '|' && line[i + 1] == '|')
+		return (OR_OPERATOR);
+	else if (line[i] == '|')
+		return (PIPE);
+	else if (line[i] == '&' && line[i + 1] == '&')
+		return (AND_OPERATOR);
+	else if (line[i] == '(')
+		return (L_PAREN);
+	else if (line[i] ==')')
+		return (R_PAREN);
+	else
+		return (0);
+		// ㅇㅣ ㅂㅜ부ㄴ 에러처리 어떻게 할지 생각해보기
+}
 
 void ft_token_metachar(char *line, int *i, int start, t_list *head)
 {
-	char *str;
-	int	tokennum;
+	char	*str;
+	int		tokennum;
 
-	if (line[*i] == '<' && line[*i + 1] == '<')
+	tokennum = ft_token_num(line, *i);
+	if (tokennum == ERROR)
 	{
-		tokennum = REDIRECT_HEREDOC;
-		// *i += 2;
-		// str = ft_substr(line, start, *i - start);
-		// ft_tokenadd(head,str,REDIRECT_HEREDOC);
+		printf("Syntax Error\n"); // error 문구 생각하기
+		exit(-1); // exit 코드 생각
+		//free 해줘야하는지 고려하기..
 	}
-	else if (line[*i] == '<')
-	{
-		tokennum = REDIRECT_IN;
-		// *i += 1;
-		// str = ft_substr(line, start, *i - start);
-		// ft_tokenadd(head, str, REDIRECT_IN);
-	}
-	else if (line[*i] == '>' && line[*i + 1] == '>')
-	{
-		tokennum = REDIRECT_APPEND;
-
-	}
-	else if (line[*i] == '>')
-	{
-		tokennum = REDIRECT_OUT;
-
-	}
-	else if (line[*i] == '|' && line[*i + 1] == '|')
-	{
-		tokennum = OR_OPERATOR;
-	}else if (line[*i] == '|')
-	{
-		tokennum = PIPE;
-	}
-	else if (line[*i] == '&' && line[*i + 1] == '&')
-	{
-		tokennum = AND_OPERATOR;
-	}
-	else if (line[*i] == '(')
-	{
-		tokennum = L_PAREN;
-	}
-	else if (line[*i] ==')')
-	{
-		tokennum = R_PAREN;
-
-	}
-	if (tokennum ==  REDIRECT_IN || tokennum == REDIRECT_OUT || tokennum == L_PAREN 
+	else if (tokennum ==  REDIRECT_IN || tokennum == REDIRECT_OUT || tokennum == L_PAREN 
 	|| tokennum == R_PAREN || tokennum == PIPE)
 	 	*i += 1;
 	else if (tokennum == REDIRECT_APPEND || tokennum == REDIRECT_HEREDOC
 	|| tokennum == AND_OPERATOR || tokennum == OR_OPERATOR)
 		*i += 2;
+	str = ft_substr(line, start, *i - start);
+	ft_tokenadd(head,str,tokennum);
 }
 
 t_list *tokenizer(char *line, t_list *head)
@@ -142,7 +126,7 @@ t_list *tokenizer(char *line, t_list *head)
 }
 
 void leaks (void){
-	
+	system("leaks minishell");
 }
 
 int main(void)
@@ -150,7 +134,7 @@ int main(void)
 	char *line;
 	t_list	*head;
 
-	//atexit(leaks);
+	atexit(leaks);
 	while(1)
 	{
 		head = ft_lstnew(NULL);
