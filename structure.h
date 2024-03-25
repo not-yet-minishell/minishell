@@ -6,6 +6,19 @@
 #define REDIRECTION 6
 #define WORD 7
 
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}	t_list;
+
+typedef struct s_token_list
+{
+	void			*token;
+	t_token_list	*next;
+} t_token_list;
+
+
 typedef struct s_token {
 	char	*str;
 	int		token;
