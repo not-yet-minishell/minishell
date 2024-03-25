@@ -7,15 +7,24 @@ t_list *tokenizer(char *line, t_list *head)
 	int		i;
 	int		start;
 	char	*str;
-
 	i = 0;
+	// 따옴표 ' , " 만났을 경우 무조건 다음 따옴표 만날때 까지 word처리
+	// 다음 따옴표 만나지 못한다면, error 처리
 	while (line[i])
 	{
 		while (line[i] && ft_is_ifs(line[i]) && !ft_is_metacharacter(line[i]))
 			i++;
 		start = i;
 		while (line[i] && !ft_is_ifs(line[i]) && !ft_is_metacharacter(line[i]))
-			i++;
+		{
+			if (line[i] == '\"')
+			{
+				i++;
+				while (line[i] && line[i] != '\"')
+					i++;
+			}else
+				i++;
+		}
 		if (i - start > 0)
 		{
 			str = ft_substr(line, start, i - start);
