@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute.h                                          :+:      :+:    :+:   */
+/*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/21 13:56:57 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/03/26 19:35:04 by yeoshin          ###   ########.fr       */
+/*   Created: 2024/03/21 13:59:27 by yeoshin           #+#    #+#             */
+/*   Updated: 2024/03/27 02:20:11 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTE_H
-# define EXECUTE_H
+#include "execute.h"
+#include "../parse/parse_env.h"
 
-# define FALSE -1
-# define TRUE 1
+int	execute(t_list *head, t_env env_list)
+{
+	char	*cmd;
 
-# include <libft/libft.h>
-# include <sys/errno.h>
-
-void	free_list(t_list *head);
-void	ft_exit(t_list *head);
-void	error_handler(char *cmd_name, char *option_name, char *msg);
-int		execute(t_list *head);
-
-#endif
+	cmd = head->content;
+	if (ft_strncmp(cmd, "exit", 5) == 0)
+		ft_exit(head);
+}
