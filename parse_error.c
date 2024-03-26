@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:37:19 by soljeong          #+#    #+#             */
-/*   Updated: 2024/03/26 12:51:11 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/03/26 16:08:40 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 void	parse_error(void)
 {
 	printf("parse error\n"); // error 문구 생각하기, stderr로 해야하나 생각하기
-	exit(-1);
+	exit(1);
 }

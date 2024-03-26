@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:48:22 by soljeong          #+#    #+#             */
-/*   Updated: 2024/03/26 12:50:49 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/03/26 13:38:37 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,24 @@ static int	ft_token_num(char *line, int i);
 void	ft_tokenizer_metachar(char *line, int *i, int start, t_list *head)
 {
 	char	*str;
-	int		tokennum;
+	int		tokentype;
 
-	tokennum = ft_token_num(line, *i);
-	if (tokennum == ERROR)
+	tokentype = ft_token_num(line, *i);
+	if (tokentype == ERROR)
 	{
 		printf("parse error\n"); // error 문구 생각하기
 		exit(-1); // exit 코드 생각
 		//free 해줘야하는지 고려하기..
 	}
-	else if (tokennum == REDIRECT_IN || tokennum == REDIRECT_OUT
-		|| tokennum == L_PAREN || tokennum == R_PAREN
-		|| tokennum == PIPE)
+	else if (tokentype == REDIRECT_IN || tokentype == REDIRECT_OUT
+		|| tokentype == L_PAREN || tokentype == R_PAREN
+		|| tokentype == PIPE)
 		*i += 1;
-	else if (tokennum == REDIRECT_APPEND || tokennum == REDIRECT_HEREDOC
-		|| tokennum == AND_OPERATOR || tokennum == OR_OPERATOR)
+	else if (tokentype == REDIRECT_APPEND || tokentype == REDIRECT_HEREDOC
+		|| tokentype == AND_OPERATOR || tokentype == OR_OPERATOR)
 		*i += 2;
 	str = ft_substr(line, start, *i - start);
-	ft_add_token_node(head, str, tokennum);
+	ft_add_token_node(head, str, tokentype);
 }
 
 static int	ft_token_num(char *line, int i)
