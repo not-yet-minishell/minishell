@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tokennew.c                                      :+:      :+:    :+:   */
+/*   parse_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/25 11:25:10 by soljeong          #+#    #+#             */
-/*   Updated: 2024/03/26 12:43:15 by soljeong         ###   ########.fr       */
+/*   Created: 2024/03/26 12:37:19 by soljeong          #+#    #+#             */
+/*   Updated: 2024/03/26 12:51:11 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-t_token	*ft_tokennew(void *str, int tokennum)
+void	parse_error(void)
 {
-	t_token	*new;
-
-	new = malloc(sizeof(t_token));
-	if (new == NULL)
-		return (NULL);
-	new->str = str;
-	new->token = tokennum;
-	return (new);
+	printf("parse error\n"); // error 문구 생각하기, stderr로 해야하나 생각하기
+	exit(-1);
 }

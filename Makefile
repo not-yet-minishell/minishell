@@ -6,7 +6,8 @@ SRCS = main.c\
 		ft_add_token_node.c\
 		ft_del_token_node.c\
 		tokenizer_metachar.c\
-		tokenizer.c
+		tokenizer.c\
+		parse_error.c
 OBJS = $(SRCS:.c=.o)
 SUBDIRS = libft
 MAKE = make

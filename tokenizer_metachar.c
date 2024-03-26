@@ -1,7 +1,20 @@
-#include "structure.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokenizer_metachar.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/26 12:48:22 by soljeong          #+#    #+#             */
+/*   Updated: 2024/03/26 12:50:49 by soljeong         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "parse.h"
 
 static int	ft_token_num(char *line, int i);
-void		ft_tokenizer_metachar(char *line, int *i, int start, t_list *head)
+
+void	ft_tokenizer_metachar(char *line, int *i, int start, t_list *head)
 {
 	char	*str;
 	int		tokennum;
@@ -13,14 +26,15 @@ void		ft_tokenizer_metachar(char *line, int *i, int start, t_list *head)
 		exit(-1); // exit 코드 생각
 		//free 해줘야하는지 고려하기..
 	}
-	else if (tokennum ==  REDIRECT_IN || tokennum == REDIRECT_OUT || tokennum == L_PAREN 
-	|| tokennum == R_PAREN || tokennum == PIPE)
-	 	*i += 1;
+	else if (tokennum == REDIRECT_IN || tokennum == REDIRECT_OUT
+		|| tokennum == L_PAREN || tokennum == R_PAREN
+		|| tokennum == PIPE)
+		*i += 1;
 	else if (tokennum == REDIRECT_APPEND || tokennum == REDIRECT_HEREDOC
-	|| tokennum == AND_OPERATOR || tokennum == OR_OPERATOR)
+		|| tokennum == AND_OPERATOR || tokennum == OR_OPERATOR)
 		*i += 2;
 	str = ft_substr(line, start, *i - start);
-	ft_add_token_node(head,str,tokennum);
+	ft_add_token_node(head, str, tokennum);
 }
 
 static int	ft_token_num(char *line, int i)
@@ -41,7 +55,7 @@ static int	ft_token_num(char *line, int i)
 		return (AND_OPERATOR);
 	else if (line[i] == '(')
 		return (L_PAREN);
-	else if (line[i] ==')')
+	else if (line[i] == ')')
 		return (R_PAREN);
 	else
 		return (0);
