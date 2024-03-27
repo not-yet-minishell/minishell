@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 13:40:49 by soljeong          #+#    #+#             */
-/*   Updated: 2024/03/26 20:23:04 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/03/27 13:17:41 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,21 @@ t_tree *syntax_simple_cmd(t_list **list);
 t_tree *syntax_redirection(t_list **list);
 
 
+void tree_inorder_print(t_tree *tree)
+{
+	if (!tree)
+		return ;
+	if (tree->left)
+	{
+		tree_inorder_print(tree->left);
+	}
+	if (tree->token)
+			printf("tree str: %s\n",tree->token->str);
+	if (tree->right)
+	{
+		tree_inorder_print(tree->right);
+	}
+}
 
 void curr_list_print(t_list *list)
 {
@@ -35,10 +50,13 @@ void curr_list_print(t_list *list)
 
 t_tree *parse_tree(t_list **list)
 {
+	t_tree	*tree;
 	*list = (*list)->next;
 	if (!*list)
 		return (0);
-	return (syntax_list(list));
+	tree = syntax_list(list);
+	tree_inorder_print(tree);
+	return (tree);
 }
 
 t_tree *ft_tree_new(t_token *token)
@@ -71,6 +89,8 @@ t_tree *syntax_list(t_list **list)
 		if (tree->right == NULL)
 			parse_error();
 	}
+	else
+		parse_error();
 	return (tree);
 }
 
@@ -82,6 +102,7 @@ t_tree *syntax_sublist(t_list **list)
 	if (*list == NULL)
 		return (NULL);
 	token = (t_token *)(*list)->content;
+	//curr_list_print(*list);
 	if (token->type == L_PAREN)
 	{
 		*list = (*list)->next;
@@ -114,14 +135,13 @@ t_tree *syntax_pipeline(t_list **list)
 
 	tree = ft_tree_new(NULL);
 	tree->left = syntax_cmd(list);
-	if (!(tree->left))
+	if (tree->left == NULL)
 		parse_error();
 	if (*list == NULL)
 		return tree;
 	token = (t_token *)(*list)->content;
 	if (token->type == PIPE)
 	{
-		curr_list_print(*list);
 		tree->token = token;
 		*list = (*list)->next;
 		tree->right = syntax_pipeline(list);
@@ -173,7 +193,7 @@ t_tree *syntax_redirection(t_list **list)
 {
 	t_token	*token;
 	t_tree	*tree;
-	t_tree	*subtree;
+	//t_tree	*subtree;
 
 	if (*list == NULL)
 		parse_error();
@@ -191,8 +211,7 @@ t_tree *syntax_redirection(t_list **list)
 		token = (t_token *)(*list)->content;
 		if (token->type == WORD)
 		{
-			subtree = ft_tree_new(token);
-			curr_list_print(*list);
+			tree->right = ft_tree_new(token);
 			(*list) = (*list)->next;
 			return (tree);
 		}
