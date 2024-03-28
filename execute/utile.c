@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
+/*   utile.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/29 17:06:29 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/03/28 14:59:21 by yeoshin          ###   ########.fr       */
+/*   Created: 2024/03/26 18:57:50 by yeoshin           #+#    #+#             */
+/*   Updated: 2024/03/28 14:26:14 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "execute.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	free_list(t_list *head)
 {
-	t_list	*last;
+	t_list	*temp;
 
-	if (lst == NULL)
+	while (head != NULL)
 	{
-		*lst = new;
-		return ;
+		temp = head;
+		head = head->next;
+		free(temp->content);
+		free(temp);
 	}
-	if (new == NULL)
-		return ;
-	last = ft_lstlast(*lst);
-	if (last != NULL)
-		last->next = new;
-	else
-		*lst = new;
 }

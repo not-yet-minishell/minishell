@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
+/*   error_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/29 17:06:29 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/03/28 14:59:21 by yeoshin          ###   ########.fr       */
+/*   Created: 2024/03/26 17:00:13 by yeoshin           #+#    #+#             */
+/*   Updated: 2024/03/26 19:29:19 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "execute.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	error_handler(char *cmd_name, char *option_name, char *msg)
 {
-	t_list	*last;
-
-	if (lst == NULL)
-	{
-		*lst = new;
-		return ;
-	}
-	if (new == NULL)
-		return ;
-	last = ft_lstlast(*lst);
-	if (last != NULL)
-		last->next = new;
+	ft_printf(STDERR_FILENO, "minishell: ");
+	if (cmd_name != NULL)
+		ft_printf(STDERR_FILENO, "%s: ", cmd_name);
+	if (option_name != NULL)
+		ft_printf(STDERR_FILENO, "%s: ", option_name);
+	if (msg != NULL)
+		ft_printf(STDERR_FILENO, "%s", msg);
 	else
-		*lst = new;
+		ft_printf(STDERR_FILENO, "%s\n", strerror(errno));
 }

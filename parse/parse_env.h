@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
+/*   parse_env.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/29 17:06:29 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/03/28 14:59:21 by yeoshin          ###   ########.fr       */
+/*   Created: 2024/03/27 02:00:55 by yeoshin           #+#    #+#             */
+/*   Updated: 2024/03/28 15:07:45 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef PARSE_ENV_H
+# define PARSE_ENV_H
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+# include <stdlib.h>
+# include "../libft/libft.h"
+# include "../printf/ft_printf.h"
+
+typedef struct s_env
 {
-	t_list	*last;
+	char	*key;
+	char	*value;
+}	t_env;
 
-	if (lst == NULL)
-	{
-		*lst = new;
-		return ;
-	}
-	if (new == NULL)
-		return ;
-	last = ft_lstlast(*lst);
-	if (last != NULL)
-		last->next = new;
-	else
-		*lst = new;
-}
+void	*ft_malloc(int size);
+t_list	*parse_env(char *env[]);
+
+#endif

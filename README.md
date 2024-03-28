@@ -24,6 +24,7 @@ ex ) Feat : Add tokenizer#2
 |Test	| 테스트 코드, 리펙토링 테스트 코드 추가, Production Code(실제로 사용하는 코드) 변경 없음|
 |Rename |	파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우|
 |Docs | 문서 수정에 대한 커밋|
+|Merge | 다른 브랜치에 있는 내용을 merge 했을 경우 |
 
 ## 🌟 role
 
