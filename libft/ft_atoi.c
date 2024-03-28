@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 19:44:27 by yeoshin           #+#    #+#             */
-/*   Updated: 2023/10/14 13:47:25 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/03/26 19:21:47 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ static int	check_long(const char *str, int flag)
 
 int	ft_atoi(const char *str)
 {
-	int	flag;
-	int	num;
-	int	check;
+	int			flag;
+	long long	num;
+	int			check;
 
 	flag = 1;
 	num = 0;
@@ -65,11 +65,11 @@ int	ft_atoi(const char *str)
 		str ++;
 	check = check_long(str, flag);
 	if (check != 1)
-		return (check);
+		return (-1);
 	while (*str >= '0' && *str <= '9')
 	{
 		num = num * 10 + *str - 48;
 		str ++;
 	}
-	return (flag * num);
+	return ((unsigned char)flag * num);
 }

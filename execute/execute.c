@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
+/*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/29 17:06:29 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/03/28 14:59:21 by yeoshin          ###   ########.fr       */
+/*   Created: 2024/03/21 13:59:27 by yeoshin           #+#    #+#             */
+/*   Updated: 2024/03/27 02:20:11 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "execute.h"
+#include "../parse/parse_env.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+int	execute(t_list *head, t_env env_list)
 {
-	t_list	*last;
+	char	*cmd;
 
-	if (lst == NULL)
-	{
-		*lst = new;
-		return ;
-	}
-	if (new == NULL)
-		return ;
-	last = ft_lstlast(*lst);
-	if (last != NULL)
-		last->next = new;
-	else
-		*lst = new;
+	cmd = head->content;
+	if (ft_strncmp(cmd, "exit", 5) == 0)
+		ft_exit(head);
 }
