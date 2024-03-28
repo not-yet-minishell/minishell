@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 13:40:49 by soljeong          #+#    #+#             */
-/*   Updated: 2024/03/27 13:17:41 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/03/28 14:30:30 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ t_tree *syntax_redirection(t_list **list);
 
 void tree_inorder_print(t_tree *tree)
 {
-	if (!tree)
+	if (tree == NULL)
 		return ;
-	if (tree->left)
+	if (tree->left != NULL)
 	{
 		tree_inorder_print(tree->left);
 	}
-	if (tree->token)
+	if (tree->token != NULL && tree->token->str != NULL)
 			printf("tree str: %s\n",tree->token->str);
-	if (tree->right)
+	if (tree->right != NULL)
 	{
 		tree_inorder_print(tree->right);
 	}
@@ -44,6 +44,11 @@ void curr_list_print(t_list *list)
 {
 	t_token *token;
 
+	if (!list)
+	{
+		printf("no!!\n");
+		return ;
+	}
 	token = (t_token *)list->content;
 	printf("str :%s\n", token->str);
 }
@@ -55,7 +60,6 @@ t_tree *parse_tree(t_list **list)
 	if (!*list)
 		return (0);
 	tree = syntax_list(list);
-	tree_inorder_print(tree);
 	return (tree);
 }
 
@@ -65,6 +69,8 @@ t_tree *ft_tree_new(t_token *token)
 
 	tree = malloc(sizeof(t_tree));
 	tree->token = token;
+	tree->left = NULL;
+	tree->right = NULL;
 	return tree;
 }
 
@@ -89,8 +95,6 @@ t_tree *syntax_list(t_list **list)
 		if (tree->right == NULL)
 			parse_error();
 	}
-	else
-		parse_error();
 	return (tree);
 }
 
@@ -102,15 +106,15 @@ t_tree *syntax_sublist(t_list **list)
 	if (*list == NULL)
 		return (NULL);
 	token = (t_token *)(*list)->content;
-	//curr_list_print(*list);
 	if (token->type == L_PAREN)
 	{
 		*list = (*list)->next;
 		tree = syntax_list(list);
 		if (!tree)
 			parse_error();
+		if (*list == NULL)
+			parse_error();
 		token = (t_token *)(*list)->content;
-		curr_list_print(*list);
 		if (token->type == R_PAREN)
 		{
 			*list = (*list)->next;
@@ -120,9 +124,7 @@ t_tree *syntax_sublist(t_list **list)
 		{
 			parse_error();
 			return (0);
-			//error
 		}
-			//error
 	}
 	else
 		return (syntax_pipeline(list));

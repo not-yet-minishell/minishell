@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:51:18 by soljeong          #+#    #+#             */
-/*   Updated: 2024/03/26 13:10:04 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/03/28 11:07:07 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,15 @@ int		ft_is_ifs(char c);
 int		ft_is_metacharacter(char c);
 void	ft_quotemarks(char *line, int *i, char quote);
 
-t_list	*tokenizer(char *line, t_list *head)
+t_list	*tokenizer(char *line)
 {
 	int		i;
 	int		start;
 	char	*str;
+	t_list	*head;
 
 	i = 0;
+	head = ft_lstnew(NULL);
 	while (line[i])
 	{
 		while (line[i] && ft_is_ifs(line[i]) && !ft_is_metacharacter(line[i]))

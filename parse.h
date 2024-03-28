@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:45:34 by soljeong          #+#    #+#             */
-/*   Updated: 2024/03/26 19:01:53 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/03/28 14:22:55 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,10 @@ typedef struct s_tree {
 t_token	*ft_tokennew(void *str, int tokennum);
 void	ft_del_token_node(t_token *node);
 void	ft_add_token_node(t_list *head, char *str, int tokennum);
-t_list	*tokenizer(char *line, t_list *head);
+t_list	*tokenizer(char *line);
 void	ft_tokenizer_metachar(char *line, int *i, int start, t_list *head);
 void	parse_error(void);
 t_tree *parse_tree(t_list **list);
+void tree_inorder_print(t_tree *tree);
 
 #endif

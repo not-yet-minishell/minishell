@@ -16,12 +16,12 @@ MAKE = make
 all : $(NAME)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c  $< -o $@
+	$(CC) $(CFLAGS) -c  $< -o $@ 
 
 $(NAME) : $(OBJS)
 	make -C $(SUBDIRS)
 	cp $(SUBDIRS)/libft.a $(NAME)
-	$(CC) $(CFLAGS) -I. $(OBJS)  -o $(NAME)  -lft -L$(SUBDIRS) -lreadline
+	$(CC) $(CFLAGS) -I. $(OBJS)  -o $(NAME)  -lft -L$(SUBDIRS) -lreadline -fsanitize=address
 
 clean:
 	make -C $(SUBDIRS) clean

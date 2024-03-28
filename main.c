@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/03/26 19:26:57 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/03/28 14:23:56 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,29 @@ int	main(void)
 {
 	char	*line;
 	t_list	*head;
+	t_tree	*tree;
 
 	//atexit(leaks);
+	//wait(1)
+	//..????????????????????????????????????
+	//..?
 	while (1)
 	{
-		head = ft_lstnew(NULL);
 		line = readline("examshell : ");
 		add_history(line);
-		tokenizer(line, head);
+		head = tokenizer(line);
+		if (!head)
+		{
+			printf("error\n");
+		}
+		// head를 return으로 받고 null이 아닐때만 실행부로 넘김
 		//ft_lstiter(head, (void *)print_node);
-		parse_tree(&head);
+		tree = parse_tree(&head);
+		if (!tree)
+			printf("error\n");
+		tree_inorder_print(tree);
+		// parse_tree에서 tree를 받고, null이 아닐때만 실행부로 넘김
 		ft_lstclear(&head, (void *)ft_del_token_node);
+		//ft_parse_tree(head)'
 	}
 }
