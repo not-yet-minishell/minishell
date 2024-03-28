@@ -6,38 +6,43 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 01:59:48 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/03/27 02:38:05 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/03/28 15:01:56 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse_env.h"
 
-static char	*make_key(char *env);
-static char	*make_value(char *env);
+static char		*make_key(char *env);
+static char		*make_value(char *env);
+static t_env	*init_content(char *env);
 
-t_env	*parse_env(char *env[])
+t_list	*parse_env(char *env[])
 {
-	t_env	*node;
-	t_env	*pre;
-	t_env	*head;
+	t_env	*content;
+	t_list	*env_node;
+	t_list	*env_head;
 	int		idx;
 
 	idx = 0;
-	pre = NULL;
+	env_head = NULL;
 	while (env[idx] != NULL)
 	{
-		node = (t_env *)ft_malloc(sizeof(t_env));
-		node->key = make_key(env[idx]);
-		node->value = make_value(env[idx]);
-		node->next = NULL;
+		content = init_content(env[idx]);
+		env_node = ft_lstnew(content);
+		ft_lstadd_back(&env_head, env_node);
 		idx++;
-		if (pre != NULL)
-			pre->next = node;
-		else
-			head = node;
-		pre = node;
 	}
-	return (head);
+	return (env_head);
+}
+
+static t_env	*init_content(char *env)
+{
+	t_env	*content;
+
+	content = ft_malloc(sizeof(t_env));
+	content->key = make_key(env);
+	content->value = make_value(env);
+	return (content);
 }
 
 static char	*make_key(char *env)
@@ -50,9 +55,8 @@ static char	*make_key(char *env)
 	idx = 0;
 	while (env[len] != '=')
 		len++;
-	idx++;
 	key = (char *)ft_malloc(len + 2);
-	while (idx <= len)
+	while (idx < len)
 	{
 		key[idx] = env[idx];
 		idx++;
@@ -64,20 +68,24 @@ static char	*make_key(char *env)
 static char	*make_value(char *env)
 {
 	int		idx;
+	int		value_idx;
 	int		len;
 	char	*value;
 
 	idx = 0;
+	value_idx = 0;
 	len = ft_strlen(env);
 	while (env[idx] != '=')
 		idx++;
 	idx++;
-	value = (char *)ft_malloc(len + 1);
+	value = ft_malloc(len - idx + 1);
+
 	while (idx < len)
 	{
-		value[idx] = env[idx];
+		value[value_idx] = env[idx];
 		idx++;
+		value_idx++;
 	}
-	value[idx] = '\0';
+	value[value_idx] = '\0';
 	return (value);
 }
