@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 17:06:29 by yeoshin           #+#    #+#             */
-/*   Updated: 2023/11/05 17:52:58 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/03/28 14:59:21 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	t_list	*last;
 
 	if (lst == NULL)
+	{
+		*lst = new;
 		return ;
+	}
 	if (new == NULL)
 		return ;
 	last = ft_lstlast(*lst);

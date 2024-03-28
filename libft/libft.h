@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 20:00:50 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/03/26 19:21:33 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/03/28 14:40:59 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+void			*ft_malloc(int size);
 void			*ft_calloc(size_t count, size_t size);
 int				ft_isalnum(int alnum);
 int				ft_isalpha(int alpha);
