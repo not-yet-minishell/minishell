@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utile.c                                            :+:      :+:    :+:   */
+/*   ft_malloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 18:57:50 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/03/28 14:26:14 by yeoshin          ###   ########.fr       */
+/*   Created: 2024/03/28 14:25:43 by yeoshin           #+#    #+#             */
+/*   Updated: 2024/03/28 14:26:51 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execute.h"
+#include <stdlib.h>
 
-void	free_list(t_list *head)
+void	*ft_malloc(int size)
 {
-	t_list	*temp;
+	void	*content;
 
-	while (head != NULL)
-	{
-		temp = head;
-		head = head->next;
-		free(temp->content);
-		free(temp);
-	}
+	content = malloc(size);
+	if (content == NULL)
+		exit (1);
+	return (content);
 }
