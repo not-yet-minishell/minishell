@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list.h                                             :+:      :+:    :+:   */
+/*   parse_list.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 17:34:23 by soljeong          #+#    #+#             */
-/*   Updated: 2024/03/29 18:21:44 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/03/29 18:30:28 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifdef PARSE_LIST_H
+#ifndef PARSE_LIST_H
 # define PARSE_LIST_H
 
 typedef enum e_rd_type {
@@ -34,4 +34,4 @@ typedef struct	s_cmd_node {
 	struct s_exe_node	*exe_list;
 }	t_cmd_node;
 
-#endif PARSE_LIST_H
+#endif
