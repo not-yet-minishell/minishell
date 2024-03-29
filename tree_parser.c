@@ -6,14 +6,13 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 13:40:49 by soljeong          #+#    #+#             */
-/*   Updated: 2024/03/28 14:30:30 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/03/29 20:34:35 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-// 지금 종단 점에서 에러나고있음...
-
+// 괄호가 있으면.. 그 뒤로 더이상 돌지 않는 증상이 발생함...!
 t_tree *parse_tree(t_list **list);
 t_tree *ft_tree_new(t_token *token);
 t_tree *syntax_list(t_list **list);
@@ -60,6 +59,8 @@ t_tree *parse_tree(t_list **list)
 	if (!*list)
 		return (0);
 	tree = syntax_list(list);
+	if (*list)
+		parse_error();
 	return (tree);
 }
 
@@ -79,7 +80,6 @@ t_tree *syntax_list(t_list **list)
 	t_token	*token;
 	t_tree	*tree;
 
-	// 일단 tree new 해야함
 	tree = ft_tree_new(NULL);
 	tree->left = syntax_sublist(list);
 	if (tree->left == NULL)
@@ -207,6 +207,7 @@ t_tree *syntax_redirection(t_list **list)
 	|| token->type == REDIRECT_OUT)
 	{
 		tree->token = token;
+		ft_del_token_node(token);
 		*list = (*list)->next;
 		if (*list == NULL)
 			parse_error();
