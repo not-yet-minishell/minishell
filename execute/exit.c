@@ -6,13 +6,13 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 20:24:51 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/03/26 19:34:20 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/03/27 04:37:33 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
 
-void	ft_exit(t_list *head)
+void	ft_exit(t_list *head, t_env *env_list)
 {
 	t_list	*cmd_node;
 	int		exit_num;
