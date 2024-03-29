@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 02:00:55 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/03/28 15:07:45 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/03/29 16:51:00 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ typedef struct s_env
 	char	*value;
 }	t_env;
 
-void	*ft_malloc(int size);
 t_list	*parse_env(char *env[]);
 
 #endif
