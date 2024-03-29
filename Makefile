@@ -7,9 +7,9 @@ SRCS = main.c\
 		ft_del_token_node.c\
 		tokenizer_metachar.c\
 		tokenizer.c\
-		parse_error.c
+		parse_error.c\
+		error_handler.c
 OBJS = $(SRCS:.c=.o)
-SUBDIRS = libft
 MAKE = make
 
 all : $(NAME)
@@ -18,16 +18,18 @@ all : $(NAME)
 	$(CC) $(CFLAGS) -c  $< -o $@
 
 $(NAME) : $(OBJS)
-	make -C $(SUBDIRS)
-	cp $(SUBDIRS)/libft.a $(NAME)
-	$(CC) $(CFLAGS) -I. $(OBJS)  -o $(NAME)  -lft -L$(SUBDIRS) -lreadline
+	make -C libft
+	make -C printf
+	$(CC) $(CFLAGS) $(OBJS)  -o $(NAME) -Llibft -Lprintf -lft -lftprintf  -lreadline
 
 clean:
-	make -C $(SUBDIRS) clean
+	make -C libft clean
+	make -C printf clean
 	rm -f $(OBJS) $(BONUS_OBJS)
 
 fclean: clean
-	rm -f $(SUBDIRS)/libft.a
+	rm -f libft/libft.a
+	rm -f printf/libftprintf.a
 	rm -f $(NAME)
 
 re: fclean all

@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/03/26 12:45:29 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/03/28 17:16:57 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ int	main(void)
 	while (1)
 	{
 		head = ft_lstnew(NULL);
-		line = readline("examshell : ");
+		line = readline("minishell$ ");
 		add_history(line);
-		tokenizer(line, head);
-		ft_lstiter(head, (void *)print_node);
+		head = tokenizer(line);
+		if (head)
+			ft_lstiter(head, (void *)print_node);
 		ft_lstclear(&head, (void *)ft_del_token_node);
 	}
 }

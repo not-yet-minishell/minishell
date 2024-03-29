@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"structure.h": "c",
-		"parse.h": "c"
+		"parse.h": "c",
+		"cstring": "c"
 	}
 }

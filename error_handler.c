@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   error_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 17:00:13 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/03/26 19:29:19 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/03/28 16:45:21 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execute.h"
+#include "execute/execute.h"
 
 void	error_handler(char *cmd_name, char *option_name, char *msg)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:56:57 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/03/28 14:41:15 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/03/28 16:46:48 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "../libft/libft.h"
 # include "../printf/ft_printf.h"
 # include "../parse/parse_env.h"
-
+# include <string.h>
 
 void	free_list(t_list *head);
 void	ft_exit(t_list *head, t_env *env_list);
