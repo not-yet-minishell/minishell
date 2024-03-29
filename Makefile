@@ -8,6 +8,7 @@ SRCS = main.c\
 		parse/tokenizer_metachar.c\
 		parse/tokenizer.c\
 		parse/parse_error.c\
+		parse/token_test.c\
 		error_handler.c
 OBJS = $(SRCS:.c=.o)
 MAKE = make

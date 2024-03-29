@@ -6,11 +6,11 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 18:10:51 by soljeong          #+#    #+#             */
-/*   Updated: 2024/03/29 18:11:55 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/03/29 18:35:57 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse/parse.h"
+#include "parse.h"
 
 void	print_node(t_token *node)
 {
