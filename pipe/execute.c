@@ -6,21 +6,23 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 19:59:34 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/03/29 20:49:49 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/03/30 08:00:47 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+static char	**make_list_to_array(t_list *node);
 
 void	execute(t_list *node)
 {
 	char	**exe;
 
 	exe = make_list_to_array(node);
-
+	check_builtin(exe);
 }
 
-char	**make_list_to_array(t_list *node)
+static char	**make_list_to_array(t_list *node)
 {
 	char	**ret;
 	int		list_len;

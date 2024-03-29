@@ -6,13 +6,15 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 19:46:28 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/03/29 20:42:42 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/03/30 08:07:16 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	start_command(t_list *node, t_fd fd_info)
+static t_list	*free_and_next_rd(t_list *rd_node);
+
+void	start_command(t_list *node, t_fd *fd_info)
 {
 	t_list	*rd_node;
 	t_list	*exe_node;
@@ -24,15 +26,17 @@ void	start_command(t_list *node, t_fd fd_info)
 		redirect(rd_node->content);
 		rd_node = free_and_next_rd(rd_node);
 	}
-	while (exe_node != NULL)
-	{
-		execute(exe_node->content);
-		exe_node = free_and_next_exe(exe_node);
-	}
+	execute(exe_node->content);
 }
 
 static t_list	*free_and_next_rd(t_list *rd_node)
-{}
+{
+	t_list	*pre;
 
-static t_list	*free_and_next_exe(t_list *exe_node)
-{}
+	pre = rd_node;
+	rd_node = rd_node->next;
+	free(pre->content->filename);
+	free(pre->content);
+	free(pre);
+	return (rd_node);
+}

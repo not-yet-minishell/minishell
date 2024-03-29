@@ -6,16 +6,16 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 19:59:20 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/03/29 20:41:10 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/03/30 07:52:57 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	in_redirect(t_rd_node *node);
-void	out_redirect(t_rd_node *node);
-void	append_redirect(t_rd_node *node);
-void	heredoc(t_rd_node *node);
+static void	in_redirect(t_rd_node *node);
+static void	out_redirect(t_rd_node *node);
+static void	append_redirect(t_rd_node *node);
+static void	heredoc(t_rd_node *node);
 
 void	redirect(t_rd_node *node)
 {
@@ -31,12 +31,14 @@ void	redirect(t_rd_node *node)
 		append_redirect(node);
 }
 
-void	in_redirect(t_rd_node *node)
-{}
-void	out_redirect(t_rd_node *node)
-{}
-void	append_redirect(t_rd_node *node)
+static void	in_redirect(t_rd_node *node)
 {}
 
-void	heredoc(t_rd_node *node);
+static void	out_redirect(t_rd_node *node)
+{}
+
+static void	append_redirect(t_rd_node *node)
+{}
+
+static void	heredoc(t_rd_node *node);
 {}
