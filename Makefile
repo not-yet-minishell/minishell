@@ -2,12 +2,12 @@ NAME = minishell
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 SRCS = main.c\
-		ft_tokennew.c\
-		ft_add_token_node.c\
-		ft_del_token_node.c\
-		tokenizer_metachar.c\
-		tokenizer.c\
-		parse_error.c\
+		parse/ft_tokennew.c\
+		parse/ft_add_token_node.c\
+		parse/ft_del_token_node.c\
+		parse/tokenizer_metachar.c\
+		parse/tokenizer.c\
+		parse/parse_error.c\
 		error_handler.c
 OBJS = $(SRCS:.c=.o)
 MAKE = make

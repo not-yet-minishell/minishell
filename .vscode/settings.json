@@ -2,6 +2,7 @@
 	"files.associations": {
 		"structure.h": "c",
 		"parse.h": "c",
-		"cstring": "c"
+		"cstring": "c",
+		"__node_handle": "cpp"
 	}
 }

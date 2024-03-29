@@ -6,14 +6,14 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:45:34 by soljeong          #+#    #+#             */
-/*   Updated: 2024/03/28 16:40:11 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/03/29 18:12:51 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_H
 # define PARSE_H
 # define ERROR 0
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include <stdio.h>
 
 enum {

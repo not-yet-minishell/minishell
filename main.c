@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/03/28 17:16:57 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/03/29 18:12:18 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,8 @@
 #include <readline/history.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "parse.h"
-
-void	print_node(t_token *node)
-{
-	if (!node)
-		return ;
-	printf("str : %s\n", node->str);
-	printf("token : %d\n", node->token);
-}
+#include "parse/parse.h"
+#include "parse/parse_test.h"
 
 void	leaks(void)
 {
