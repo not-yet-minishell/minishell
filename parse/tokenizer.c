@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:51:18 by soljeong          #+#    #+#             */
-/*   Updated: 2024/03/29 18:06:39 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/03/29 18:39:10 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int	ft_is_metacharacter(char c)
 
 void	ft_quotemarks(char *line, int *i, char quote)
 {
-
 	*i += 1;
 	while (line[*i] && line[*i] != quote)
 		*i += 1;
