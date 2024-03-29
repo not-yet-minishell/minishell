@@ -6,13 +6,13 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 17:34:23 by soljeong          #+#    #+#             */
-/*   Updated: 2024/03/29 18:43:09 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/03/29 19:13:26 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_LIST_H
 # define PARSE_LIST_H
-# include "../libft/libft.h"
+# include "../minishell.h"
 typedef enum e_rd_type {
 	RD_IN = 1,
 	RD_HEREDOC,

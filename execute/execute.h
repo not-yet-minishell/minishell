@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:56:57 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/03/28 14:41:15 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/03/29 19:14:29 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,7 @@
 
 # define FALSE -1
 # define TRUE 1
-
-# include <sys/errno.h>
-# include <stdlib.h>
-# include "../libft/libft.h"
-# include "../printf/ft_printf.h"
-# include "../parse/parse_env.h"
+#include "../minishell.h"
 
 
 void	free_list(t_list *head);
