@@ -6,21 +6,15 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:56:57 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/03/30 15:35:48 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/03/30 17:38:07 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTE_BUILTIN_H
-# define EXECUTE_BUILTIN_H
-
+#ifndef EXECUTE_H
+# define EXECUTE_H
 # define FALSE -1
 # define TRUE 1
-
-# include <sys/errno.h>
-# include <stdlib.h>
-# include "../libft/libft.h"
-# include "../printf/ft_printf.h"
-# include "../parse/parse_env.h"
+# include "../minishell.h"
 
 void	free_list(t_list *head);
 void	ft_exit(t_list *head, t_env *env_list);
