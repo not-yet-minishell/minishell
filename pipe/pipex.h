@@ -25,8 +25,10 @@ typedef struct s_arg
 }	t_arg;
 
 
-void	start_command(t_list *node, t_fd *fd_info);
+void	start_command(t_list *node, t_list *fd_info);
 void	redirect(t_rd_node *node);
-int	start_process(t_list *head);
+int		start_process(t_list *head, t_env *env, t_list *env);
+char	**find_path_to_array(t_list *env);
+char	**make_list_to_array(t_list *node);
 
 #endif

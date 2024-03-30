@@ -6,13 +6,13 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:59:27 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/03/27 07:46:45 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/03/30 15:32:34 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execute.h"
+#include "execute_builtin.h"
 
-int	execute(t_list *head, t_env *env_list)
+int	execute_builtin(char **cmd, t_env *env_list)
 {
 	char	*cmd;
 
