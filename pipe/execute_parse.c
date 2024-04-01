@@ -6,12 +6,11 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 13:58:11 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/03/30 17:44:15 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/01 16:46:24 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-#include "../minishell.h"
 
 char	**find_path_to_array(t_list *env)
 {
@@ -20,9 +19,9 @@ char	**find_path_to_array(t_list *env)
 	path = NULL;
 	while (env != NULL)
 	{
-		if (strncmp(env->content->key, "PATH", 5) == 0)
+		if (strncmp(((t_env *)env->content)->key, "PATH", 5) == 0)
 		{
-			path = env->content->value;
+			path = ((t_env *)env->content)->value;
 			break ;
 		}
 		env = env->next;

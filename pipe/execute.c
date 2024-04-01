@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 19:59:34 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/03/30 17:10:47 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/01 15:41:35 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ static void	check_which(char **exe, char **env_array)
 	if (!((ft_strchr(cmd, '/') || (ft_strncmp(cmd, "./", 2) == 0)) && \
 	access(cmd, F_OK) != -1))
 		return ;
-	if (access(arg, X_OK) == -1)
-		error_handler(arg, NULL, 126);
-	while (arg[idx] != '\0')
+	if (access(cmd, X_OK) == -1)
+		error_handler(cmd, NULL, 126);
+	while (cmd[idx] != '\0')
 	{
-		if (arg[idx] == ' ')
+		if (cmd[idx] == ' ')
 			exit(0);
 		idx++;
 	}
@@ -66,7 +66,7 @@ static void	exec_cmd(char **exe, char **env_array)
 		free(command);
 		idx++;
 	}
-	error_handler(exe_ptr[0], "command not found\n", 127);
+	error_handler(exe[0], "command not found\n", 127);
 }
 
 int	check_access(char *command, char **argument, int idx, char **env_array)

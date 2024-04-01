@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_list.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 17:34:23 by soljeong          #+#    #+#             */
-/*   Updated: 2024/03/29 20:01:34 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/01 16:21:16 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,9 @@ typedef struct s_rd_node {
 	char	*filename;
 }	t_rd_node;
 
-typedef struct s_exe_node {
-	char	*word;
-}	t_exe_node;
-
 typedef struct s_cmd_node {
 	t_list	*rd_list;
-	t_list	*exe_list;
+	char	*exe_cmd;
 }	t_cmd_node;
 
 #endif

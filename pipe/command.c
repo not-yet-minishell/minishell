@@ -6,33 +6,35 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 19:46:28 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/03/30 17:44:03 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/01 16:46:34 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
 #include "pipex.h"
 
 static t_list	*free_and_next_rd(t_list *rd_node);
 
-void	start_command(t_list *node, t_fd *fd_info, t_list *env)
+void	start_command(t_list *cmd_list, t_fd *fd_info, t_list *env)
 {
 	t_list	*rd_node;
-	t_list	*exe_node;
+	char	*exe_cmd;
 
-	rd_node = node->content->rd_list;
-	exe_node = node->content->exe_list;
+	rd_node = ((t_cmd_node *)cmd_list->content)->rd_list;
+	exe_cmd = ((t_cmd_node *)cmd_list->content)->exe_cmd;
+	if (fd_info->temp_fd != -1)
+	{
+		dup2(fd_info->temp_fd, STDIN_FILENO);
+		close(fd_info->temp_fd);
+	}
 	while (rd_node != NULL)
 	{
 		redirect(rd_node->content);
-		rd_node = free_and_next_rd(rd_node, fd_info);
+		rd_node = free_and_next_rd(rd_node);
 	}
-	dup2(fd_info->fd, STDIN_FILENO);
 	dup2(fd_info->fds[1], STDOUT_FILENO);
-	close(fd_info->fd);
 	close(fd_info->fds[1]);
 	close(fd_info->fds[0]);
-	execute(exe_node->content, env);
+	execute(exe_cmd, env);
 }
 
 static t_list	*free_and_next_rd(t_list *rd_node)
@@ -41,7 +43,7 @@ static t_list	*free_and_next_rd(t_list *rd_node)
 
 	pre = rd_node;
 	rd_node = rd_node->next;
-	free(pre->content->filename);
+	free(((t_rd_node *)pre->content)->filename);
 	free(pre->content);
 	free(pre);
 	return (rd_node);
