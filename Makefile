@@ -1,14 +1,15 @@
 NAME = minishell
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
+PARSEDIR = parse
 SRCS = main.c\
-		parse/ft_tokennew.c\
-		parse/ft_add_token_node.c\
-		parse/ft_del_token_node.c\
-		parse/tokenizer_metachar.c\
-		parse/tokenizer.c\
-		parse/parse_error.c\
-		parse/token_test.c\
+		$(PARSEDIR)/ft_tokennew.c\
+		$(PARSEDIR)/ft_add_token_node.c\
+		$(PARSEDIR)/ft_del_token_node.c\
+		$(PARSEDIR)/tokenizer_metachar.c\
+		$(PARSEDIR)/tokenizer.c\
+		$(PARSEDIR)/parse_error.c\
+		$(PARSEDIR)/token_test.c\
 		error_handler.c
 OBJS = $(SRCS:.c=.o)
 MAKE = make
@@ -24,9 +25,9 @@ $(NAME) : $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS)  -o $(NAME) -Llibft -Lprintf -lft -lftprintf  -lreadline
 
 clean:
+	rm -rf $(OBJS)
 	make -C libft clean
 	make -C printf clean
-	rm -f $(OBJS) $(BONUS_OBJS)
 
 fclean: clean
 	rm -f libft/libft.a

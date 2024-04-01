@@ -5,6 +5,8 @@
 		"cstring": "c",
 		"__node_handle": "cpp",
 		"parse_list.h": "c",
-		"execute.h": "c"
+		"execute.h": "c",
+		"parse_env.h": "c",
+		"ft_printf.h": "c"
 	}
 }
