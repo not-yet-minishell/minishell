@@ -6,26 +6,26 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:45:34 by soljeong          #+#    #+#             */
-/*   Updated: 2024/03/28 14:22:55 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/01 16:44:49 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_H
 # define PARSE_H
 # define ERROR 0
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include <stdio.h>
 
 enum {
-	AND_OPERATOR = 1,
+	REDIRECT_IN = 1,
+	REDIRECT_OUT,
+	REDIRECT_APPEND,
+	REDIRECT_HEREDOC,
+	AND_OPERATOR,
 	OR_OPERATOR,
 	L_PAREN,
 	R_PAREN,
 	PIPE,
-	REDIRECT_IN,
-	REDIRECT_OUT,
-	REDIRECT_APPEND,
-	REDIRECT_HEREDOC,
 	WORD,
 };
 

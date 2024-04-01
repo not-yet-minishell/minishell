@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute.h                                          :+:      :+:    :+:   */
+/*   parse_test.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/21 13:56:57 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/01 09:24:45 by soljeong         ###   ########.fr       */
+/*   Created: 2024/03/29 18:11:27 by soljeong          #+#    #+#             */
+/*   Updated: 2024/03/29 18:38:29 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTE_H
-# define EXECUTE_H
-# define FALSE -1
-# define TRUE 1
-# include "../minishell.h"
+#ifndef PARSE_TEST_H
+# define PARSE_TEST_H
+# include "parse.h"
 
-void	free_list(t_list *head);
-void	ft_exit(t_list *head, t_env *env_list);
-void	error_handler(char *cmd_name, char *option_name, char *msg);
-int		execute(t_list *head, t_env *env_list);
+void	print_node(t_token *node);
 #endif

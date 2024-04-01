@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/03/28 14:23:56 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/01 16:44:03 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,7 @@
 #include <readline/history.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "parse.h"
-
-void	print_node(t_token *node)
-{
-	if (!node)
-		return ;
-	printf("str : %s\n", node->str);
-	printf("token : %d\n", node->type);
-}
+#include "minishell.h"
 
 void	leaks(void)
 {
@@ -37,21 +29,13 @@ int	main(void)
 	t_list	*head;
 	t_tree	*tree;
 
-	//atexit(leaks);
-	//wait(1)
-	//..????????????????????????????????????
-	//..?
 	while (1)
 	{
 		line = readline("examshell : ");
 		add_history(line);
 		head = tokenizer(line);
 		if (!head)
-		{
 			printf("error\n");
-		}
-		// head를 return으로 받고 null이 아닐때만 실행부로 넘김
-		//ft_lstiter(head, (void *)print_node);
 		tree = parse_tree(&head);
 		if (!tree)
 			printf("error\n");

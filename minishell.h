@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_error.c                                      :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 12:37:19 by soljeong          #+#    #+#             */
-/*   Updated: 2024/03/26 16:08:40 by soljeong         ###   ########.fr       */
+/*   Created: 2024/03/29 19:05:52 by soljeong          #+#    #+#             */
+/*   Updated: 2024/04/01 16:40:30 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
-void	parse_error(void)
-{
-	printf("parse error\n"); // error 문구 생각하기, stderr로 해야하나 생각하기
-	exit(1);
-}
+# include <stdlib.h>
+# include <sys/errno.h>
+# include <stdlib.h>
+# include <string.h>
+# include "libft/libft.h"
+# include "printf/ft_printf.h"
+# include "parse/parse_env.h"
+# include "execute/execute.h"
+# include "parse/parse_list.h"
+# include "parse.h"
+#endif

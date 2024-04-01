@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:48:22 by soljeong          #+#    #+#             */
-/*   Updated: 2024/03/26 13:38:37 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/01 16:44:52 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	ft_tokenizer_metachar(char *line, int *i, int start, t_list *head)
 	tokentype = ft_token_num(line, *i);
 	if (tokentype == ERROR)
 	{
-		printf("parse error\n"); // error 문구 생각하기
-		exit(-1); // exit 코드 생각
-		//free 해줘야하는지 고려하기..
+		parse_error();
+		*i += 1;
+		return ;
 	}
 	else if (tokentype == REDIRECT_IN || tokentype == REDIRECT_OUT
 		|| tokentype == L_PAREN || tokentype == R_PAREN
@@ -59,5 +59,4 @@ static int	ft_token_num(char *line, int i)
 		return (R_PAREN);
 	else
 		return (0);
-		// ㅇㅣ ㅂㅜ부ㄴ 에러처리 어떻게 할지 생각해보기
 }
