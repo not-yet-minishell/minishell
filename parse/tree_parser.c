@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 13:40:49 by soljeong          #+#    #+#             */
-/*   Updated: 2024/03/29 20:34:35 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/01 19:01:05 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,24 @@ void tree_inorder_print(t_tree *tree)
 	}
 }
 
+void clear_tree(t_tree *tree)
+{
+	if (!tree)
+		return ;
+	if (tree->left)
+		clear_tree(tree->left);
+	if (tree->right)
+		clear_tree(tree->right);
+	if (tree->token)
+	{
+		if (tree->token->str)
+			free(tree->token->str);
+		free(tree->token);
+	}
+	if (tree)
+		free(tree);
+}
+
 void curr_list_print(t_list *list)
 {
 	t_token *token;
@@ -55,6 +73,7 @@ void curr_list_print(t_list *list)
 t_tree *parse_tree(t_list **list)
 {
 	t_tree	*tree;
+	free(*list);
 	*list = (*list)->next;
 	if (!*list)
 		return (0);
@@ -90,6 +109,7 @@ t_tree *syntax_list(t_list **list)
 	if (token->type == AND_OPERATOR || token->type == OR_OPERATOR)
 	{
 		tree->token = token;
+		free(*list);
 		*list = (*list)->next;
 		tree->right = syntax_list(list);
 		if (tree->right == NULL)
@@ -108,6 +128,7 @@ t_tree *syntax_sublist(t_list **list)
 	token = (t_token *)(*list)->content;
 	if (token->type == L_PAREN)
 	{
+		free(*list);
 		*list = (*list)->next;
 		tree = syntax_list(list);
 		if (!tree)
@@ -117,6 +138,7 @@ t_tree *syntax_sublist(t_list **list)
 		token = (t_token *)(*list)->content;
 		if (token->type == R_PAREN)
 		{
+			free(*list);
 			*list = (*list)->next;
 			return (tree);
 		}
@@ -145,6 +167,7 @@ t_tree *syntax_pipeline(t_list **list)
 	if (token->type == PIPE)
 	{
 		tree->token = token;
+		free(*list);
 		*list = (*list)->next;
 		tree->right = syntax_pipeline(list);
 		if (!(tree->right))
@@ -180,10 +203,11 @@ t_tree *syntax_simple_cmd(t_list **list)
 	if ((*list) == NULL)
 		return NULL;
 	token = (t_token *)(*list)->content;
-	tree = ft_tree_new(NULL);
 	if (token->type == WORD)
 	{
+		tree = ft_tree_new(NULL);
 		tree->token = token;
+		free(*list);
 		*list = (*list)->next;
 		return (tree);
 	}
@@ -207,7 +231,7 @@ t_tree *syntax_redirection(t_list **list)
 	|| token->type == REDIRECT_OUT)
 	{
 		tree->token = token;
-		ft_del_token_node(token);
+		free(*list);
 		*list = (*list)->next;
 		if (*list == NULL)
 			parse_error();
@@ -215,6 +239,7 @@ t_tree *syntax_redirection(t_list **list)
 		if (token->type == WORD)
 		{
 			tree->right = ft_tree_new(token);
+			free(*list);
 			(*list) = (*list)->next;
 			return (tree);
 		}

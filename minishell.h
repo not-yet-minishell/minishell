@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 19:05:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/01 16:40:30 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/01 18:05:46 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,5 @@
 # include "parse/parse_env.h"
 # include "execute/execute.h"
 # include "parse/parse_list.h"
-# include "parse.h"
+# include "parse/parse.h"
 #endif
