@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_tokennew.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/29 19:05:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/01 09:32:47 by soljeong         ###   ########.fr       */
+/*   Created: 2024/03/25 11:25:10 by soljeong          #+#    #+#             */
+/*   Updated: 2024/03/26 12:43:15 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "parse.h"
 
-# include <stdlib.h>
-# include <sys/errno.h>
-# include <stdlib.h>
-# include <string.h>
-# include "libft/libft.h"
-# include "printf/ft_printf.h"
-# include "parse/parse_env.h"
-# include "execute/execute.h"
-# include "parse/parse_list.h"
-#endif
+t_token	*ft_tokennew(void *str, int tokennum)
+{
+	t_token	*new;
+
+	new = malloc(sizeof(t_token));
+	if (new == NULL)
+		return (NULL);
+	new->str = str;
+	new->token = tokennum;
+	return (new);
+}

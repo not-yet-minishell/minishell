@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_add_token_node.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/29 19:05:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/01 09:32:47 by soljeong         ###   ########.fr       */
+/*   Created: 2024/03/25 19:57:20 by soljeong          #+#    #+#             */
+/*   Updated: 2024/03/26 12:44:07 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "parse.h"
 
-# include <stdlib.h>
-# include <sys/errno.h>
-# include <stdlib.h>
-# include <string.h>
-# include "libft/libft.h"
-# include "printf/ft_printf.h"
-# include "parse/parse_env.h"
-# include "execute/execute.h"
-# include "parse/parse_list.h"
-#endif
+void	ft_add_token_node(t_list *head, char *str, int tokennum)
+{
+	t_list	*new_node;
+	t_token	*content;
+
+	content = ft_tokennew(str, tokennum);
+	if (!content)
+		ft_lstclear(&head, (void *)ft_del_token_node);
+	new_node = ft_lstnew(content);
+	ft_lstadd_back(&head, new_node);
+}

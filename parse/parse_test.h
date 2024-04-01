@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   parse_test.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/29 19:05:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/01 09:32:47 by soljeong         ###   ########.fr       */
+/*   Created: 2024/03/29 18:11:27 by soljeong          #+#    #+#             */
+/*   Updated: 2024/03/29 18:38:29 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef PARSE_TEST_H
+# define PARSE_TEST_H
+# include "parse.h"
 
-# include <stdlib.h>
-# include <sys/errno.h>
-# include <stdlib.h>
-# include <string.h>
-# include "libft/libft.h"
-# include "printf/ft_printf.h"
-# include "parse/parse_env.h"
-# include "execute/execute.h"
-# include "parse/parse_list.h"
+void	print_node(t_token *node);
 #endif
