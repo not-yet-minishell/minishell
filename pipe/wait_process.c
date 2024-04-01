@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_env.h                                        :+:      :+:    :+:   */
+/*   wait_process.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/27 02:00:55 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/03/30 17:39:45 by yeoshin          ###   ########.fr       */
+/*   Created: 2024/04/01 17:56:12 by yeoshin           #+#    #+#             */
+/*   Updated: 2024/04/01 18:03:24 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_ENV_H
-# define PARSE_ENV_H
-# include "../minishell.h"
+#include "pipex.h"
 
-typedef struct s_env
+static void	unlink_heredoc(void);
+
+void	wait_process(t_fd *fd_info, int fork_count)
 {
-	char	*key;
-	char	*value;
-}	t_env;
+	int		status;
+	int		ret;
 
-t_list	*parse_env(char *env[]);
+	ret = 0;
+	status = 0;
+	while (fork_count-- > 0)
+	{
+		if (wait(&status) == fd_info->pid)
+		{
+			if (WIFEXITED(status))
+				ret = WEXITSTATUS(status);
+		}
+	}
+	unlink_heredoc();
+	exit(ret);
+}
 
-#endif
+static void	unlink_heredoc(void)
+{}
