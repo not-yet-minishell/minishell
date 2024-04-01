@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 20:00:50 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/03/28 14:40:59 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/01 15:45:33 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void			ft_bzero(void *string, size_t len);
 int				ft_tolower(int lower);
 int				ft_toupper(int upper);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
-char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_strjoin(char const *s1, char const *s2, char const a);
 char			*ft_strtrim(char const *s1, char const *set);
 char			**ft_split(char const *s, char c);
 char			*ft_itoa(int n);
