@@ -3,19 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_env.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 02:00:55 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/03/28 15:07:45 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/03/29 19:13:57 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_ENV_H
 # define PARSE_ENV_H
-
-# include <stdlib.h>
-# include "../libft/libft.h"
-# include "../printf/ft_printf.h"
+# include "../minishell.h"
 
 typedef struct s_env
 {
