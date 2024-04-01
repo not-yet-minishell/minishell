@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 19:59:20 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/01 16:46:00 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/01 17:26:19 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void	redirect(t_rd_node *node, t_fd *fd_info)
 	if (fd_info->temp_fd != -1)
 		dup2(fd_info->temp_fd, STDIN_FILENO);
 	type = node->rd_type;
-	if (type == RD_IN)
+	if (type == REDIRECT_IN)
 		in_redirect(node);
-	else if (type == RD_OUT)
+	else if (type == REDIRECT_OUT)
 		out_redirect(node);
-	else if (type == RD_APPEND)
+	else if (type == REDIRECT_APPEND)
 		append_redirect(node);
 	else
 		error_handler("node", NULL, NULL);

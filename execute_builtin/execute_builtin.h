@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utile.c                                            :+:      :+:    :+:   */
+/*   execute_builtin.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 18:57:50 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/03/28 14:26:14 by yeoshin          ###   ########.fr       */
+/*   Created: 2024/03/21 13:56:57 by yeoshin           #+#    #+#             */
+/*   Updated: 2024/04/01 18:04:55 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execute.h"
+#ifndef EXECUTE_BUILTIN_H
+# define EXECUTE_BUILTIN_H
+# define FALSE -1
+# define TRUE 1
 
-void	free_list(t_list *head)
-{
-	t_list	*temp;
+# include "../minishell.h"
 
-	while (head != NULL)
-	{
-		temp = head;
-		head = head->next;
-		free(temp->content);
-		free(temp);
-	}
-}
+void	free_list(t_list *head);
+void	ft_exit(t_list *head, t_env *env_list);
+void	error_handler(char *cmd_name, char *option_name, char *msg);
+void	execute_builtin(t_list *head, t_env *env_list);
+
+#endif

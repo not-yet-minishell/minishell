@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 19:59:34 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/01 15:41:35 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/01 17:55:26 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ static void	exec_cmd(char **exe, char **env_array)
 	while (env_array[idx])
 	{
 		command = ft_strjoin(env_array[idx], exe[0], '/');
-		if (check_access(command, exe, idx, env_array) != -1)
-			break ;
+		check_access(command, exe, idx, env_array);
 		free(command);
 		idx++;
 	}

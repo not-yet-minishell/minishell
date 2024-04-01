@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 17:34:23 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/01 17:05:11 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/01 17:15:57 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_rd_node {
 
 typedef struct s_cmd_node {
 	t_list	*rd_list;
-	char	*exe_cmd;
+	t_list	*cmd_list;
 }	t_cmd_node;
 
 #endif

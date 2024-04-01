@@ -6,10 +6,9 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 17:43:30 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/01 16:45:40 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/01 18:01:24 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef PIPEX_H
 # define PIPEX_H
@@ -28,6 +27,7 @@ typedef struct s_fd
 	int		temp_fd;
 }	t_fd;
 
+void	wait_process(t_fd	*fd_info, int fork_count);
 void	start_command(t_list *node, t_fd *fd_info, t_list *env);
 void	redirect(t_rd_node *node);
 int		start_process(t_list *head, t_env *env);

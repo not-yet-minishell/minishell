@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 20:30:17 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/01 16:46:13 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/01 18:03:29 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static t_fd	*init_fd(void);
 static void	delete_cmd_node(t_list *node);
 static void	close_fd(t_fd *fd_info);
+static void	free_list(t_list *node);
 
 int	start_process(t_list *head, t_list *env)
 {
@@ -39,7 +40,7 @@ int	start_process(t_list *head, t_list *env)
 		head = delete_and_next_node(head);
 	}
 	close(fd_info->fds[0]);
-	return (fork_count);
+	wait_process(fd_info, fork_count);
 }
 
 static void	close_parent_fd(t_fd *fd_info)
@@ -68,10 +69,23 @@ static t_list	*delete_and_next_node(t_list *node)
 		free(temp_rd_list->content);
 		free(temp_rd_list);
 	}
-	free(cmd_node->exe_cmd);
+	free_list(cmd_node->cmd_list);
 	free(cmd_node);
 	free(temp);
 	return (node);
+}
+
+static void	free_list(t_list *node)
+{
+	t_list	*temp;
+
+	while (node)
+	{
+		temp = node;
+		node = node->next;
+		free(temp->content);
+		free(temp);
+	}
 }
 
 static t_fd	*init_fd(void)
