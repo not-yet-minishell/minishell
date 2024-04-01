@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handler.c                                    :+:      :+:    :+:   */
+/*   ft_add_token_node.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 17:00:13 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/01 09:26:23 by soljeong         ###   ########.fr       */
+/*   Created: 2024/03/25 19:57:20 by soljeong          #+#    #+#             */
+/*   Updated: 2024/03/26 12:44:07 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parse.h"
 
-void	error_handler(char *cmd_name, char *option_name, char *msg)
+void	ft_add_token_node(t_list *head, char *str, int tokennum)
 {
-	ft_printf(STDERR_FILENO, "minishell: ");
-	if (cmd_name != NULL)
-		ft_printf(STDERR_FILENO, "%s: ", cmd_name);
-	if (option_name != NULL)
-		ft_printf(STDERR_FILENO, "%s: ", option_name);
-	if (msg != NULL)
-		ft_printf(STDERR_FILENO, "%s", msg);
-	else
-		ft_printf(STDERR_FILENO, "%s\n", strerror(errno));
+	t_list	*new_node;
+	t_token	*content;
+
+	content = ft_tokennew(str, tokennum);
+	if (!content)
+		ft_lstclear(&head, (void *)ft_del_token_node);
+	new_node = ft_lstnew(content);
+	ft_lstadd_back(&head, new_node);
 }

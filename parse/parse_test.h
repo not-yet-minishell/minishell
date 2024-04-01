@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_list.h                                       :+:      :+:    :+:   */
+/*   parse_test.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/29 17:34:23 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/01 17:05:11 by yeoshin          ###   ########.fr       */
+/*   Created: 2024/03/29 18:11:27 by soljeong          #+#    #+#             */
+/*   Updated: 2024/03/29 18:38:29 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_LIST_H
-# define PARSE_LIST_H
+#ifndef PARSE_TEST_H
+# define PARSE_TEST_H
+# include "parse.h"
 
-# include "../minishell.h"
-
-typedef struct s_rd_node {
-	int		rd_type;
-	char	*filename;
-}	t_rd_node;
-
-typedef struct s_cmd_node {
-	t_list	*rd_list;
-	char	*exe_cmd;
-}	t_cmd_node;
-
+void	print_node(t_token *node);
 #endif

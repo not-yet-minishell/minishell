@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_list.h                                       :+:      :+:    :+:   */
+/*   parse_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/29 17:34:23 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/01 17:05:11 by yeoshin          ###   ########.fr       */
+/*   Created: 2024/03/26 12:37:19 by soljeong          #+#    #+#             */
+/*   Updated: 2024/03/29 18:14:24 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_LIST_H
-# define PARSE_LIST_H
+#include "parse.h"
+#include "../execute/execute.h"
 
-# include "../minishell.h"
-
-typedef struct s_rd_node {
-	int		rd_type;
-	char	*filename;
-}	t_rd_node;
-
-typedef struct s_cmd_node {
-	t_list	*rd_list;
-	char	*exe_cmd;
-}	t_cmd_node;
-
-#endif
+void	parse_error(void)
+{
+	error_handler(NULL, NULL, "syntax error near unexpected token\n");
+}

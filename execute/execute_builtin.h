@@ -6,14 +6,15 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:56:57 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/03/30 17:38:07 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/01 17:04:31 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTE_H
-# define EXECUTE_H
+#ifndef EXECUTE_BUILTIN_H
+# define EXECUTE_BUILTIN_H
 # define FALSE -1
 # define TRUE 1
+
 # include "../minishell.h"
 
 void	free_list(t_list *head);

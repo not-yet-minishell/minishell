@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_list.h                                       :+:      :+:    :+:   */
+/*   ft_tokennew.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/29 17:34:23 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/01 17:05:11 by yeoshin          ###   ########.fr       */
+/*   Created: 2024/03/25 11:25:10 by soljeong          #+#    #+#             */
+/*   Updated: 2024/03/26 12:43:15 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_LIST_H
-# define PARSE_LIST_H
+#include "parse.h"
 
-# include "../minishell.h"
+t_token	*ft_tokennew(void *str, int tokennum)
+{
+	t_token	*new;
 
-typedef struct s_rd_node {
-	int		rd_type;
-	char	*filename;
-}	t_rd_node;
-
-typedef struct s_cmd_node {
-	t_list	*rd_list;
-	char	*exe_cmd;
-}	t_cmd_node;
-
-#endif
+	new = malloc(sizeof(t_token));
+	if (new == NULL)
+		return (NULL);
+	new->str = str;
+	new->token = tokennum;
+	return (new);
+}
