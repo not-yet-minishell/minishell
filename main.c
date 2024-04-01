@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/03/29 18:36:48 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/01 09:43:52 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	main(void)
 		line = readline("minishell$ ");
 		add_history(line);
 		head = tokenizer(line);
-		//if (head)
-		//	ft_lstiter(head, (void *)print_node);
+		if (head)
+			ft_lstiter(head, (void *)print_node);
 		ft_lstclear(&head, (void *)ft_del_token_node);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:45:34 by soljeong          #+#    #+#             */
-/*   Updated: 2024/03/29 18:12:51 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/01 09:42:02 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@
 # include <stdio.h>
 
 enum {
-	AND_OPERATOR = 1,
+	REDIRECT_IN = 1,
+	REDIRECT_OUT,
+	REDIRECT_APPEND,
+	REDIRECT_HEREDOC,
+	AND_OPERATOR,
 	OR_OPERATOR,
 	L_PAREN,
 	R_PAREN,
 	PIPE,
-	REDIRECT_IN,
-	REDIRECT_OUT,
-	REDIRECT_APPEND,
-	REDIRECT_HEREDOC,
 	WORD,
 };
 

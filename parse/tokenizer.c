@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:51:18 by soljeong          #+#    #+#             */
-/*   Updated: 2024/03/29 18:39:10 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/01 09:47:12 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_list	*tokenizer(char *line)
 		start = i;
 		while (line[i] && !ft_is_ifs(line[i]) && !ft_is_metacharacter(line[i]))
 		{
-			if (line[i] == '\"' || line[i] == '\"')
+			if (line[i] == '\"' || line[i] == '\'')
 				ft_quotemarks(line, &i, line[i]);
 			i++;
 		}
