@@ -6,11 +6,12 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 13:58:11 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/03/30 14:02:50 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/03/30 17:44:15 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include "../minishell.h"
 
 char	**find_path_to_array(t_list *env)
 {

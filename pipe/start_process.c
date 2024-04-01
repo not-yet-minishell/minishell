@@ -6,11 +6,12 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 20:30:17 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/03/30 13:55:47 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/03/30 17:44:19 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include "../minishell.h"
 
 static t_fd	*init_fd(void);
 static void	delete_cmd_node(t_list *node);

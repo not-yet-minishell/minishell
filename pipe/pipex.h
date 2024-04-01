@@ -1,9 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/30 17:43:30 by yeoshin           #+#    #+#             */
+/*   Updated: 2024/03/30 17:45:14 by yeoshin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include "../parse/parse_env.h"
-# include "../libft/libft.h"
-# include "../execute/execute.h"
 # include <sys/types.h>
 # include <fcntl.h>
 # include <errno.h>
@@ -15,19 +25,9 @@ typedef struct s_fd
 	int		temp_fd;
 }	t_fd;
 
-typedef struct s_arg
-{
-	char	**env_path;
-	char	**arv;
-	int		hd_flag;
-	int		arc;
-	char	**envp;
-}	t_arg;
-
-
-void	start_command(t_list *node, t_list *fd_info);
+void	start_command(t_list *node, t_fd *fd_info, t_list *env);
 void	redirect(t_rd_node *node);
-int		start_process(t_list *head, t_env *env, t_list *env);
+int		start_process(t_list *head, t_env *env);
 char	**find_path_to_array(t_list *env);
 char	**make_list_to_array(t_list *node);
 
