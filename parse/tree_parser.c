@@ -6,95 +6,32 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 13:40:49 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/01 19:01:05 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/02 14:15:01 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
+#include "../minishell.h"
 
-// 괄호가 있으면.. 그 뒤로 더이상 돌지 않는 증상이 발생함...!
-t_tree *parse_tree(t_list **list);
-t_tree *ft_tree_new(t_token *token);
-t_tree *syntax_list(t_list **list);
-t_tree *syntax_sublist(t_list **list);
-t_tree *syntax_pipeline(t_list **list);
-t_tree *syntax_cmd(t_list **list);
-t_tree *syntax_simple_cmd(t_list **list);
-t_tree *syntax_redirection(t_list **list);
-
-
-void tree_inorder_print(t_tree *tree)
-{
-	if (tree == NULL)
-		return ;
-	if (tree->left != NULL)
-	{
-		tree_inorder_print(tree->left);
-	}
-	if (tree->token != NULL && tree->token->str != NULL)
-			printf("tree str: %s\n",tree->token->str);
-	if (tree->right != NULL)
-	{
-		tree_inorder_print(tree->right);
-	}
-}
-
-void clear_tree(t_tree *tree)
-{
-	if (!tree)
-		return ;
-	if (tree->left)
-		clear_tree(tree->left);
-	if (tree->right)
-		clear_tree(tree->right);
-	if (tree->token)
-	{
-		if (tree->token->str)
-			free(tree->token->str);
-		free(tree->token);
-	}
-	if (tree)
-		free(tree);
-}
-
-void curr_list_print(t_list *list)
-{
-	t_token *token;
-
-	if (!list)
-	{
-		printf("no!!\n");
-		return ;
-	}
-	token = (t_token *)list->content;
-	printf("str :%s\n", token->str);
-}
-
-t_tree *parse_tree(t_list **list)
+t_tree	*parse_tree(t_list **list)
 {
 	t_tree	*tree;
-	free(*list);
-	*list = (*list)->next;
+
+	ft_del_token_node((*list)->content);
+	list_shift(list);
 	if (!*list)
 		return (0);
 	tree = syntax_list(list);
-	if (*list)
+	if (*list || tree == NULL)
+	{
 		parse_error();
+		tree_parser_error(list, tree);
+		return (0);
+	}
 	return (tree);
 }
 
-t_tree *ft_tree_new(t_token *token)
-{
-	t_tree *tree;
-
-	tree = malloc(sizeof(t_tree));
-	tree->token = token;
-	tree->left = NULL;
-	tree->right = NULL;
-	return tree;
-}
-
-t_tree *syntax_list(t_list **list)
+t_tree	*syntax_list(t_list **list)
 {
 	t_token	*token;
 	t_tree	*tree;
@@ -102,151 +39,86 @@ t_tree *syntax_list(t_list **list)
 	tree = ft_tree_new(NULL);
 	tree->left = syntax_sublist(list);
 	if (tree->left == NULL)
-		parse_error();
+	{
+		tree_parser_error(list, tree);
+		return (0);
+	}
 	if (*list == NULL)
 		return (tree);
 	token = (t_token *)(*list)->content;
 	if (token->type == AND_OPERATOR || token->type == OR_OPERATOR)
 	{
 		tree->token = token;
-		free(*list);
-		*list = (*list)->next;
+		list_shift(list);
 		tree->right = syntax_list(list);
 		if (tree->right == NULL)
-			parse_error();
+		{
+			tree_parser_error(list, tree);
+			return (0);
+		}
 	}
 	return (tree);
 }
 
-t_tree *syntax_sublist(t_list **list)
+t_tree	*syntax_paren(t_list **list, t_token *token)
 {
-	t_token *token;
 	t_tree	*tree;
+
+	ft_del_token_node(token);
+	list_shift(list);
+	tree = syntax_list(list);
+	if (!tree)
+		return (0);
+	if (*list == NULL)
+	{
+		tree_parser_error(list, tree);
+		return (0);
+	}
+	token = (t_token *)(*list)->content;
+	if (token->type == R_PAREN)
+	{
+		ft_del_token_node(token);
+		list_shift(list);
+		return (tree);
+	}
+	return (0);
+}
+
+t_tree	*syntax_sublist(t_list **list)
+{
+	t_token	*token;
 
 	if (*list == NULL)
 		return (NULL);
 	token = (t_token *)(*list)->content;
 	if (token->type == L_PAREN)
-	{
-		free(*list);
-		*list = (*list)->next;
-		tree = syntax_list(list);
-		if (!tree)
-			parse_error();
-		if (*list == NULL)
-			parse_error();
-		token = (t_token *)(*list)->content;
-		if (token->type == R_PAREN)
-		{
-			free(*list);
-			*list = (*list)->next;
-			return (tree);
-		}
-		else
-		{
-			parse_error();
-			return (0);
-		}
-	}
+		return (syntax_paren(list, token));
 	else
 		return (syntax_pipeline(list));
 }
 
-t_tree *syntax_pipeline(t_list **list)
+t_tree	*syntax_pipeline(t_list **list)
 {
-	t_token *token;
+	t_token	*token;
 	t_tree	*tree;
 
 	tree = ft_tree_new(NULL);
 	tree->left = syntax_cmd(list);
 	if (tree->left == NULL)
-		parse_error();
+	{
+		tree_parser_error(list, tree);
+		return (0);
+	}
 	if (*list == NULL)
-		return tree;
+		return (tree);
 	token = (t_token *)(*list)->content;
 	if (token->type == PIPE)
 	{
 		tree->token = token;
-		free(*list);
-		*list = (*list)->next;
+		list_shift(list);
 		tree->right = syntax_pipeline(list);
 		if (!(tree->right))
-			parse_error();
+			return (0);
 	}
-	return tree;
-}
-
-t_tree *syntax_cmd(t_list **list)
-{
-	t_token *token;
-	t_tree	*tree;
-
-	tree = ft_tree_new(NULL);
-	tree->left = syntax_simple_cmd(list);
-	if (!(tree->left))
-		parse_error();
-	if ((*list) == NULL)
-		return tree;
-	token = (t_token *)(*list)->content;
-	if (token->type == WORD || token->type == REDIRECT_IN
-	|| token->type == REDIRECT_OUT || token->type == REDIRECT_APPEND
-	|| token->type == REDIRECT_HEREDOC)
-		tree->right = syntax_cmd(list);
-	return tree;
-}
-
-t_tree *syntax_simple_cmd(t_list **list)
-{
-	t_token *token;
-	t_tree	*tree;
-
-	if ((*list) == NULL)
-		return NULL;
-	token = (t_token *)(*list)->content;
-	if (token->type == WORD)
-	{
-		tree = ft_tree_new(NULL);
-		tree->token = token;
-		free(*list);
-		*list = (*list)->next;
-		return (tree);
-	}
-	else
-		return (syntax_redirection(list));
-}
-
-t_tree *syntax_redirection(t_list **list)
-{
-	t_token	*token;
-	t_tree	*tree;
-	//t_tree	*subtree;
-
-	if (*list == NULL)
-		parse_error();
-	token = (t_token *)(*list)->content;
-	tree = ft_tree_new(NULL);
-	if (token->type == REDIRECT_APPEND
-	|| token->type == REDIRECT_HEREDOC
-	|| token->type == REDIRECT_IN
-	|| token->type == REDIRECT_OUT)
-	{
-		tree->token = token;
-		free(*list);
-		*list = (*list)->next;
-		if (*list == NULL)
-			parse_error();
-		token = (t_token *)(*list)->content;
-		if (token->type == WORD)
-		{
-			tree->right = ft_tree_new(token);
-			free(*list);
-			(*list) = (*list)->next;
-			return (tree);
-		}
-		else
-			parse_error();
-	}
-	else
-		parse_error();
-		return (0);
+	return (tree);
 }

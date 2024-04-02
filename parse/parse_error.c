@@ -6,12 +6,12 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:37:19 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/01 16:44:44 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/01 20:28:16 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-#include "../execute/execute.h"
+#include "../execute_builtin/execute_builtin.h"
 
 void	parse_error(void)
 {

@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/01 18:41:30 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/02 14:23:47 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 #include <stdlib.h>
 #include "minishell.h"
 
-void clear_tree(t_tree *tree);
 void	leaks(void)
 {
 	system("leaks minishell");
@@ -36,15 +35,12 @@ int	main(void)
 		add_history(line);
 		head = tokenizer(line);
 		if (!head)
-			printf("error\n");
+		{
+			free(line);
+			continue;
+		}
 		tree = parse_tree(&head);
-		//if (!tree)
-		//	printf("error\n");
-		tree_inorder_print(tree);
-		// parse_tree에서 tree를 받고, null이 아닐때만 실행부로 넘김
 		clear_tree(tree);
-		free(head);
 		free(line);
-		leaks();
 	}
 }

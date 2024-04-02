@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:51:18 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/01 16:45:34 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/02 13:49:14 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ t_list	*tokenizer(char *line)
 		if (i - start > 0)
 			ft_add_token_node(head, ft_substr(line, start, i - start), WORD);
 		else if (ft_is_metacharacter(line[i]))
-			ft_tokenizer_metachar(line, &i, start, head);
+			if (!ft_tokenizer_metachar(line, &i, start, head))
+				return (0);
 	}
 	return (head);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 17:43:30 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/01 18:01:24 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/01 20:25:51 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <errno.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <../minishell.h>
+# include "../minishell.h"
 
 typedef struct s_fd
 {
