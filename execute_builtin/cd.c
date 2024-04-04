@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_env.h                                        :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/27 02:00:55 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/04 18:02:52 by soljeong         ###   ########.fr       */
+/*   Created: 2024/03/27 04:20:46 by yeoshin           #+#    #+#             */
+/*   Updated: 2024/04/01 18:04:40 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_ENV_H
-# define PARSE_ENV_H
-# include "../minishell.h"
+#include "execute_builtin.h"
 
-typedef struct s_env
+void	ft_cd(t_list *head, t_env *env_list)
 {
-	char	*key;
-	char	*value;
-}	t_env;
-
-t_list	*parse_env(char *env[]);
-
-#endif
+	
+}

@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_error.c                                      :+:      :+:    :+:   */
+/*   utile.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 12:37:19 by soljeong          #+#    #+#             */
-/*   Updated: 2024/03/26 16:08:40 by soljeong         ###   ########.fr       */
+/*   Created: 2024/03/26 18:57:50 by yeoshin           #+#    #+#             */
+/*   Updated: 2024/04/01 18:04:15 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "execute_builtin.h"
 
-void	parse_error(void)
+void	free_list(t_list *head)
 {
-	printf("parse error\n"); // error 문구 생각하기, stderr로 해야하나 생각하기
-	exit(1);
+	t_list	*temp;
+
+	while (head != NULL)
+	{
+		temp = head;
+		head = head->next;
+		free(temp->content);
+		free(temp);
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 01:59:48 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/03/28 15:01:56 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/04 20:04:41 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,20 @@
 static char		*make_key(char *env);
 static char		*make_value(char *env);
 static t_env	*init_content(char *env);
+void bubble_sort(t_list *env_list);
+t_list	*select_sort(t_list *env_list);
+void	print_env(t_list *env_list)
+{
+	t_env	*env;
+
+	env_list = env_list->next;
+	while (env_list != NULL)
+	{
+		env = env_list->content;
+		ft_printf(1,"%s=%s\n",env->key,env->value);
+		env_list = env_list->next;
+	}
+}
 
 t_list	*parse_env(char *env[])
 {
@@ -22,6 +36,8 @@ t_list	*parse_env(char *env[])
 	t_list	*env_node;
 	t_list	*env_head;
 	int		idx;
+	int		*exit_num;
+	t_list	*sorted_list;
 
 	idx = 0;
 	env_head = NULL;
@@ -32,6 +48,12 @@ t_list	*parse_env(char *env[])
 		ft_lstadd_back(&env_head, env_node);
 		idx++;
 	}
+	idx = 0;
+	exit_num = &idx;
+	env_node = ft_lstnew(exit_num);
+	ft_lstadd_front(&env_head, env_node);
+	sorted_list = select_sort(env_head);
+	print_env(sorted_list);
 	return (env_head);
 }
 
@@ -79,7 +101,6 @@ static char	*make_value(char *env)
 		idx++;
 	idx++;
 	value = ft_malloc(len - idx + 1);
-
 	while (idx < len)
 	{
 		value[value_idx] = env[idx];

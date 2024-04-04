@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/03/28 14:23:56 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/04 18:56:53 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,25 @@
 #include <readline/history.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "parse.h"
+#include "minishell.h"
 
-void	print_node(t_token *node)
-{
-	if (!node)
-		return ;
-	printf("str : %s\n", node->str);
-	printf("token : %d\n", node->type);
-}
+void	print_env(t_list *env_list);
 
 void	leaks(void)
 {
 	system("leaks minishell");
 }
 
-int	main(void)
+int	main(int argc, char *argv[], char *envp[])
 {
 	char	*line;
 	t_list	*head;
 	t_tree	*tree;
+	t_list	*env_list;
 
-	//atexit(leaks);
-	//wait(1)
-	//..????????????????????????????????????
-	//..?
+	(void)argc;
+	(void)argv;
+	env_list = parse_env(envp);
 	while (1)
 	{
 		line = readline("examshell : ");
@@ -48,16 +42,11 @@ int	main(void)
 		head = tokenizer(line);
 		if (!head)
 		{
-			printf("error\n");
+			free(line);
+			continue;
 		}
-		// head를 return으로 받고 null이 아닐때만 실행부로 넘김
-		//ft_lstiter(head, (void *)print_node);
 		tree = parse_tree(&head);
-		if (!tree)
-			printf("error\n");
-		tree_inorder_print(tree);
-		// parse_tree에서 tree를 받고, null이 아닐때만 실행부로 넘김
-		ft_lstclear(&head, (void *)ft_del_token_node);
-		//ft_parse_tree(head)'
+		clear_tree(tree);
+		free(line);
 	}
 }

@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_list.h                                       :+:      :+:    :+:   */
+/*   wait_process.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/29 17:34:23 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/01 17:15:57 by yeoshin          ###   ########.fr       */
+/*   Created: 2024/04/01 17:56:12 by yeoshin           #+#    #+#             */
+/*   Updated: 2024/04/01 18:03:24 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_LIST_H
-# define PARSE_LIST_H
+#include "pipex.h"
 
-# include "../minishell.h"
+static void	unlink_heredoc(void);
 
-typedef struct s_rd_node {
-	int		rd_type;
-	char	*filename;
-}	t_rd_node;
+void	wait_process(t_fd *fd_info, int fork_count)
+{
+	int		status;
+	int		ret;
 
-typedef struct s_cmd_node {
-	t_list	*rd_list;
-	t_list	*cmd_list;
-}	t_cmd_node;
+	ret = 0;
+	status = 0;
+	while (fork_count-- > 0)
+	{
+		if (wait(&status) == fd_info->pid)
+		{
+			if (WIFEXITED(status))
+				ret = WEXITSTATUS(status);
+		}
+	}
+	unlink_heredoc();
+	exit(ret);
+}
 
-#endif
+static void	unlink_heredoc(void)
+{}

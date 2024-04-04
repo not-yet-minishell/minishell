@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute.c                                          :+:      :+:    :+:   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/21 13:59:27 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/03/27 02:20:11 by yeoshin          ###   ########.fr       */
+/*   Created: 2024/04/02 11:13:34 by soljeong          #+#    #+#             */
+/*   Updated: 2024/04/02 14:19:05 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execute.h"
-#include "../parse/parse_env.h"
+#include "parse.h"
 
-int	execute(t_list *head, t_env env_list)
+void	list_shift(t_list **list)
 {
-	char	*cmd;
+	t_list	*tmp;
 
-	cmd = head->content;
-	if (ft_strncmp(cmd, "exit", 5) == 0)
-		ft_exit(head);
+	if (list == NULL || *list == NULL)
+		return ;
+	tmp = *list;
+	*list = (*list)->next;
+	free(tmp);
 }

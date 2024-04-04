@@ -2,15 +2,22 @@ NAME = minishell
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 SRCS = main.c\
-		ft_tokennew.c\
-		ft_add_token_node.c\
-		ft_del_token_node.c\
-		tokenizer_metachar.c\
-		tokenizer.c\
-		parse_error.c\
-		tree_parser.c
+		parse/ft_tokennew.c\
+		parse/ft_add_token_node.c\
+		parse/ft_del_token_node.c\
+		parse/tokenizer_metachar.c\
+		parse/tokenizer.c\
+		parse/parse_error.c\
+		parse/token_test.c\
+		parse/tree_parser.c\
+		parse/tree_parser2.c\
+		parse/list_utils.c\
+		parse/tree_utils.c\
+		parse/parse_test.c\
+		parse/parse_env.c\
+		parse/sort_env.c\
+		error_handler.c
 OBJS = $(SRCS:.c=.o)
-SUBDIRS = libft
 MAKE = make
 
 all : $(NAME)
@@ -19,16 +26,18 @@ all : $(NAME)
 	$(CC) $(CFLAGS) -c  $< -o $@ 
 
 $(NAME) : $(OBJS)
-	make -C $(SUBDIRS)
-	cp $(SUBDIRS)/libft.a $(NAME)
-	$(CC) $(CFLAGS) -I. $(OBJS)  -o $(NAME)  -lft -L$(SUBDIRS) -lreadline -fsanitize=address
+	$(MAKE) -C libft
+	$(MAKE) -C printf
+	$(CC) $(CFLAGS) $(OBJS)  -o $(NAME) -Llibft -Lprintf -lft -lftprintf  -lreadline
 
 clean:
-	make -C $(SUBDIRS) clean
+	$(MAKE) -C libft clean
+	$(MAKE) -C printf clean
 	rm -f $(OBJS) $(BONUS_OBJS)
 
 fclean: clean
-	rm -f $(SUBDIRS)/libft.a
+	rm -f libft/libft.a
+	rm -f printf/libftprintf.a
 	rm -f $(NAME)
 
 re: fclean all

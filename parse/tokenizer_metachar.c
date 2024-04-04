@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:48:22 by soljeong          #+#    #+#             */
-/*   Updated: 2024/03/26 13:38:37 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/02 14:19:22 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,21 @@
 
 static int	ft_token_num(char *line, int i);
 
-void	ft_tokenizer_metachar(char *line, int *i, int start, t_list *head)
+int	tokenizer_error(t_list *head)
+{
+	parse_error();
+	ft_lstclear(&head, (void *)ft_del_token_node);
+	return (0);
+}
+
+int	ft_tokenizer_metachar(char *line, int *i, int start, t_list *head)
 {
 	char	*str;
 	int		tokentype;
 
 	tokentype = ft_token_num(line, *i);
-	if (tokentype == ERROR)
-	{
-		printf("parse error\n"); // error 문구 생각하기
-		exit(-1); // exit 코드 생각
-		//free 해줘야하는지 고려하기..
-	}
+	if (tokentype == 0)
+		return (tokenizer_error(head));
 	else if (tokentype == REDIRECT_IN || tokentype == REDIRECT_OUT
 		|| tokentype == L_PAREN || tokentype == R_PAREN
 		|| tokentype == PIPE)
@@ -35,6 +38,7 @@ void	ft_tokenizer_metachar(char *line, int *i, int start, t_list *head)
 		*i += 2;
 	str = ft_substr(line, start, *i - start);
 	ft_add_token_node(head, str, tokentype);
+	return (TRUE);
 }
 
 static int	ft_token_num(char *line, int i)
@@ -59,5 +63,4 @@ static int	ft_token_num(char *line, int i)
 		return (R_PAREN);
 	else
 		return (0);
-		// ㅇㅣ ㅂㅜ부ㄴ 에러처리 어떻게 할지 생각해보기
 }

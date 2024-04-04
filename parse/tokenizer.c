@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:51:18 by soljeong          #+#    #+#             */
-/*   Updated: 2024/03/28 11:07:07 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/02 13:49:14 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ t_list	*tokenizer(char *line)
 {
 	int		i;
 	int		start;
-	char	*str;
 	t_list	*head;
 
 	i = 0;
@@ -32,17 +31,15 @@ t_list	*tokenizer(char *line)
 		start = i;
 		while (line[i] && !ft_is_ifs(line[i]) && !ft_is_metacharacter(line[i]))
 		{
-			if (line[i] == '\"' || line[i] == '\"')
+			if (line[i] == '\"' || line[i] == '\'')
 				ft_quotemarks(line, &i, line[i]);
 			i++;
 		}
 		if (i - start > 0)
-		{
-			str = ft_substr(line, start, i - start);
-			ft_add_token_node(head, str, WORD);
-		}
+			ft_add_token_node(head, ft_substr(line, start, i - start), WORD);
 		else if (ft_is_metacharacter(line[i]))
-			ft_tokenizer_metachar(line, &i, start, head);
+			if (!ft_tokenizer_metachar(line, &i, start, head))
+				return (0);
 	}
 	return (head);
 }
@@ -64,12 +61,9 @@ int	ft_is_metacharacter(char c)
 
 void	ft_quotemarks(char *line, int *i, char quote)
 {
-	if (line[*i] == quote)
-	{
+	*i += 1;
+	while (line[*i] && line[*i] != quote)
 		*i += 1;
-		while (line[*i] && line[*i] != quote)
-			*i += 1;
-		if (line[*i] != quote)
-			parse_error();//error
-	}
+	if (line[*i] == '\0' || line[*i] != quote)
+		parse_error();
 }
