@@ -30,11 +30,11 @@ int	main(int argc, char *argv[], char *envp[])
 	char	*line;
 	t_list	*head;
 	t_tree	*tree;
-	t_list	*env_list;
+	//t_list	*env_list;
 
 	(void)argc;
 	(void)argv;
-	env_list = parse_env(envp);
+	parse_env(envp);
 	while (1)
 	{
 		line = readline("examshell : ");
