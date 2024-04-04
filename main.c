@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/03 19:47:33 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/04 13:56:39 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(void)
 
 	while (1)
 	{
-		line = readline("examshell : ");
+		line = readline("minishell: ");
 		add_history(line);
 		head = tokenizer(line);
 		if (!head)
@@ -40,9 +40,9 @@ int	main(void)
 			continue;
 		}
 		tree = parse_tree(&head);
+		//leaks();
 		inorder_cmd_tree(tree);
+		clear_tree(tree);
 		free(line);
 	}
 }
-
-

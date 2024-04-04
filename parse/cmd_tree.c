@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:56:13 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/03 19:45:41 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/04 13:49:13 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,35 @@ t_cmd_node	*new_cmd_node(t_list *rd_list, t_list *cmd_list)
 	return (cmd_node);
 }
 
+void	print_cmd(char *cmd)
+{
+	printf("cmd: %s\n",cmd);
+}
+
+void	print_rdnode(t_rd_node *rd_node)
+{
+	printf("rdtype:%d  rdfilename:%s\n",rd_node->rd_type,rd_node->filename);
+}
+
+void	print_pipenode(t_cmd_node *pipenode)
+{
+	printf("ㅅㅐ로운 파이프\n");
+	ft_lstiter(pipenode->rd_list, (void *)print_rdnode);
+	ft_lstiter(pipenode->cmd_list, (void *)print_cmd);
+}
+
 void inorder_cmd_tree(t_tree *tree)
 {
 	//t_token		*token;
 	t_list		*pipelist;
 
+	if (tree == NULL)
+		return ;
 	if (tree->left)
+	{
 		pipelist =  make_pipelist(tree->left);
+		ft_lstiter(pipelist,(void *)print_pipenode);
+	}
 	// if (token &&(token->type == OR_OPERATOR
 	// || token->type == AND_OPERATOR))
 	// {
