@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:45:34 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/02 14:16:49 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/03 19:47:25 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # define ERROR -1
 # define TRUE 1
 # include "../libft/libft.h"
+# include "parse_list.h"
 # include <stdio.h>
 
 enum {
@@ -30,6 +31,15 @@ enum {
 	WORD,
 };
 
+enum {
+	LIST = 11,
+	SUBLIST,
+	PIPELINE,
+	CMD,
+	SMPCMD,
+	RD
+};
+
 typedef struct s_token {
 	char	*str;
 	int		type;
@@ -37,6 +47,8 @@ typedef struct s_token {
 
 typedef struct s_tree {
 	t_token			*token;
+	t_rd_node		*redirect;
+	int				status;
 	struct s_tree	*left;
 	struct s_tree	*right;
 }	t_tree;
@@ -50,13 +62,18 @@ void	parse_error(void);
 t_tree	*parse_tree(t_list **list);
 void	tree_inorder_print(t_tree *tree);
 t_tree	*parse_tree(t_list **list);
-t_tree	*ft_tree_new(t_token *token);
+t_tree	*ft_tree_new(t_token *token, int status);
 t_tree	*syntax_list(t_list **list);
 t_tree	*syntax_sublist(t_list **list);
 t_tree	*syntax_pipeline(t_list **list);
 t_tree	*syntax_cmd(t_list **list);
 t_tree	*syntax_simple_cmd(t_list **list);
 t_tree	*syntax_redirection(t_list **list);
+t_rd_node	*new_rd_node(int rd_type, char *filename);
+t_cmd_node	*new_cmd_node(t_list *rd_list, t_list *cmd_list);
+t_cmd_node *new_cmd_tree_pipeline(t_tree *tree);
+t_list	*make_pipelist(t_tree *tree);
+void inorder_cmd_tree(t_tree *tree);
 void	clear_tree(t_tree *tree);
 void	list_shift(t_list **list);
 int		is_redicrtion(t_token *token);

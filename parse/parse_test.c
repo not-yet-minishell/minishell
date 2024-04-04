@@ -6,12 +6,11 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:10:51 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/02 14:17:59 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/02 17:16:11 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
-#include "parse_test.h"
+#include "../minishell.h"
 
 void	tree_inorder_print(t_tree *tree)
 {

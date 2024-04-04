@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/02 14:23:47 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/03 19:47:33 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ int	main(void)
 			continue;
 		}
 		tree = parse_tree(&head);
-		clear_tree(tree);
+		inorder_cmd_tree(tree);
 		free(line);
 	}
 }
+
+

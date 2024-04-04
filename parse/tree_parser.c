@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 13:40:49 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/02 14:15:01 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/03 13:53:32 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_tree	*syntax_list(t_list **list)
 	t_token	*token;
 	t_tree	*tree;
 
-	tree = ft_tree_new(NULL);
+	tree = ft_tree_new(NULL,LIST);
 	tree->left = syntax_sublist(list);
 	if (tree->left == NULL)
 	{
@@ -102,7 +102,7 @@ t_tree	*syntax_pipeline(t_list **list)
 	t_token	*token;
 	t_tree	*tree;
 
-	tree = ft_tree_new(NULL);
+	tree = ft_tree_new(NULL,PIPELINE);
 	tree->left = syntax_cmd(list);
 	if (tree->left == NULL)
 	{

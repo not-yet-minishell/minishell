@@ -6,11 +6,11 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 11:25:10 by soljeong          #+#    #+#             */
-/*   Updated: 2024/03/26 13:36:09 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/02 17:45:52 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "../minishell.h"
 
 t_token	*ft_tokennew(void *str, int tokentype)
 {

@@ -14,6 +14,7 @@ SRCS = main.c\
 		parse/list_utils.c\
 		parse/tree_utils.c\
 		parse/parse_test.c\
+		parse/cmd_tree.c\
 		error_handler.c
 OBJS = $(SRCS:.c=.o)
 MAKE = make
