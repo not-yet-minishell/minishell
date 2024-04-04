@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:56:13 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/04 13:49:13 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/04 14:53:00 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,21 +59,23 @@ void	print_pipenode(t_cmd_node *pipenode)
 
 void inorder_cmd_tree(t_tree *tree)
 {
-	//t_token		*token;
+	t_token		*token;
 	t_list		*pipelist;
 
 	if (tree == NULL)
 		return ;
+	token = tree->token;
 	if (tree->left)
 	{
 		pipelist =  make_pipelist(tree->left);
 		ft_lstiter(pipelist,(void *)print_pipenode);
 	}
-	// if (token &&(token->type == OR_OPERATOR
-	// || token->type == AND_OPERATOR))
-	// {
-	// 	//앞에거 결과값 받아서 되면 오른쪽 결과값 진행
-	// }
+	if (token &&(token->type == OR_OPERATOR
+	|| token->type == AND_OPERATOR))
+	{
+		printf("oper\n");
+		inorder_cmd_tree(tree->right);
+	}
 }
 
 t_list	*make_pipelist(t_tree *tree)
