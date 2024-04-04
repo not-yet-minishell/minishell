@@ -1,0 +1,13 @@
+{
+	"files.associations": {
+		"structure.h": "c",
+		"parse.h": "c",
+		"cstring": "c",
+		"__node_handle": "cpp",
+		"parse_list.h": "c",
+		"execute.h": "c",
+		"minishell.h": "c",
+		"stdlib.h": "c",
+		"ft_printf.h": "c"
+	}
+}

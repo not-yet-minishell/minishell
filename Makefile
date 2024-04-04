@@ -9,6 +9,11 @@ SRCS = main.c\
 		parse/tokenizer.c\
 		parse/parse_error.c\
 		parse/token_test.c\
+		parse/tree_parser.c\
+		parse/tree_parser2.c\
+		parse/list_utils.c\
+		parse/tree_utils.c\
+		parse/parse_test.c\
 		error_handler.c
 OBJS = $(SRCS:.c=.o)
 MAKE = make
@@ -16,16 +21,16 @@ MAKE = make
 all : $(NAME)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c  $< -o $@
+	$(CC) $(CFLAGS) -c  $< -o $@ 
 
 $(NAME) : $(OBJS)
-	make -C libft
-	make -C printf
+	$(MAKE) -C libft
+	$(MAKE) -C printf
 	$(CC) $(CFLAGS) $(OBJS)  -o $(NAME) -Llibft -Lprintf -lft -lftprintf  -lreadline
 
 clean:
-	make -C libft clean
-	make -C printf clean
+	$(MAKE) -C libft clean
+	$(MAKE) -C printf clean
 	rm -f $(OBJS) $(BONUS_OBJS)
 
 fclean: clean

@@ -6,13 +6,13 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 11:25:10 by soljeong          #+#    #+#             */
-/*   Updated: 2024/03/26 12:43:15 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/03/26 13:36:09 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-t_token	*ft_tokennew(void *str, int tokennum)
+t_token	*ft_tokennew(void *str, int tokentype)
 {
 	t_token	*new;
 
@@ -20,6 +20,6 @@ t_token	*ft_tokennew(void *str, int tokennum)
 	if (new == NULL)
 		return (NULL);
 	new->str = str;
-	new->token = tokennum;
+	new->type = tokentype;
 	return (new);
 }
