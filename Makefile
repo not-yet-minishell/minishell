@@ -24,13 +24,13 @@ all : $(NAME)
 	$(CC) $(CFLAGS) -c  $< -o $@ 
 
 $(NAME) : $(OBJS)
-	make -C libft
-	make -C printf
+	$(MAKE) -C libft
+	$(MAKE) -C printf
 	$(CC) $(CFLAGS) $(OBJS)  -o $(NAME) -Llibft -Lprintf -lft -lftprintf  -lreadline
 
 clean:
-	make -C libft clean
-	make -C printf clean
+	$(MAKE) -C libft clean
+	$(MAKE) -C printf clean
 	rm -f $(OBJS) $(BONUS_OBJS)
 
 fclean: clean
