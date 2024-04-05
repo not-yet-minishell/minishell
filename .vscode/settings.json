@@ -9,6 +9,7 @@
 		"minishell.h": "c",
 		"stdlib.h": "c",
 		"ft_printf.h": "c",
-		"execute_builtin.h": "c"
+		"execute_builtin.h": "c",
+		"parse_env.h": "c"
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 18:29:18 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/04 20:32:20 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/05 11:52:11 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,35 +36,39 @@ void select_sort_selectsmall(t_list **head, t_list **new_list)
 	t_list	*small_prev;
 	t_list	*small;
 	t_list	*prev;
+	t_list	*temp;
 
-		curr = (*head)->next;
-		small = *head;
-		small_prev = NULL;
-		while (curr)
+	prev = (*head);
+	curr = (*head)->next;
+	small = *head;
+	small_prev = NULL;
+	while (curr)
+	{
+		if (ft_strncmp(((t_env *)small->content)->key,((t_env *)curr->content)->key, ft_strlen(((t_env *)curr->content)->key)) > 0)
 		{
-			if (ft_strncmp(((t_env *)small->content)->key,((t_env *)curr->content)->key, ft_strlen(((t_env *)curr->content)->key)) > 0)
-			{
-				small = curr;
-				small_prev = prev;
-			}
-			prev = curr;
-			curr = curr->next;
+			small = curr;
+			small_prev = prev;
 		}
-		if ((*new_list) == NULL)
-		{
-			(*new_list) = list_delete(small_prev,small);
-		}else
-		{
-			if (small_prev == NULL)
-				(*head) = (*head)->next;
-			ft_lstadd_back(new_list,list_delete(small_prev,small));
-		}
+		prev = curr;
+		curr = curr->next;
+	}
+	if (small == (*head))
+	{
+		temp = (*head)->next;
+		(*head)->next = NULL;
+		ft_lstadd_back(new_list, (*head));
+		(*head) = temp;
+	}
+	else
+		ft_lstadd_back(new_list,list_delete(small_prev,small));
 }
 
 t_list *list_delete(t_list *prev, t_list *curr)
 {
 	if (prev && curr->next)
 		prev->next = curr->next;
+	if (prev && curr&& curr->next == NULL)
+		prev->next = NULL;
 	curr->next = NULL;
 	return (curr);
 }
