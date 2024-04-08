@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/02 14:23:47 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/08 10:40:28 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,14 @@ void	leaks(void)
 	system("leaks minishell");
 }
 
-int	main(void)
+int	main(int argc, char *argv[], char *envp[])
 {
 	char	*line;
 	t_list	*head;
 	t_tree	*tree;
 
+	(void)argc;
+	(void)argv;
 	while (1)
 	{
 		line = readline("examshell : ");
