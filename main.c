@@ -33,7 +33,11 @@ int	main(int argc, char *argv[], char *envp[])
 	(void)argv;
 	while (1)
 	{
-		line = readline("examshell : ");
+		line = readline("minishell: ");
+		// line nuull 체크해서 exit 코드
+		// ctrl + c 눌렀을때 프로그램 안꺼지고 다음 프롬프트
+		// ctrl + \ 했을때 아무 동작도 안하게! 자식프로세스는 꺼지고 , 부모프로세스는 아무동작도 안하게
+		// heredoc도 조금 다르다!
 		add_history(line);
 		head = tokenizer(line);
 		if (!head)
@@ -42,6 +46,8 @@ int	main(int argc, char *argv[], char *envp[])
 			continue;
 		}
 		tree = parse_tree(&head);
+		//leaks();
+		inorder_cmd_tree(tree);
 		clear_tree(tree);
 		free(line);
 	}
