@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_env.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 02:00:55 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/04 18:02:52 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/08 17:58:22 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@ typedef struct s_env
 	char	*key;
 	char	*value;
 }	t_env;
+
+typedef struct s_builtin
+{
+	char	*pwd;
+	int		exit_num;
+}	t_builtin;
 
 t_list	*parse_env(char *env[]);
 

@@ -6,11 +6,13 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 20:24:51 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/04 16:13:37 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/08 19:01:39 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute_builtin.h"
+
+static int	isnum(char *content);
 
 void	ft_exit(char **cmd, t_list *env_list)
 {

@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 15:59:53 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/04 20:05:50 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/08 20:26:01 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 static t_list	*find_insert(t_list *env_list, char *key);
 static void		print_export(t_list *env_list);
-static t_list	*add_envlist(t_list **env_list, t_list *new_node);
+static void		add_envlist(t_list *env_list, t_list *new_node);
 static t_env	*devide_key_value(char *env);
+
+//따옴표 처리
 
 void	export(char **cmd, t_list *env_list)
 {
@@ -37,7 +39,7 @@ void	export(char **cmd, t_list *env_list)
 		cmd++;
 		content = divide_key_value(env);
 		node = ft_lstnew(content);
-		env_list = add_envlist(env_list, node);
+		add_envlist(env_list, node);
 	}
 	change_exit_number(0, env_list);
 }
@@ -46,6 +48,7 @@ static void	print_export(t_list *env_list)
 {
 	t_env	*content;
 
+	env_list = env_list->next;
 	while (env_list != NULL)
 	{
 		content = (t_env *)env_list->content;
@@ -58,21 +61,22 @@ static void	print_export(t_list *env_list)
 	}
 }
 
-static t_list	*add_envlist(t_list **env_list, t_list *new_node)
+static void	add_envlist(t_list *env_list, t_list *new_node)
 {
 	t_list	*temp;
 	t_list	*pre;
 	t_list	*back;
 
-	if (*env_list == NULL)
-		*env_list = new_node;
+	env_list = env_list->next;
+	if (env_list == NULL)
+		env_list = new_node;
 	else
 	{
-		pre = find_insert(*env_list, ((t_env *)new_node->content)->key);
+		pre = find_insert(env_list, ((t_env *)new_node->content)->key);
 		if (pre == NULL)
 		{
-			new_node->next = *env_list;
-			*env_list = new_node;
+			new_node->next = env_list;
+			env_list = new_node;
 		}
 		else
 		{
@@ -81,18 +85,25 @@ static t_list	*add_envlist(t_list **env_list, t_list *new_node)
 			new_node->next = temp;
 		}
 	}
-	return (*env_list);
 }
 
-static t_list	*find_insert(t_list *env_list, char *key)
+static t_list	*find_insert(t_list *head, char *key)
 {
 	t_list	*pre;
 	t_env	*content;
+	t_list	*temp;
+	t_list	*env_list;
 
-	pre = NULL;
+	pre = head;
+	env_list = head->next;
 	while (env_list != NULL)
 	{
 		content = env_list->content;
+		if (ft_strncmp(key, content->key, ft_strlen(key) + 1) == 0)
+		{
+			delete_env_node(pre, env_list);
+			break ;
+		}
 		if (ft_strncmp(key, content->key, ft_strlen(key) + 1) < 0)
 			break ;
 		pre = env_list;
