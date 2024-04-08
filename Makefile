@@ -1,6 +1,6 @@
 NAME = minishell
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 SRCS = main.c\
 		parse/ft_tokennew.c\
 		parse/ft_add_token_node.c\
@@ -17,6 +17,7 @@ SRCS = main.c\
 		parse/cmd_tree.c\
 		parse/cmd_tree_utils.c\
 		parse/print_cmd_tree.c\
+		parse/parse_env.c\
 		error_handler.c
 OBJS = $(SRCS:.c=.o)
 MAKE = make

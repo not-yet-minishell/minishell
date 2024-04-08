@@ -21,6 +21,6 @@
 # include "parse/parse_list.h"
 # include "parse/parse.h"
 # include "parse/parse_test.h"
-# include "pipe/pipex.h"
-# include "execute_builtin/execute_builtin.h"
+//# include "pipe/pipex.h"
+//# include "execute_builtin/execute_builtin.h"
 #endif

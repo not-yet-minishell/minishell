@@ -13,6 +13,7 @@
 		"parse_test.h": "c",
 		"stdio.h": "c",
 		"ios": "c",
-		"signal.h": "c"
+		"signal.h": "c",
+		"parse_env.h": "c"
 	}
 }
