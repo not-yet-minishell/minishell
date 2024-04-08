@@ -10,6 +10,10 @@
 		"stdlib.h": "c",
 		"ft_printf.h": "c",
 		"execute_builtin.h": "c",
+		"parse_test.h": "c",
+		"stdio.h": "c",
+		"ios": "c",
+		"signal.h": "c",
 		"parse_env.h": "c"
 	}
 }
