@@ -6,11 +6,11 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 12:56:21 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/08 12:56:23 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/08 14:20:40 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse_list.h"
+#include "../minishell.h"
 
 void	print_cmd(char *cmd)
 {

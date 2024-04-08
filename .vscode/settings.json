@@ -12,6 +12,7 @@
 		"execute_builtin.h": "c",
 		"parse_test.h": "c",
 		"stdio.h": "c",
-		"ios": "c"
+		"ios": "c",
+		"signal.h": "c"
 	}
 }

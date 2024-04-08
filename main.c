@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/04 13:56:39 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/08 14:15:50 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ int	main(void)
 	while (1)
 	{
 		line = readline("minishell: ");
+		// line nuull 체크해서 exit 코드
+		// ctrl + c 눌렀을때 프로그램 안꺼지고 다음 프롬프트
+		// ctrl + \ 했을때 아무 동작도 안하게! 자식프로세스는 꺼지고 , 부모프로세스는 아무동작도 안하게
+		// heredoc도 조금 다르다!
 		add_history(line);
 		head = tokenizer(line);
 		if (!head)
