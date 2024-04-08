@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/01 09:43:52 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/08 10:40:28 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,33 @@
 #include <readline/history.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "parse/parse.h"
-#include "parse/parse_test.h"
+#include "minishell.h"
 
 void	leaks(void)
 {
 	system("leaks minishell");
 }
 
-int	main(void)
+int	main(int argc, char *argv[], char *envp[])
 {
 	char	*line;
 	t_list	*head;
+	t_tree	*tree;
 
-	atexit(leaks);
+	(void)argc;
+	(void)argv;
 	while (1)
 	{
-		head = ft_lstnew(NULL);
-		line = readline("minishell$ ");
+		line = readline("examshell : ");
 		add_history(line);
 		head = tokenizer(line);
-		if (head)
-			ft_lstiter(head, (void *)print_node);
-		ft_lstclear(&head, (void *)ft_del_token_node);
+		if (!head)
+		{
+			free(line);
+			continue;
+		}
+		tree = parse_tree(&head);
+		clear_tree(tree);
+		free(line);
 	}
 }

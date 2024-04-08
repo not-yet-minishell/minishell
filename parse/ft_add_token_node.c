@@ -6,18 +6,18 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:57:20 by soljeong          #+#    #+#             */
-/*   Updated: 2024/03/26 12:44:07 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/08 10:31:19 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-void	ft_add_token_node(t_list *head, char *str, int tokennum)
+void	ft_add_token_node(t_list *head, char *str, int tokentype)
 {
 	t_list	*new_node;
 	t_token	*content;
 
-	content = ft_tokennew(str, tokennum);
+	content = ft_tokennew(str, tokentype);
 	if (!content)
 		ft_lstclear(&head, (void *)ft_del_token_node);
 	new_node = ft_lstnew(content);

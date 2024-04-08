@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 01:59:48 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/03/29 18:39:05 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/08 10:41:20 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_list	*parse_env(char *env[])
 	t_list	*env_node;
 	t_list	*env_head;
 	int		idx;
+	int		*exit_num;
 
 	idx = 0;
 	env_head = NULL;
@@ -32,6 +33,10 @@ t_list	*parse_env(char *env[])
 		ft_lstadd_back(&env_head, env_node);
 		idx++;
 	}
+	idx = 0;
+	exit_num = &idx;
+	env_node = ft_lstnew(exit_num);
+	ft_lstadd_front(&env_head, env_node);
 	return (env_head);
 }
 
