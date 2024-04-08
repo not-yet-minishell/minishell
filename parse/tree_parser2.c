@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 14:12:37 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/04 13:45:12 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/08 12:57:06 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_tree	*syntax_cmd(t_list **list)
 	t_token	*token;
 	t_tree	*tree;
 
-	tree = ft_tree_new(NULL,CMD);
+	tree = ft_tree_new(NULL, CMD);
 	tree->left = syntax_simple_cmd(list);
 	if (!(tree->left))
 	{
@@ -49,7 +49,7 @@ t_tree	*syntax_simple_cmd(t_list **list)
 	token = (t_token *)(*list)->content;
 	if (token->type == WORD)
 	{
-		tree = ft_tree_new(NULL,SMPCMD);
+		tree = ft_tree_new(NULL, SMPCMD);
 		tree->token = token;
 		list_shift(list);
 		return (tree);
@@ -66,7 +66,7 @@ t_tree	*syntax_redirection(t_list **list)
 	int			rd_type;
 
 	token = (t_token *)(*list)->content;
-	tree = ft_tree_new(NULL,RD);
+	tree = ft_tree_new(NULL, RD);
 	if (is_redicrtion(token) && (*list)->next)
 	{
 		tree->token = token;
