@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 16:00:07 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/08 19:02:21 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/10 19:18:00 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	check_flag(char **cmd, int *flag);
 static void	check_env_and_print(char *str, t_list *env_list);
 
-void	echo(char **cmd, t_list *env_list)
+void	ft_echo(char **cmd, t_list *env_list)
 {
 	int		idx;
 	int		flag;
@@ -73,7 +73,7 @@ static void	check_env_and_print(char *str, t_list *env_list)
 	while (env_list != NULL)
 	{
 		content = env_list->content;
-		if (ft_strncmp(*str, content->key, ft_strlen(*str) + 1) == 0)
+		if (ft_strncmp(str, content->key, ft_strlen(str) + 1) == 0)
 		{
 			ft_printf(1, "%s", str);
 			return ;

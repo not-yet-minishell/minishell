@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_tree.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:56:13 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/08 12:51:37 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/10 19:53:08 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,29 @@ static t_cmd_node	*new_cmd_tree_pipeline(t_tree *tree);
 static t_list		*cmd_tree_rd_list(t_list **rd_list, t_tree *tree);
 static t_list		*cmd_tree_cmd_list(t_list **cmd_list, t_tree *tree);
 
-void	inorder_cmd_tree(t_tree *tree)
+
+
+void	inorder_cmd_tree(t_tree *tree, t_list *envp, int flag)
 {
 	t_token		*token;
 	t_list		*pipelist;
+	int			exit_num;
 
+	pipelist = NULL;
 	if (tree == NULL)
 		return ;
 	token = tree->token;
 	if (tree->left)
 		pipelist = make_pipelist(tree->left);
+	if (flag == AND_TRUE || flag == OR_FALSE || flag == START)
+		exit_num = start_process(pipelist, envp);
+	free_pipe_list(pipelist);
 	if (token && (token->type == OR_OPERATOR
 			|| token->type == AND_OPERATOR))
-		inorder_cmd_tree(tree->right);
+	{
+		flag = divide_flag(token->type, exit_num);
+		inorder_cmd_tree(tree->right, envp, flag);
+	}
 }
 
 static t_list	*make_pipelist(t_tree *tree)

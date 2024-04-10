@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 18:57:50 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/08 20:25:17 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/10 19:23:40 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,17 @@ void	delete_env_node(t_list *pre, t_list *current)
 	free(content);
 	free(current);
 	pre->next = next;
+}
+
+void	free_array(char **arr)
+{
+	int	idx;
+
+	idx = 0;
+	while (arr[idx] != NULL)
+	{
+		free(arr[idx]);
+		idx++;
+	}
+	free(arr);
 }

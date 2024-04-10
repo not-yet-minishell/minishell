@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 15:59:53 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/08 20:26:01 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/10 19:40:48 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_env	*devide_key_value(char *env);
 
 //따옴표 처리
 
-void	export(char **cmd, t_list *env_list)
+void	ft_export(char **cmd, t_list *env_list)
 {
 	char	*env;
 	t_env	*content;
@@ -37,7 +37,7 @@ void	export(char **cmd, t_list *env_list)
 	{
 		env = *cmd;
 		cmd++;
-		content = divide_key_value(env);
+		content = devide_key_value(env);
 		node = ft_lstnew(content);
 		add_envlist(env_list, node);
 	}
@@ -52,11 +52,11 @@ static void	print_export(t_list *env_list)
 	while (env_list != NULL)
 	{
 		content = (t_env *)env_list->content;
-		printf(1, "declare -x %s", content->key);
+		ft_printf(1, "declare -x %s", content->key);
 		if (content->value != NULL)
-			printf(1, "=\"%s\"\n", content->value);
+			ft_printf(1, "=\"%s\"\n", content->value);
 		else
-			printf(1, "\n");
+			ft_printf(1, "\n");
 		env_list = env_list->next;
 	}
 }
@@ -65,7 +65,7 @@ static void	add_envlist(t_list *env_list, t_list *new_node)
 {
 	t_list	*temp;
 	t_list	*pre;
-	t_list	*back;
+	//t_list	*back;
 
 	env_list = env_list->next;
 	if (env_list == NULL)
@@ -91,7 +91,7 @@ static t_list	*find_insert(t_list *head, char *key)
 {
 	t_list	*pre;
 	t_env	*content;
-	t_list	*temp;
+	//t_list	*temp;
 	t_list	*env_list;
 
 	pre = head;
@@ -125,7 +125,12 @@ static t_env	*devide_key_value(char *env)
 	while (env[idx] && env[idx] != '=')
 		idx++;
 	key = ft_substr(env, 0, idx);
-	value = ft_substr(env, idx + 1, ft_strlen(env) - idx - 1);
+	if (env[idx] == '\0')
+		value = "\0";
+	else if (env[idx] == '=' && env[idx + 1] == '\0')
+		value = "\"\"";
+	else
+		value = ft_substr(env, idx + 1, ft_strlen(env) - idx - 1);
 	content->key = key;
 	content->value = value;
 	return (content);

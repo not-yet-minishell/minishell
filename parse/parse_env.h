@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 02:00:55 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/08 17:58:22 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/09 10:47:31 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_env
 typedef struct s_builtin
 {
 	char	*pwd;
-	int		exit_num;
+	int		*exit_num;
 }	t_builtin;
 
 t_list	*parse_env(char *env[]);

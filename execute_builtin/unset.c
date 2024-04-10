@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 04:36:18 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/08 20:25:34 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/10 19:41:45 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_unset(char **cmd, t_list *env_list)
 		content = current->content;
 		if (ft_strncmp(*cmd, content->key, ft_strlen(*cmd) + 1) == 0)
 		{
-			delete_node(pre, current);
+			delete_env_node(pre, env_list);
 			break ;
 		}
 		pre = current;
