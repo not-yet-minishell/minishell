@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:56:13 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/10 19:53:08 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/10 20:06:35 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	inorder_cmd_tree(t_tree *tree, t_list *envp, int flag)
 		pipelist = make_pipelist(tree->left);
 	if (flag == AND_TRUE || flag == OR_FALSE || flag == START)
 		exit_num = start_process(pipelist, envp);
-	free_pipe_list(pipelist);
+	//free_pipe_list(pipelist);
 	if (token && (token->type == OR_OPERATOR
 			|| token->type == AND_OPERATOR))
 	{

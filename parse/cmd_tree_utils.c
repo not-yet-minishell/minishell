@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 12:44:02 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/09 12:42:01 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/10 20:05:02 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_cmd_node	*new_cmd_node(t_list *rd_list, t_list *cmd_list)
 {
 	t_cmd_node	*cmd_node;
 
-	cmd_node = malloc(sizeof(t_cmd_node *));
+	cmd_node = malloc(sizeof(t_cmd_node));
 	if (!cmd_node)
 		exit (-1);
 	cmd_node->rd_list = rd_list;

@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 16:00:07 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/10 19:18:00 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/10 20:39:10 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	ft_echo(char **cmd, t_list *env_list)
 	}
 	if (flag == FALSE)
 		ft_printf(1, "\n");
+	change_exit_number(0, env_list);
 }
 
 static int	check_flag(char **cmd, int *flag)
@@ -67,7 +68,10 @@ static void	check_env_and_print(char *str, t_list *env_list)
 	t_env	*content;
 
 	if (*str != '$')
+	{
 		ft_printf(1, "%s", str);
+		return ;
+	}
 	str++;
 	env_list = env_list->next;
 	while (env_list != NULL)
