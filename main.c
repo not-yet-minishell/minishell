@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/08 10:40:28 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/09 11:13:55 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	leaks(void)
 	system("leaks minishell");
 }
 
-int	main(int argc, char *argv[], char *envp[])
+int	main(int argc, char *argv[], char **envp)
 {
 	char	*line;
 	t_list	*head;
@@ -43,11 +43,14 @@ int	main(int argc, char *argv[], char *envp[])
 		if (!head)
 		{
 			free(line);
-			continue;
+			continue ;
 		}
 		tree = parse_tree(&head);
 		//leaks();
-		inorder_cmd_tree(tree);
+		
+		inorder_cmd_tree(tree, parse_env(envp), START);
+		//ret = pipe(list);
+		//inorder_cmd_tree(ret);
 		clear_tree(tree);
 		free(line);
 	}

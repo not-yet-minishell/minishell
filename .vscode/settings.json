@@ -10,10 +10,22 @@
 		"stdlib.h": "c",
 		"ft_printf.h": "c",
 		"execute_builtin.h": "c",
-		"parse_test.h": "c",
-		"stdio.h": "c",
-		"ios": "c",
-		"signal.h": "c",
-		"parse_env.h": "c"
+		"parse_env.h": "c",
+		"__bit_reference": "c",
+		"__functional_base": "c",
+		"algorithm": "c",
+		"bitset": "c",
+		"chrono": "c",
+		"__memory": "c",
+		"functional": "c",
+		"iterator": "c",
+		"limits": "c",
+		"memory": "c",
+		"optional": "c",
+		"ratio": "c",
+		"system_error": "c",
+		"tuple": "c",
+		"type_traits": "c",
+		"vector": "c"
 	}
 }

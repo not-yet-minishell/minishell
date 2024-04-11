@@ -6,13 +6,11 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 19:46:28 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/01 17:19:31 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/10 17:00:39 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-static t_list	*free_and_next_rd(t_list *rd_node);
 
 void	start_command(t_list *cmd_list, t_fd *fd_info, t_list *env)
 {
@@ -28,7 +26,8 @@ void	start_command(t_list *cmd_list, t_fd *fd_info, t_list *env)
 	}
 	while (rd_node != NULL)
 	{
-		redirect(rd_node->content);
+		if (redirect(rd_node->content) == FALSE)
+			exit(1);
 		rd_node = free_and_next_rd(rd_node);
 	}
 	dup2(fd_info->fds[1], STDOUT_FILENO);
@@ -37,7 +36,7 @@ void	start_command(t_list *cmd_list, t_fd *fd_info, t_list *env)
 	execute(exe_cmd, env);
 }
 
-static t_list	*free_and_next_rd(t_list *rd_node)
+t_list	*free_and_next_rd(t_list *rd_node)
 {
 	t_list	*pre;
 

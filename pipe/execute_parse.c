@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 13:58:11 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/01 16:46:24 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/10 20:27:27 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	**find_path_to_array(t_list *env)
 	path = NULL;
 	while (env != NULL)
 	{
-		if (strncmp(((t_env *)env->content)->key, "PATH", 5) == 0)
+		if (ft_strncmp(((t_env *)env->content)->key, "PATH", 5) == 0)
 		{
 			path = ((t_env *)env->content)->value;
 			break ;
@@ -27,7 +27,7 @@ char	**find_path_to_array(t_list *env)
 		env = env->next;
 	}
 	if (path == NULL)
-		*path = "/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:.";
+		path = "/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:.";
 	return (ft_split(path, ':'));
 }
 
@@ -43,13 +43,12 @@ char	**make_list_to_array(t_list *node)
 	ret = (char **)ft_malloc(sizeof(char *) * (list_len + 1));
 	while (node != NULL)
 	{
-		ret[idx] = node->content;
+		ret[idx] = (char *)node->content;
 		pre = node;
 		node = node->next;
-		free(pre->content);
-		free(pre);
 		idx++;
 	}
 	ret[idx] = NULL;
+	idx = 0;
 	return (ret);
 }
