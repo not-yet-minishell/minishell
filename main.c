@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/11 11:32:44 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/11 11:35:23 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	main(int argc, char *argv[], char **envp)
 
 	(void)argc;
 	(void)argv;
-	(void)envp;
 	signalinit();
 	while (1)
 	{
@@ -49,7 +48,7 @@ int	main(int argc, char *argv[], char **envp)
 			continue ;
 		}
 		tree = parse_tree(&head);
-		inorder_cmd_tree(tree);
+		inorder_cmd_tree(tree,parse_env(envp),START);
 		clear_tree(tree);
 		free(line);
 	}
