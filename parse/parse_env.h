@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 02:00:55 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/09 10:47:31 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/11 10:26:52 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ typedef struct s_builtin
 }	t_builtin;
 
 t_list	*parse_env(char *env[]);
+t_list	*select_sort(t_list *env_list);
 
 #endif

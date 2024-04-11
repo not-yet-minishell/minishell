@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 01:59:48 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/08 19:24:53 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/11 10:24:48 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_list	*parse_env(char *env[])
 	}
 	env_node = ft_lstnew(init_head_content());
 	ft_lstadd_front(&env_head, env_node);
-	return (env_head);
+	return (select_sort(env_head));
 }
 
 static t_builtin	*init_head_content(void)

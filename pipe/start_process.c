@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 20:30:17 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/10 17:07:01 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/11 10:36:28 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	start_process(t_list *head, t_list *env)
 	fd_info = init_fd();
 	if ((head->next) == NULL && (is_builtin(head) == TRUE))
 		return (one_process(head, env));
+	printf("12312312asdfsadfsdaffasd\n");
 	while (head != NULL)
 	{
 		if (head->next != NULL)
