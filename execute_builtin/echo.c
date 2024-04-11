@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 16:00:07 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/10 20:39:10 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/11 09:41:14 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	ft_echo(char **cmd, t_list *env_list)
 	int		idx;
 	int		flag;
 
-	flag = 1;
-	idx = check_flag(cmd, &flag);
+	idx = 0;
+	flag = check_flag(cmd, &idx);
 	while (cmd[idx] != NULL)
 	{
 		check_env_and_print(cmd[idx], env_list);
@@ -34,33 +34,29 @@ void	ft_echo(char **cmd, t_list *env_list)
 	change_exit_number(0, env_list);
 }
 
-static int	check_flag(char **cmd, int *flag)
+static int	check_flag(char **cmd, int *idx)
 {
-	int	idx;
+	int	ret_flag;
+	int	flag_idx;
 
-	idx = 0;
-	if (*cmd[0] != '-')
-		*flag = -1;
-	while (cmd[idx] != NULL)
+	ret_flag = FALSE;
+	while (*cmd != NULL)
 	{
-		if (*cmd[idx] != '-')
-			break ;
-		else
+		flag_idx = 0;
+		if (*cmd[flag_idx] != '-')
+			return (ret_flag);
+		flag_idx++;
+		while (cmd[*idx][flag_idx] != '\0')
 		{
-			cmd[idx]++;
-			while (*cmd[idx] != '\0')
-			{
-				if (*cmd[idx] != 'n')
-				{
-					*flag = -1;
-					break ;
-				}
-				cmd[idx]++;
-			}
+			if (cmd[*idx][flag_idx] != 'n')
+				return (ret_flag);
+			flag_idx++;
 		}
-		idx++;
+		if ((*idx) == 0)
+			ret_flag = TRUE;
+		(*idx)++;
 	}
-	return (idx);
+	return (ret_flag);
 }
 
 static void	check_env_and_print(char *str, t_list *env_list)

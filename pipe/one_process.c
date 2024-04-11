@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:54:37 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/10 20:34:41 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/11 09:05:36 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	one_process(t_list *node, t_list *env)
 		rd_node = free_and_next_rd(rd_node);
 	}
 	cmd = make_list_to_array(exe_cmd);
+	//printf("cmd[1] : %s\n", cmd[1]);
 	exit_code = execute_builtin(cmd, env);
 	free_list(node);
 	return (exit_code);

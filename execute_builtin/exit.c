@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 20:24:51 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/10 19:22:30 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/11 08:56:01 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ void	ft_exit(char **cmd, t_list *env_list)
 {
 	int		exit_num;
 
+	if (cmd[1] == NULL)
+	{
+		change_exit_number(0, env_list);
+		exit(0);
+	}
 	exit_num = ft_atoi(cmd[1]);
 	ft_printf(STDOUT_FILENO, "%s\n", *cmd);
 	if (isnum(cmd[1]) == FALSE || exit_num == FALSE)
@@ -33,11 +38,8 @@ void	ft_exit(char **cmd, t_list *env_list)
 		free_array(cmd);
 		change_exit_number(1, env_list);
 	}
-	else
-	{
-		change_exit_number(exit_num, env_list);
-		exit(exit_num);
-	}
+	change_exit_number(exit_num, env_list);
+	exit(exit_num);
 }
 
 static int	isnum(char *content)

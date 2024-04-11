@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 13:58:11 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/10 20:27:27 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/11 09:04:15 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,13 @@ char	**make_list_to_array(t_list *node)
 	ret = (char **)ft_malloc(sizeof(char *) * (list_len + 1));
 	while (node != NULL)
 	{
+		//printf("node content : %s\n", (char *)node->content);
 		ret[idx] = (char *)node->content;
+		//printf("ret[idx] : %s\n", ret[idx]);
 		pre = node;
 		node = node->next;
 		idx++;
 	}
 	ret[idx] = NULL;
-	idx = 0;
 	return (ret);
 }
