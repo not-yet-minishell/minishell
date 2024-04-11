@@ -18,6 +18,7 @@ SRCS = main.c\
 		parse/cmd_tree_utils.c\
 		parse/print_cmd_tree.c\
 		parse/parse_env.c\
+		signal/signal.c\
 		parse/free_pipe_list.c\
 		error_handler.c\
 		pipe/command.c\

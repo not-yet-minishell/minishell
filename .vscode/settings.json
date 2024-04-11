@@ -10,6 +10,17 @@
 		"stdlib.h": "c",
 		"ft_printf.h": "c",
 		"execute_builtin.h": "c",
+<<<<<<< HEAD
+		"parse_test.h": "c",
+		"stdio.h": "c",
+		"ios": "c",
+		"signal.h": "c",
+		"parse_env.h": "c",
+		"history.h": "c",
+		"unistd.h": "c",
+		"_types.h": "c",
+		"readline.h": "c"
+=======
 		"parse_env.h": "c",
 		"__bit_reference": "c",
 		"__functional_base": "c",
@@ -27,5 +38,6 @@
 		"tuple": "c",
 		"type_traits": "c",
 		"vector": "c"
+>>>>>>> 950fa63ffbeb363f52f137213ea09a65315b67da
 	}
 }

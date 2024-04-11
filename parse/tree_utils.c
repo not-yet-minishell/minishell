@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:12:37 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/04 13:46:13 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/08 18:57:19 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_tree	*ft_tree_new(t_token *token, int status)
 {
 	t_tree	*tree;
 
-	tree = malloc(sizeof(t_tree));
+	tree = ft_malloc(sizeof(t_tree));
 	tree->token = token;
 	tree->status = status;
 	tree->redirect = NULL;

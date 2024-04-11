@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/09 11:13:55 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/11 11:35:23 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include "minishell.h"
+#include "signal/minsignal.h"
+
+static void	do_sigterm(void);
 
 void	leaks(void)
 {
@@ -31,13 +34,12 @@ int	main(int argc, char *argv[], char **envp)
 
 	(void)argc;
 	(void)argv;
+	signalinit();
 	while (1)
 	{
 		line = readline("minishell: ");
-		// line nuull 체크해서 exit 코드
-		// ctrl + c 눌렀을때 프로그램 안꺼지고 다음 프롬프트
-		// ctrl + \ 했을때 아무 동작도 안하게! 자식프로세스는 꺼지고 , 부모프로세스는 아무동작도 안하게
-		// heredoc도 조금 다르다!
+		if (line == NULL)
+			break;
 		add_history(line);
 		head = tokenizer(line);
 		if (!head)
@@ -46,12 +48,17 @@ int	main(int argc, char *argv[], char **envp)
 			continue ;
 		}
 		tree = parse_tree(&head);
-		//leaks();
-		
-		inorder_cmd_tree(tree, parse_env(envp), START);
-		//ret = pipe(list);
-		//inorder_cmd_tree(ret);
+		inorder_cmd_tree(tree,parse_env(envp),START);
 		clear_tree(tree);
 		free(line);
 	}
+	do_sigterm();
+}
+
+static void	do_sigterm(void)
+{
+	set_terminal_print_off();
+	ft_putstr_fd("\033[1A", 2); // 현재 커서의 위치를 한칸 위로 올려줌
+	ft_putstr_fd("\033[11C", 2); // 현재 커서의 위치를 11번째칸으로 이동
+	ft_putstr_fd("exit\n", 2);
 }

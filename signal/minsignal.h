@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tokennew.c                                      :+:      :+:    :+:   */
+/*   minsignal.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/25 11:25:10 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/08 18:57:12 by soljeong         ###   ########.fr       */
+/*   Created: 2024/04/11 11:07:43 by soljeong          #+#    #+#             */
+/*   Updated: 2024/04/11 11:19:39 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#ifndef MINSIGNAL_H
+# define MINSIGNAL_H
+# include <signal.h>
 
-t_token	*ft_tokennew(void *str, int tokentype)
-{
-	t_token	*new;
+void	signalinit(void);
+void	set_terminal_print_off(void);
 
-	new = ft_malloc(sizeof(t_token));
-	if (new == NULL)
-		return (NULL);
-	new->str = str;
-	new->type = tokentype;
-	return (new);
-}
+#endif
