@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/11 16:12:43 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/11 19:02:15 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <stdlib.h>
 #include "minishell.h"
 #include "signal/minsignal.h"
+#include "parse/parse_test.h"
 
 static void	do_sigterm(void);
 
@@ -25,7 +26,7 @@ void	leaks(void)
 {
 	system("leaks minishell");
 }
-
+void	extends_env(t_list *env, t_list *head);
 int	main(int argc, char *argv[], char **envp)
 {
 	char	*line;
@@ -44,11 +45,13 @@ int	main(int argc, char *argv[], char **envp)
 			break;
 		add_history(line);
 		token_head = tokenizer(line);
+		//ft_lstiter(token_head,(void *)curr_list_print);
 		if (!token_head)
 		{
 			free(line);
 			continue ;
 		}
+		extends_env(env_list, token_head);
 		tree = parse_tree(&token_head);
 		inorder_cmd_tree(tree,parse_env(envp),START);
 		clear_tree(tree);

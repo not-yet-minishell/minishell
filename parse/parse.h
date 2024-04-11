@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:45:34 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/10 19:53:25 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/11 17:42:58 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_tree {
 	struct s_tree	*right;
 }	t_tree;
 
-t_token		*ft_tokennew(void *str, int tokennum);
+t_token		*ft_tokennew(char *str, int tokennum);
 void		ft_del_token_node(t_token *node);
 void		ft_add_token_node(t_list *head, char *str, int tokennum);
 t_list		*tokenizer(char *line);
