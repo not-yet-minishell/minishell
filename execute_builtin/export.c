@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 15:59:53 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/11 12:42:58 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/11 13:22:22 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,9 @@ static void	add_envlist(t_list *env_list, t_list *new_node)
 
 	pre = env_list;
 	current = env_list->next;
-	printf("curr : %s\n", ((t_env *)current->content)->key);
 	if (current == NULL)
 		pre->next = new_node;
 	pre = find_insert(env_list, ((t_env *)new_node->content)->key);
-	printf("pre : %s\n", ((t_env *)pre->content)->key);
 	temp = pre->next;
 	pre->next = new_node;
 	new_node->next = temp;
