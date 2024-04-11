@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   parse_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 01:59:48 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/08 10:41:20 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/08 19:24:53 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse_env.h"
 
-static char		*make_key(char *env);
-static char		*make_value(char *env);
-static t_env	*init_content(char *env);
+static char			*make_key(char *env);
+static char			*make_value(char *env);
+static t_env		*init_content(char *env);
+static t_builtin	*init_head_content(void);
 
 t_list	*parse_env(char *env[])
 {
@@ -22,7 +23,6 @@ t_list	*parse_env(char *env[])
 	t_list	*env_node;
 	t_list	*env_head;
 	int		idx;
-	int		*exit_num;
 
 	idx = 0;
 	env_head = NULL;
@@ -33,11 +33,21 @@ t_list	*parse_env(char *env[])
 		ft_lstadd_back(&env_head, env_node);
 		idx++;
 	}
-	idx = 0;
-	exit_num = &idx;
-	env_node = ft_lstnew(exit_num);
+	env_node = ft_lstnew(init_head_content());
 	ft_lstadd_front(&env_head, env_node);
 	return (env_head);
+}
+
+static t_builtin	*init_head_content(void)
+{
+	t_builtin	*content;
+	int			exit_num;
+
+	content = ft_malloc(sizeof(t_builtin));
+	content->pwd = getenv("PWD");
+	exit_num = 0;
+	content->exit_num = &exit_num;
+	return (content);
 }
 
 static t_env	*init_content(char *env)
