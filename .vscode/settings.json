@@ -17,6 +17,7 @@
 		"parse_env.h": "c",
 		"history.h": "c",
 		"unistd.h": "c",
-		"_types.h": "c"
+		"_types.h": "c",
+		"readline.h": "c"
 	}
 }
