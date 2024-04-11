@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:59:27 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/10 20:36:05 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/11 11:00:22 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static void	free_cmd(char **cmd)
 	idx = 0;
 	while (cmd[idx] != NULL)
 	{
+		//printf("cmd : %s, idx : %d\n", cmd[idx], idx);
 		free(cmd[idx]);
 		idx++;
 	}

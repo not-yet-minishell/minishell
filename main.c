@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/11 11:35:23 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/11 16:07:09 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@ int	main(int argc, char *argv[], char **envp)
 	char	*line;
 	t_list	*head;
 	t_tree	*tree;
+	t_list	*env_list;
 
 	(void)argc;
 	(void)argv;
+	env_list = parse_env(envp);
 	signalinit();
 	while (1)
 	{
