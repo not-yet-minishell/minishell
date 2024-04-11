@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/11 11:35:23 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/11 16:10:37 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ void	leaks(void)
 int	main(int argc, char *argv[], char **envp)
 {
 	char	*line;
-	t_list	*head;
+	t_list	*token_head;
 	t_tree	*tree;
+	t_list	*env;
 
 	(void)argc;
 	(void)argv;
@@ -41,13 +42,15 @@ int	main(int argc, char *argv[], char **envp)
 		if (line == NULL)
 			break;
 		add_history(line);
-		head = tokenizer(line);
-		if (!head)
+		token_head = tokenizer(line);
+		if (!token_head)
 		{
 			free(line);
 			continue ;
 		}
-		tree = parse_tree(&head);
+		
+		env = parse_env(envp);
+		tree = parse_tree(&token_head);
 		inorder_cmd_tree(tree,parse_env(envp),START);
 		clear_tree(tree);
 		free(line);
