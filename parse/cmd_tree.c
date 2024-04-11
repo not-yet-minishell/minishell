@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:56:13 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/10 20:06:35 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/11 10:19:47 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ static t_list		*make_pipelist(t_tree *tree);
 static t_cmd_node	*new_cmd_tree_pipeline(t_tree *tree);
 static t_list		*cmd_tree_rd_list(t_list **rd_list, t_tree *tree);
 static t_list		*cmd_tree_cmd_list(t_list **cmd_list, t_tree *tree);
-
-
 
 void	inorder_cmd_tree(t_tree *tree, t_list *envp, int flag)
 {

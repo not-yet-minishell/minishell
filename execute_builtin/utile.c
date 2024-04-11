@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 18:57:50 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/10 19:23:40 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/11 11:08:05 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	delete_env_node(t_list *pre, t_list *current)
 	next = current->next;
 	content = current->content;
 	free(content->key);
-	free(content->value);
+	if (content->value != NULL)
+		free(content->value);
 	free(content);
 	free(current);
 	pre->next = next;

@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 15:59:53 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/10 19:40:48 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/11 13:22:22 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_export(char **cmd, t_list *env_list)
 		change_exit_number(0, env_list);
 		return ;
 	}
-	while (cmd != NULL)
+	while (*cmd != NULL)
 	{
 		env = *cmd;
 		cmd++;
@@ -65,49 +65,38 @@ static void	add_envlist(t_list *env_list, t_list *new_node)
 {
 	t_list	*temp;
 	t_list	*pre;
-	//t_list	*back;
+	t_list	*current;
 
-	env_list = env_list->next;
-	if (env_list == NULL)
-		env_list = new_node;
-	else
-	{
-		pre = find_insert(env_list, ((t_env *)new_node->content)->key);
-		if (pre == NULL)
-		{
-			new_node->next = env_list;
-			env_list = new_node;
-		}
-		else
-		{
-			temp = pre->next;
-			pre->next = new_node;
-			new_node->next = temp;
-		}
-	}
+	pre = env_list;
+	current = env_list->next;
+	if (current == NULL)
+		pre->next = new_node;
+	pre = find_insert(env_list, ((t_env *)new_node->content)->key);
+	temp = pre->next;
+	pre->next = new_node;
+	new_node->next = temp;
 }
 
 static t_list	*find_insert(t_list *head, char *key)
 {
 	t_list	*pre;
 	t_env	*content;
-	//t_list	*temp;
-	t_list	*env_list;
+	t_list	*current;
 
 	pre = head;
-	env_list = head->next;
-	while (env_list != NULL)
+	current = head->next;
+	while (current != NULL)
 	{
-		content = env_list->content;
+		content = current->content;
 		if (ft_strncmp(key, content->key, ft_strlen(key) + 1) == 0)
 		{
-			delete_env_node(pre, env_list);
+			delete_env_node(pre, current);
 			break ;
 		}
 		if (ft_strncmp(key, content->key, ft_strlen(key) + 1) < 0)
 			break ;
-		pre = env_list;
-		env_list = env_list -> next;
+		pre = current;
+		current = current -> next;
 	}
 	return (pre);
 }
@@ -119,16 +108,16 @@ static t_env	*devide_key_value(char *env)
 	t_env	*content;
 	int		idx;
 
-	content = (t_env *)ft_malloc(sizeof(env));
+	content = (t_env *)ft_malloc(sizeof(t_env));
 	value = NULL;
 	idx = 0;
-	while (env[idx] && env[idx] != '=')
+	while (env[idx] != '\0' && env[idx] != '=')
 		idx++;
 	key = ft_substr(env, 0, idx);
 	if (env[idx] == '\0')
-		value = "\0";
+		value = NULL;
 	else if (env[idx] == '=' && env[idx + 1] == '\0')
-		value = "\"\"";
+		value = "\0";
 	else
 		value = ft_substr(env, idx + 1, ft_strlen(env) - idx - 1);
 	content->key = key;
