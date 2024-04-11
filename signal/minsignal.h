@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 11:07:43 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/11 11:16:32 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/11 11:19:39 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define MINSIGNAL_H
 # include <signal.h>
 
-void					signalinit(void);
-void					set_terminal_print_off(void);
+void	signalinit(void);
+void	set_terminal_print_off(void);
 
 #endif
