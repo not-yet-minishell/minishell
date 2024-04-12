@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 16:00:07 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/11 09:41:14 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/12 10:04:41 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute_builtin.h"
 
 static int	check_flag(char **cmd, int *flag);
-static void	check_env_and_print(char *str, t_list *env_list);
+//static void	check_env_and_print(char *str, t_list *env_list);
 
 void	ft_echo(char **cmd, t_list *env_list)
 {
@@ -24,7 +24,8 @@ void	ft_echo(char **cmd, t_list *env_list)
 	flag = check_flag(cmd, &idx);
 	while (cmd[idx] != NULL)
 	{
-		check_env_and_print(cmd[idx], env_list);
+		ft_printf(1, "%s", cmd[idx]);
+		//check_env_and_print(cmd[idx], env_list);
 		if (cmd[idx + 1] != NULL)
 			ft_printf(1, " ");
 		idx++;
@@ -59,25 +60,25 @@ static int	check_flag(char **cmd, int *idx)
 	return (ret_flag);
 }
 
-static void	check_env_and_print(char *str, t_list *env_list)
-{
-	t_env	*content;
+// static void	check_env_and_print(char *str, t_list *env_list)
+// {
+// 	t_env	*content;
 
-	if (*str != '$')
-	{
-		ft_printf(1, "%s", str);
-		return ;
-	}
-	str++;
-	env_list = env_list->next;
-	while (env_list != NULL)
-	{
-		content = env_list->content;
-		if (ft_strncmp(str, content->key, ft_strlen(str) + 1) == 0)
-		{
-			ft_printf(1, "%s", str);
-			return ;
-		}
-	}
-	return ;
-}
+// 	if (*str != '$')
+// 	{
+// 		ft_printf(1, "%s", str);
+// 		return ;
+// 	}
+// 	str++;
+// 	env_list = env_list->next;
+// 	while (env_list != NULL)
+// 	{
+// 		content = env_list->content;
+// 		if (ft_strncmp(str, content->key, ft_strlen(str) + 1) == 0)
+// 		{
+// 			ft_printf(1, "%s", str);
+// 			return ;
+// 		}
+// 	}
+// 	return ;
+// }

@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/11 19:02:15 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/12 10:00:42 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	main(int argc, char *argv[], char **envp)
 		}
 		extends_env(env_list, token_head);
 		tree = parse_tree(&token_head);
-		inorder_cmd_tree(tree,parse_env(envp),START);
+		inorder_cmd_tree(tree,env_list,START);
 		clear_tree(tree);
 		free(line);
 	}
