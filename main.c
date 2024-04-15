@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/11 17:21:59 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/15 15:50:24 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ int	main(int argc, char *argv[], char **envp)
 	t_list	*head;
 	t_tree	*tree;
 	t_list	*env_list;
+	int		heredoc_count;
 
+	heredoc_count = 0;
 	(void)argc;
 	(void)argv;
 	env_list = parse_env(envp);
@@ -41,7 +43,7 @@ int	main(int argc, char *argv[], char **envp)
 	{
 		line = readline("minishell: ");
 		if (line == NULL)
-			break;
+			break ;
 		add_history(line);
 		head = tokenizer(line);
 		if (!head)
@@ -50,7 +52,7 @@ int	main(int argc, char *argv[], char **envp)
 			continue ;
 		}
 		tree = parse_tree(&head);
-		inorder_cmd_tree(tree,parse_env(envp),START);
+		inorder_cmd_tree(tree, parse_env(envp), START, &heredoc_count);
 		clear_tree(tree);
 		free(line);
 	}

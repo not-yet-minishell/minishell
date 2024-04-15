@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tree_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:12:37 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/08 18:57:19 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/15 15:52:04 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,18 @@ t_tree	*ft_tree_new(t_token *token, int status)
 	return (tree);
 }
 
-int	is_redicrtion(t_token *token)
+int	is_redicrtion(t_token *token, int *heredoc_count)
 {
+	char	*filename;
+
+	if (token->type == REDIRECT_HEREDOC)
+	{
+		filename = heredoc(token->str, heredoc_count);
+		token->type = REDIRECT_IN;
+		token->str = filename;
+		(*heredoc_count)++;
+	}
 	if (token->type == REDIRECT_APPEND
-		|| token->type == REDIRECT_HEREDOC
 		|| token->type == REDIRECT_IN
 		|| token->type == REDIRECT_OUT)
 		return (1);

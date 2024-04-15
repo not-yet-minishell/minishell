@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 20:30:17 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/15 15:01:40 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/15 15:53:35 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static t_fd	*init_fd(void);
 static void	close_parent_fd(t_fd *fd_info);
 static int	is_builtin(t_list *node);
 
-int	start_process(t_list *head, t_list *env)
+int	start_process(t_list *head, t_list *env, int *heredoc_count)
 {
 	t_fd	*fd_info;
 	int		fork_count;
@@ -39,13 +39,15 @@ int	start_process(t_list *head, t_list *env)
 		head = head->next;
 		//delete_and_next_node(head);
 	}
-	close(fd_info->fds[0]);
-	return (wait_process(fd_info, fork_count));
+	if (fd_info->fds[0] != 0)
+		close(fd_info->fds[0]);
+	return (wait_process(fd_info, fork_count, heredoc_count));
 }
 
 static void	close_parent_fd(t_fd *fd_info)
 {
-	close(fd_info->fds[1]);
+	if (fd_info->fds[1] != 0)
+		close(fd_info->fds[1]);
 	if (fd_info->temp_fd != -1)
 		close(fd_info->temp_fd);
 }
@@ -58,6 +60,8 @@ static t_fd	*init_fd(void)
 	if (init_fd == NULL)
 		exit(1);
 	init_fd->temp_fd = -1;
+	init_fd->fds[0] = 0;
+	init_fd->fds[1] = 0;
 	return (init_fd);
 }
 
