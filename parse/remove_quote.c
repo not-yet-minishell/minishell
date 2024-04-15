@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 13:22:24 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/15 17:40:58 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/15 18:35:30 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	extends_env(t_list *env, t_list **cmd_list){
 	curr = *cmd_list;
 	while (curr)
 	{
-		extends_env_rd(env, ((t_cmd_node *)(*cmd_list)->content)->rd_list);
-		extends_env_cmd(env, (*cmd_list)->content);
+		extends_env_rd(env, ((t_cmd_node *)(curr)->content)->rd_list);
+		extends_env_cmd(env, (curr)->content);
 		curr = curr->next;
 	}
 	
@@ -40,12 +40,14 @@ void	extends_env_rd(t_list *env, t_list *rd_list)
 	char	*str;
 	char	*new_str;
 
-	curr_rd = rd_list->next;
+	curr_rd = rd_list;
 	while (curr_rd)
 	{
 		str = ((t_rd_node *)curr_rd->content)->filename;
-		if (str == NULL)
-			break;
+		if (str == NULL){
+			curr_rd = curr_rd->next;
+			continue;
+		}
 		new_str = change_str(str,env);
 		((t_rd_node *)curr_rd->content)->filename = new_str;
 		free(str);
@@ -64,8 +66,10 @@ void	extends_env_cmd(t_list *env, t_list *cmd_list)
 	while (curr_cmd)
 	{
 		str = curr_cmd->content;
-		if (str == NULL)
-			break;
+		if (str == NULL){
+			curr_cmd = curr_cmd->next;
+			continue;
+		}
 		new_str = change_str(str, env);
 		curr_cmd->content = new_str;
 		free(str);

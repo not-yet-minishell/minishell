@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:56:13 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/15 17:22:33 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/15 18:36:12 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void	inorder_cmd_tree(t_tree *tree, t_list *envp, int flag)
 	if (tree->left){
 		pipelist = make_pipelist(tree->left);
 		extends_env(envp, &pipelist);
+		ft_lstiter(pipelist, (void *)print_pipenode);
 	}
 	if (flag == AND_TRUE || flag == OR_FALSE || flag == START)
 		exit_num = start_process(pipelist, envp);
-	//free_pipe_list(pipelist);
 	if (token && (token->type == OR_OPERATOR
 			|| token->type == AND_OPERATOR))
 	{
@@ -87,7 +87,10 @@ static t_list	*cmd_tree_cmd_list(t_list **cmd_list, t_tree *tree)
 	{
 		cmd = ft_strdup(token->str);
 		new_cmd_list = ft_lstnew(cmd);
-		ft_lstadd_back(cmd_list, new_cmd_list);
+		if(*cmd_list)
+			ft_lstadd_back(cmd_list, new_cmd_list);
+		else
+			*cmd_list = new_cmd_list;
 	}
 	if (tree->right)
 		cmd_tree_cmd_list(cmd_list, tree->right);

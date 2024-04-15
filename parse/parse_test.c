@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:10:51 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/11 17:39:35 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/15 18:31:52 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,4 @@ void	curr_list_print(t_list *list)
 	print_node(token);
 	if (token == NULL)
 		return ;
-	//printf("str: %p\n", token->str);
-	//printf("type: %d\n", token->type);
-	//printf("str :%s\n", token->str);
 }
