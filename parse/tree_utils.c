@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:12:37 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/08 18:57:19 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:37:18 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ void	clear_tree(t_tree *tree)
 		clear_tree(tree->right);
 	if (tree->token)
 		ft_del_token_node(tree->token);
-	if (tree->redirect)
-	{
-		if (tree->redirect->filename)
-			free(tree->redirect->filename);
-		free(tree->redirect);
-	}
+	// if (tree->redirect)
+	// {
+	// 	if (tree->redirect->filename)
+	// 		free(tree->redirect->filename);
+	// 	free(tree->redirect);
+	// }
 	if (tree)
 		free(tree);
 }

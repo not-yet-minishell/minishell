@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/12 10:00:42 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:21:54 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	leaks(void)
 {
 	system("leaks minishell");
 }
-void	extends_env(t_list *env, t_list *head);
 int	main(int argc, char *argv[], char **envp)
 {
 	char	*line;
@@ -36,6 +35,7 @@ int	main(int argc, char *argv[], char **envp)
 
 	(void)argc;
 	(void)argv;
+	(void)envp;
 	env_list = parse_env(envp);
 	signalinit();
 	while (1)
@@ -51,7 +51,7 @@ int	main(int argc, char *argv[], char **envp)
 			free(line);
 			continue ;
 		}
-		extends_env(env_list, token_head);
+		//extends_env(env_list, token_head);
 		tree = parse_tree(&token_head);
 		inorder_cmd_tree(tree,env_list,START);
 		clear_tree(tree);
