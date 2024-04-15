@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:56:13 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/11 10:19:47 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/15 14:15:51 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static t_cmd_node	*new_cmd_tree_pipeline(t_tree *tree)
 	t_cmd_node	*pipe_node;
 	t_list		*rd_list;
 	t_list		*cmd_list;
+	//char		*filename;
 
 	if (!tree)
 		return (NULL);
@@ -103,7 +104,7 @@ static t_list	*cmd_tree_rd_list(t_list **rd_list, t_tree *tree)
 	token = tree->token;
 	if (token && is_redicrtion(token))
 	{
-		rd_node = tree->redirect;
+		//rd_node = check_heredoc(tree->redirect);
 		new_rd_list = ft_lstnew(rd_node);
 		if (*rd_list)
 			ft_lstadd_back(rd_list, new_rd_list);

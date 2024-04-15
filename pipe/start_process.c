@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 20:30:17 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/11 13:51:05 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/15 14:49:41 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int	start_process(t_list *head, t_list *env)
 		if (fd_info->pid == 0)
 			start_command(head, fd_info, env);
 		fd_info->temp_fd = fd_info->fds[0];
-		head = delete_and_next_node(head);
+		head = head->next;
+		//delete_and_next_node(head);
 	}
 	close(fd_info->fds[0]);
 	return (wait_process(fd_info, fork_count));
