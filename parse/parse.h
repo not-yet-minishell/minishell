@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:45:34 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/15 18:35:28 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/15 19:36:55 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,10 @@ void		tree_parser_error(t_list **list, t_tree *tree);
 int			divide_flag(int type, int exit_num);
 void		free_pipe_list(t_list *pipelist);
 void		free_cmd_list(t_list *cmd);
-void	extends_env(t_list *env, t_list **cmd_list);
-
+void		extends_env(t_list *env, t_list **cmd_list);
+char		*extends_find_env(char *str, int *i, t_list *env);
+void		str_divide_join(char **new, char *str, int start, int i);
+void		str_temp_join(char **new, char *temp);
+char		*chage_env_key_to_value(char *str, t_list *env);
+char		*change_str(char *str, t_list *env);
 #endif

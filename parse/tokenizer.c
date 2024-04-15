@@ -6,15 +6,16 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:51:18 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/11 17:27:25 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/15 19:57:38 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-int		ft_is_ifs(char c);
-int		ft_is_metacharacter(char c);
+int	ft_is_ifs(char c);
+int	ft_is_metacharacter(char c);
 int	ft_quotemarks(char *line, int *i, char quote);
+int	check_quote_mark(char *line, int *i, t_list *head);
 
 t_list	*tokenizer(char *line)
 {
@@ -31,14 +32,8 @@ t_list	*tokenizer(char *line)
 		start = i;
 		while (line[i] && !ft_is_ifs(line[i]) && !ft_is_metacharacter(line[i]))
 		{
-			if (line[i] == '\"' || line[i] == '\'')
-			{
-				if (ft_quotemarks(line, &i, line[i]) == -1)
-				{
-					ft_lstiter(head,(void *)ft_del_token_node);
-					return NULL;
-				}
-			}
+			if (check_quote_mark(line, &i, head))
+				return (NULL);
 			i++;
 		}
 		if (i - start > 0)
@@ -48,6 +43,19 @@ t_list	*tokenizer(char *line)
 				return (0);
 	}
 	return (head);
+}
+
+int	check_quote_mark(char *line, int *i, t_list *head)
+{
+	if (line[*i] == '\"' || line[*i] == '\'')
+	{
+		if (ft_quotemarks(line, i, line[*i]) == -1)
+		{
+			ft_lstiter(head, (void *)ft_del_token_node);
+			return (1);
+		}
+	}
+	return (0);
 }
 
 int	ft_is_ifs(char c)

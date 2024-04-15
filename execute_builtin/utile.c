@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utile.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 18:57:50 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/11 11:08:05 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/15 20:14:12 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	change_exit_number(int exit_num, t_list *env_list)
 	t_builtin	*content;
 
 	content = env_list->content;
-	content->exit_num = &exit_num;
+	content->exit_num = exit_num;
 }
 
 void	delete_env_node(t_list *pre, t_list *current)

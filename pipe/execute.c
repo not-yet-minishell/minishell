@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 19:59:34 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/15 17:40:31 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/15 20:23:55 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static void	exec_cmd(char **exe, char **env_array)
 		free(command);
 		idx++;
 	}
-	error_handler(exe[0], "command not found\n", NULL);
+	error_handler(exe[0], NULL, "command not found\n");
 	exit(127);
 }
 

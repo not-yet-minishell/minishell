@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 01:59:48 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/11 12:31:24 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/15 20:27:40 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,10 @@ t_list	*parse_env(char *env[])
 static t_builtin	*init_head_content(void)
 {
 	t_builtin	*content;
-	int			exit_num;
 
 	content = ft_malloc(sizeof(t_builtin));
 	content->pwd = getenv("PWD");
-	exit_num = 0;
-	content->exit_num = &exit_num;
+	content->exit_num = 0;
 	return (content);
 }
 

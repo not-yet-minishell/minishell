@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/15 18:25:51 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/15 20:30:17 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int	main(int argc, char *argv[], char **envp)
 		inorder_cmd_tree(tree,env_list,START);
 		clear_tree(tree);
 		free(line);
+		leaks();
+		//while(1);
 	}
 	do_sigterm();
 }
