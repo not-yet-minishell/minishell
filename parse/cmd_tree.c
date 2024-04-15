@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:56:13 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/15 15:51:56 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/15 16:12:41 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,14 +99,22 @@ static t_list	*cmd_tree_rd_list(t_list **rd_list, \
 	t_list		*new_rd_list;
 	t_rd_node	*rd_node;
 	t_token		*token;
+	char		*filename;
 
 	if (!tree)
 		return (NULL);
 	if (tree->left)
 		cmd_tree_rd_list(rd_list, tree->left, heredoc_count);
 	token = tree->token;
-	if (token && is_redicrtion(token, heredoc_count))
+	if (token && is_redicrtion(token))
 	{
+		if (token->type == REDIRECT_HEREDOC)
+		{
+			filename = heredoc(token->str, heredoc_count);
+			token->type = REDIRECT_IN;
+			token->str = filename;
+			(*heredoc_count)++;
+		}
 		rd_node = tree->redirect;
 		new_rd_list = ft_lstnew(rd_node);
 		if (*rd_list)

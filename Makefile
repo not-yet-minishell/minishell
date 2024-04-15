@@ -18,6 +18,7 @@ SRCS = main.c\
 		parse/cmd_tree_utils.c\
 		parse/print_cmd_tree.c\
 		parse/parse_env.c\
+		parse/heredoc.c\
 		signal/signal.c\
 		parse/free_pipe_list.c\
 		parse/sort_env.c\
@@ -38,7 +39,9 @@ SRCS = main.c\
 		execute_builtin/export.c\
 		execute_builtin/pwd.c\
 		execute_builtin/unset.c\
-		execute_builtin/utile.c
+		execute_builtin/utile.c\
+		get_next_line/get_next_line_bonus.c\
+		get_next_line/get_next_line_utils_bonus.c
 OBJS = $(SRCS:.c=.o)
 MAKE = make
 

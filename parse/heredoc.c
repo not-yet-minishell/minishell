@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 17:42:14 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/15 16:00:09 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/15 16:13:54 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*heredoc(char *lim, int *heredoc_count)
 	char	*num;
 	int		fd;
 
-	num = atoi((*heredoc_count));
+	num = ft_itoa((*heredoc_count));
 	filename = ft_strjoin("/tmp/heredoc", num, '\0');
 	fd = open_heredoc(filename);
 	start_read(lim, fd);

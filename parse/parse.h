@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:45:34 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/15 15:50:52 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/15 16:10:09 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void		inorder_cmd_tree(t_tree *tree, t_list *env, \
 			int flag, int *heredoc_count);
 void		clear_tree(t_tree *tree);
 void		list_shift(t_list **list);
-int			is_redicrtion(t_token *token, int *heredoc_count);
+int			is_redicrtion(t_token *token);
 void		tree_parser_error(t_list **list, t_tree *tree);
 int			divide_flag(int type, int exit_num);
 void		free_pipe_list(t_list *pipelist);
