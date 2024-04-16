@@ -24,7 +24,7 @@ void	ft_echo(char **cmd, t_list *env_list)
 	flag = check_flag(cmd, &idx);
 	while (cmd[idx] != NULL)
 	{
-		ft_printf(1, "%s", cmd[idx]);
+		//ft_printf(1, "%s", cmd[idx]);
 		//check_env_and_print(cmd[idx], env_list);
 		if (cmd[idx + 1] != NULL)
 			ft_printf(1, " ");
