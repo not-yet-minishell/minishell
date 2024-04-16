@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 18:52:03 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/15 19:54:12 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/16 09:48:29 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	extends_env(t_list *env, t_list **cmd_list)
 	while (curr)
 	{
 		extends_env_rd(env, ((t_cmd_node *)(curr)->content)->rd_list);
-		extends_env_cmd(env, (curr)->content);
+		extends_env_cmd(env, ((t_cmd_node *)curr->content)->cmd_list);
 		curr = curr->next;
 	}
 }
@@ -38,11 +38,11 @@ void	extends_env_rd(t_list *env, t_list *rd_list)
 	while (curr_rd)
 	{
 		str = ((t_rd_node *)curr_rd->content)->filename;
-		if (str == NULL)
-		{
-			curr_rd = curr_rd->next;
-			continue ;
-		}
+		// if (str == NULL)
+		// {
+		// 	curr_rd = curr_rd->next;
+		// 	continue ;
+		// } 
 		new_str = change_str(str, env);
 		((t_rd_node *)curr_rd->content)->filename = new_str;
 		free(str);
@@ -56,15 +56,15 @@ void	extends_env_cmd(t_list *env, t_list *cmd_list)
 	char	*str;
 	char	*new_str;
 
-	curr_cmd = cmd_list->next;
+	curr_cmd = cmd_list;
 	while (curr_cmd)
 	{
 		str = curr_cmd->content;
-		if (str == NULL)
-		{
-			curr_cmd = curr_cmd->next;
-			continue ;
-		}
+		// if (str == NULL)
+		// {
+		// 	curr_cmd = curr_cmd->next;
+		// 	continue ;
+		// } //여기 빼도 될듯..?
 		new_str = change_str(str, env);
 		curr_cmd->content = new_str;
 		free(str);
