@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 13:22:24 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/15 20:05:24 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/17 18:29:58 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,12 @@ char	*change_str(char *str, t_list *env)
 	new = ft_strdup("\0");
 	while (str[i])
 	{
-		if (str[i] == '\"' || str[i] == '\'' || str[i] == '$')
+		if (str[i] == '*')
+		{
+			str[i] = '\10';
+			i++;
+		}
+		else if (str[i] == '\"' || str[i] == '\'' || str[i] == '$')
 		{
 			str_divide_join(&new, str, start, i);
 			temp = check_and_change_str(str, &i, env);

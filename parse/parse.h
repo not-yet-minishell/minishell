@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:45:34 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/17 15:02:35 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/17 17:08:01 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ enum {
 	REDIRECT_OUT,
 	REDIRECT_APPEND,
 	REDIRECT_HEREDOC,
+	REDIRECT_AM,
 	AND_OPERATOR,
 	OR_OPERATOR,
 	L_PAREN,

@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 12:41:48 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/15 11:13:59 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/17 20:12:54 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	free_pipe_list(t_list *pipelist)
 		cmd = node->cmd_list;
 		free_rd_list(rd);
 		free_cmd_list(cmd);
+		free(node);
 		temp = pipelist;
 		pipelist = pipelist->next;
 		free(temp);

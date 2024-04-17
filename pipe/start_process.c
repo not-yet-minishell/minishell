@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 20:30:17 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/17 15:16:02 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/17 19:32:53 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int	start_process(t_list *head, t_list *env, int *heredoc_count)
 	int		fork_count;
 
 	fork_count = 0;
-	fd_info = init_fd();
 	if ((head->next) == NULL && (is_builtin(head) == TRUE))
 		return (one_process(head, env));
+	fd_info = init_fd();
 	while (head != NULL)
 	{
 		 if (head->next != NULL)
@@ -42,6 +42,7 @@ int	start_process(t_list *head, t_list *env, int *heredoc_count)
 	if (fd_info->fds[0] != 0)
 		close(fd_info->fds[0]);
 	((t_builtin *)(env->content))->exit_num = wait_process(fd_info, fork_count, heredoc_count);
+	free(fd_info);
 	return (((t_builtin *)(env->content))->exit_num);
 }
 

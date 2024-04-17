@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tree_parser2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 14:12:37 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/15 16:10:03 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/17 20:02:12 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ t_tree	*syntax_redirection(t_list **list)
 			rd_node = new_rd_node(rd_type, token->str);
 			tree->redirect = rd_node;
 			list_shift(list);
+			free(token);
 			return (tree);
 		}
 	}
