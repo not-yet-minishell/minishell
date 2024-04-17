@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:56:13 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/15 16:12:41 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/17 15:00:09 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@ void	inorder_cmd_tree(t_tree *tree, t_list *envp, \
 		return ;
 	token = tree->token;
 	if (tree->left)
-		pipelist = make_pipelist(tree->left, heredoc_count);
+	{
+		pipelist = make_pipelist(tree->left);
+		extends_env(envp, &pipelist);
+	}
 	if (flag == AND_TRUE || flag == OR_FALSE || flag == START)
-		exit_num = start_process(pipelist, envp, heredoc_count);
-	//free_pipe_list(pipelist);
+		exit_num = start_process(pipelist, envp);
 	if (token && (token->type == OR_OPERATOR
 			|| token->type == AND_OPERATOR))
 	{
@@ -67,6 +69,7 @@ static t_cmd_node	*new_cmd_tree_pipeline(t_tree *tree, int *heredoc_count)
 	cmd_list = NULL;
 	rd_list = cmd_tree_rd_list(&rd_list, tree, heredoc_count);
 	cmd_list = cmd_tree_cmd_list(&cmd_list, tree);
+	//printf("%p\n", cmd_list);
 	pipe_node = new_cmd_node(rd_list, cmd_list);
 	return (pipe_node);
 }
@@ -84,9 +87,12 @@ static t_list	*cmd_tree_cmd_list(t_list **cmd_list, t_tree *tree)
 	token = tree->token;
 	if (token && token->type == WORD)
 	{
-		cmd = token->str;
+		cmd = ft_strdup(token->str);
 		new_cmd_list = ft_lstnew(cmd);
-		ft_lstadd_back(cmd_list, new_cmd_list);
+		if (*cmd_list)
+			ft_lstadd_back(cmd_list, new_cmd_list);
+		else
+			*cmd_list = new_cmd_list;
 	}
 	if (tree->right)
 		cmd_tree_cmd_list(cmd_list, tree->right);

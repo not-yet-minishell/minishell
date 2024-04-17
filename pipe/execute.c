@@ -6,13 +6,13 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 19:59:34 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/11 08:59:12 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/17 15:00:14 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static void	check_which(char **exe, char **env_array);
+static void	check_which(char **exe, char **env_array, t_list *env);
 static void	exec_cmd(char **exe, char **env_array);
 static int	check_access(char *command, char **argument, int idx, char **env_array);
 
@@ -27,16 +27,17 @@ void	execute(t_list *node, t_list *env)
 	exit_code = execute_builtin(cmd, env);
 	if (exit_code != -1)
 		exit(exit_code);
-	check_which(cmd, env_array);
+	check_which(cmd, env_array, env);
 	exec_cmd(cmd, env_array);
 }
 
-static void	check_which(char **exe, char **env_array)
+static void	check_which(char **exe, char **env_array, t_list *env)
 {
 	char	*cmd;
 	int		idx;
 	//char	*exe_cmd[2];
 
+	(void)env;
 	idx = 0;
 	if (exe[1] != NULL)
 		return ;
@@ -71,7 +72,7 @@ static void	exec_cmd(char **exe, char **env_array)
 		free(command);
 		idx++;
 	}
-	error_handler(exe[0], "command not found\n", NULL);
+	error_handler(exe[0], NULL, "command not found\n");
 	exit(127);
 }
 

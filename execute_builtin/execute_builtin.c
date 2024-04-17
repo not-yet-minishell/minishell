@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:59:27 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/11 11:00:22 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/15 20:15:31 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	execute_builtin(char **cmd, t_list *env_list)
 	else
 		return (-1);
 	free_cmd(cmd);
-	exit_num = *(int *)(env_list->content);
+	exit_num = (((t_builtin *)env_list->content)->exit_num);
 	return (exit_num);
 }
 
