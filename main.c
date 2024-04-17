@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/16 09:37:32 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/17 15:14:36 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ int	main(int argc, char *argv[], char **envp)
 	t_list	*token_head;
 	t_tree	*tree;
 	t_list	*env_list;
+	int		heredoc_count;
 
+	heredoc_count = 0;
 	(void)argc;
 	(void)argv;
 	(void)envp;
@@ -42,7 +44,7 @@ int	main(int argc, char *argv[], char **envp)
 	{
 		line = readline("minishell: ");
 		if (line == NULL)
-			break;
+			break ;
 		add_history(line);
 		token_head = tokenizer(line);
 		//ft_lstiter(token_head,(void *)curr_list_print);
@@ -51,9 +53,8 @@ int	main(int argc, char *argv[], char **envp)
 			free(line);
 			continue ;
 		}
-		//extends_env(env_list, token_head);
 		tree = parse_tree(&token_head);
-		inorder_cmd_tree(tree,env_list,START);
+		inorder_cmd_tree(tree, env_list, START, &heredoc_count);
 		clear_tree(tree);
 		free(line);
 		//leaks();

@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 19:46:28 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/15 14:21:49 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/17 14:50:35 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ void	start_command(t_list *cmd_list, t_fd *fd_info, t_list *env)
 	}
 	if (fd_info->fds[0] != 0)
 		close(fd_info->fds[0]);
+	if (exe_cmd == NULL)
+		exit(0);
+	//printf("%p\n", exe_cmd);
 	execute(exe_cmd, env);
 }
 
