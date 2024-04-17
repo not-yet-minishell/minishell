@@ -6,11 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2024/04/17 14:57:29 by yeoshin          ###   ########.fr       */
-=======
-/*   Updated: 2024/04/17 14:25:07 by yeoshin          ###   ########.fr       */
->>>>>>> Stashed changes
+/*   Updated: 2024/04/17 15:14:36 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +53,8 @@ int	main(int argc, char *argv[], char **envp)
 			free(line);
 			continue ;
 		}
-		tree = parse_tree(&head);
-		inorder_cmd_tree(tree,parse_env(envp),START);
+		tree = parse_tree(&token_head);
+		inorder_cmd_tree(tree, env_list, START, &heredoc_count);
 		clear_tree(tree);
 		free(line);
 		//leaks();

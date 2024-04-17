@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 20:30:17 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/17 15:00:37 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/17 15:16:02 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ int	start_process(t_list *head, t_list *env, int *heredoc_count)
 	while (head != NULL)
 	{
 		 if (head->next != NULL)
-			pipe(fd_info->fds); // 파이프가 하나있을때도 무조건 떠야 한다~?
-			//명령어가 하나있으면 포크를 떠서 해야 하smsep... 두개 있을때는 넥스트 널이면 되는데... 아니면 자기것을 닫아버림!!!
+			pipe(fd_info->fds);
 		fd_info->pid = fork();
 		fork_count++;
 		if (fd_info->pid > 0)
@@ -42,7 +41,7 @@ int	start_process(t_list *head, t_list *env, int *heredoc_count)
 	}
 	if (fd_info->fds[0] != 0)
 		close(fd_info->fds[0]);
-	((t_builtin *)(env->content))->exit_num = wait_process(fd_info, fork_count);
+	((t_builtin *)(env->content))->exit_num = wait_process(fd_info, fork_count, heredoc_count);
 	return (((t_builtin *)(env->content))->exit_num);
 }
 
