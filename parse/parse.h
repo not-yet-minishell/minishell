@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:45:34 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/10 19:53:25 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/15 19:36:55 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_tree {
 	struct s_tree	*right;
 }	t_tree;
 
-t_token		*ft_tokennew(void *str, int tokennum);
+t_token		*ft_tokennew(char *str, int tokennum);
 void		ft_del_token_node(t_token *node);
 void		ft_add_token_node(t_list *head, char *str, int tokennum);
 t_list		*tokenizer(char *line);
@@ -87,5 +87,10 @@ void		tree_parser_error(t_list **list, t_tree *tree);
 int			divide_flag(int type, int exit_num);
 void		free_pipe_list(t_list *pipelist);
 void		free_cmd_list(t_list *cmd);
-
+void		extends_env(t_list *env, t_list **cmd_list);
+char		*extends_find_env(char *str, int *i, t_list *env);
+void		str_divide_join(char **new, char *str, int start, int i);
+void		str_temp_join(char **new, char *temp);
+char		*chage_env_key_to_value(char *str, t_list *env);
+char		*change_str(char *str, t_list *env);
 #endif

@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_env.h                                        :+:      :+:    :+:   */
+/*   remove_quote_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/27 02:00:55 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/15 20:13:56 by soljeong         ###   ########.fr       */
+/*   Created: 2024/04/15 19:06:48 by soljeong          #+#    #+#             */
+/*   Updated: 2024/04/15 19:37:32 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_ENV_H
-# define PARSE_ENV_H
-# include "../minishell.h"
+#include "../minishell.h"
 
-typedef struct s_env
+void	str_temp_join(char **new, char *temp)
 {
-	char	*key;
-	char	*value;
-}	t_env;
+	char	*prev;
 
-typedef struct s_builtin
+	prev = *new;
+	*new = ft_strjoin(prev, temp, 0);
+	free(prev);
+	free(temp);
+}
+
+void	str_divide_join(char **new, char *str, int start, int i)
 {
-	char	*pwd;
-	int		exit_num;
-}	t_builtin;
+	char	*temp;
+	char	*prev;
 
-t_list	*parse_env(char *env[]);
-t_list	*select_sort(t_list *env_list);
-
-#endif
+	temp = ft_substr(str, start, i - start);
+	prev = *new;
+	(*new) = ft_strjoin(prev, temp, 0);
+	free(prev);
+	if (temp)
+		free(temp);
+}

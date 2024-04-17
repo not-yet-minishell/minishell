@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 18:29:18 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/11 10:26:40 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/15 20:29:18 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ t_list	*select_sort(t_list *env_list)
 	new_list = NULL;
 	while (head)
 		select_sort_selectsmall(&head, &new_list);
+	env_list->next = NULL;
+	ft_lstadd_front(&new_list, env_list);
 	return (new_list);
 }
 

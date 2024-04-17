@@ -18,10 +18,13 @@ SRCS = main.c\
 		parse/cmd_tree_utils.c\
 		parse/print_cmd_tree.c\
 		parse/parse_env.c\
+		parse/remove_quote.c\
+		parse/remove_quote_utils.c\
+		parse/extends_find_env.c\
 		signal/signal.c\
 		parse/free_pipe_list.c\
 		parse/sort_env.c\
-		error_handler.c\
+		parse/extends_env.c\
 		pipe/command.c\
 		pipe/execute_parse.c\
 		pipe/execute.c\
@@ -38,7 +41,8 @@ SRCS = main.c\
 		execute_builtin/export.c\
 		execute_builtin/pwd.c\
 		execute_builtin/unset.c\
-		execute_builtin/utile.c
+		execute_builtin/utile.c\
+		error_handler.c
 OBJS = $(SRCS:.c=.o)
 MAKE = make
 
