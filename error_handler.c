@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 17:00:13 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/15 14:44:35 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/18 18:31:27 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ void	error_handler(char *cmd_name, char *option_name, char *msg)
 		ft_printf(STDERR_FILENO, "%s: ", option_name);
 	if (msg != NULL)
 		ft_printf(STDERR_FILENO, "%s", msg);
-	// else
-	// 	ft_printf(STDERR_FILENO, "%s\n", strerror(errno));
+	else
+	 	ft_printf(STDERR_FILENO, "%s\n", strerror(errno));
 }

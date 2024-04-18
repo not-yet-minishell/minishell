@@ -6,16 +6,16 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:56:13 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/18 18:17:04 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/18 18:44:10 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static t_list		*make_pipelist(t_tree *tree, int *heredoc_count);
-static t_cmd_node	*new_cmd_tree_pipeline(t_tree *tree, int *heredoc_count);
+static t_list		*make_pipelist(t_tree *tree, int *heredoc_count, t_list *envp);
+static t_cmd_node	*new_cmd_tree_pipeline(t_tree *tree, int *heredoc_count, t_list *envp);
 static t_list		*cmd_tree_rd_list(t_list **rd_list, \
-					t_tree *tree, int *heredoc_count);
+					t_tree *tree, int *heredoc_count, t_list *envp);
 static t_list		*cmd_tree_cmd_list(t_list **cmd_list, t_tree *tree);
 
 void	inorder_cmd_tree(t_tree *tree, t_list *envp, \
@@ -31,7 +31,7 @@ void	inorder_cmd_tree(t_tree *tree, t_list *envp, \
 	token = tree->token;
 	if (tree->left)
 	{
-		pipelist = make_pipelist(tree->left, heredoc_count);
+		pipelist = make_pipelist(tree->left, heredoc_count, envp);
 		extends_env(envp, &pipelist);
 	}
 	if (flag == AND_TRUE || flag == OR_FALSE || flag == START)
@@ -44,7 +44,7 @@ void	inorder_cmd_tree(t_tree *tree, t_list *envp, \
 	}
 }
 
-static t_list	*make_pipelist(t_tree *tree, int *heredoc_count)
+static t_list	*make_pipelist(t_tree *tree, int *heredoc_count, t_list *envp)
 {
 	t_list	*pipelist;
 
@@ -52,11 +52,11 @@ static t_list	*make_pipelist(t_tree *tree, int *heredoc_count)
 		return (NULL);
 	pipelist = ft_lstnew(new_cmd_tree_pipeline(tree->left, heredoc_count));
 	if (tree->right)
-		pipelist->next = make_pipelist(tree->right, heredoc_count);
+		pipelist->next = make_pipelist(tree->right, heredoc_count, envp);
 	return (pipelist);
 }
 
-static t_cmd_node	*new_cmd_tree_pipeline(t_tree *tree, int *heredoc_count)
+static t_cmd_node	*new_cmd_tree_pipeline(t_tree *tree, int *heredoc_count, t_list *envp)
 {
 	t_cmd_node	*pipe_node;
 	t_list		*rd_list;
@@ -67,7 +67,7 @@ static t_cmd_node	*new_cmd_tree_pipeline(t_tree *tree, int *heredoc_count)
 		return (NULL);
 	rd_list = NULL;
 	cmd_list = NULL;
-	rd_list = cmd_tree_rd_list(&rd_list, tree, heredoc_count);
+	rd_list = cmd_tree_rd_list(&rd_list, tree, heredoc_count, envp);
 	cmd_list = cmd_tree_cmd_list(&cmd_list, tree);
 	//printf("%p\n", cmd_list);
 	pipe_node = new_cmd_node(rd_list, cmd_list);
@@ -100,7 +100,7 @@ static t_list	*cmd_tree_cmd_list(t_list **cmd_list, t_tree *tree)
 }
 
 static t_list	*cmd_tree_rd_list(t_list **rd_list, \
-				t_tree *tree, int *heredoc_count)
+				t_tree *tree, int *heredoc_count, t_list *envp)
 {
 	t_list		*new_rd_list;
 	t_rd_node	*rd_node;
@@ -110,13 +110,13 @@ static t_list	*cmd_tree_rd_list(t_list **rd_list, \
 	if (!tree)
 		return (NULL);
 	if (tree->left)
-		cmd_tree_rd_list(rd_list, tree->left, heredoc_count);
+		cmd_tree_rd_list(rd_list, tree->left, heredoc_count, envp);
 	token = tree->token;
 	if (token && is_redicrtion(token))
 	{
 		if (token->type == REDIRECT_HEREDOC)
 		{
-			filename = heredoc(tree->redirect->filename, heredoc_count);
+			filename = heredoc(tree->redirect->filename, heredoc_count, envp);
 			token->type = REDIRECT_IN;
 			tree->redirect->filename = filename;
 			(*heredoc_count)++;
