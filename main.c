@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/17 15:14:36 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/18 13:07:27 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	main(int argc, char *argv[], char **envp)
 			break ;
 		add_history(line);
 		token_head = tokenizer(line);
-		//ft_lstiter(token_head,(void *)curr_list_print);
 		if (!token_head)
 		{
 			free(line);

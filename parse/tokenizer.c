@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:51:18 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/15 19:57:38 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/18 10:13:54 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,26 @@ t_list	*tokenizer(char *line)
 		while (line[i] && !ft_is_ifs(line[i]) && !ft_is_metacharacter(line[i]))
 		{
 			if (check_quote_mark(line, &i, head))
-				return (NULL);
+				return (tokenizer_free(&head));
 			i++;
 		}
 		if (i - start > 0)
 			ft_add_token_node(head, ft_substr(line, start, i - start), WORD);
 		else if (ft_is_metacharacter(line[i]))
 			if (!ft_tokenizer_metachar(line, &i, start, head))
-				return (0);
+				return (tokenizer_free(&head));
 	}
 	return (head);
 }
 
 int	check_quote_mark(char *line, int *i, t_list *head)
 {
+
+	(void)head;
 	if (line[*i] == '\"' || line[*i] == '\'')
 	{
 		if (ft_quotemarks(line, i, line[*i]) == -1)
 		{
-			ft_lstiter(head, (void *)ft_del_token_node);
 			return (1);
 		}
 	}

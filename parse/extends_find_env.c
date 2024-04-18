@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 18:50:24 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/15 20:14:36 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/17 18:02:12 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ char	*chage_env_key_to_value(char *str, t_list *env)
 		{
 			str_divide_join(&new, str, start, i);
 			temp = extends_find_env(str, &i, env);
-			printf("%s\n",temp);
 			str_temp_join(&new, temp);
 			start = i;
 		}
