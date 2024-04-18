@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 17:05:50 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/17 20:26:09 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/18 17:13:59 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,24 +83,29 @@ void	wildcard_cmd(t_list **cmd_list)
 		{
 			temp = curr_cmd;
 			ft_lstlast(wild_list)->next = temp->next;
+
 			if (prev)
 				prev->next = wild_list;
 			else
 				*cmd_list = wild_list;
+			curr_cmd = wild_list;
+			free(temp->content);
+			free(temp);
 		}
 		else{
 			int	i = 0;
-			char *str = (*cmd_list)->content;
+			char *str = curr_cmd->content;
 			while (str[i])
 			{
-				if (str[i] == '\10')
+				if (str[i] == '\12')
 					str[i] = '*';
 				i++;
 			}
 		}
 		}
 		prev = curr_cmd;
-		curr_cmd = curr_cmd->next;
+		if (curr_cmd)
+			curr_cmd = curr_cmd->next;
 	}
 }
 
@@ -111,11 +116,39 @@ int	has_wildcard(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '\10')
+		if (str[i] == '\12')
 			return (1);
 		i++;
 	}
 	return (0);
+}
+
+int		is_wildcard_dirtory(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '/')
+		i++;
+	if (str[i] == NULL)
+		return (0);
+	while (str[i] == '/')
+		i++;
+	if (str[i] == NULL)
+		return (1);
+	return (0);
+}
+
+char	*delete_dir_flag(char *str)
+{
+	int	i;
+	char	*new_str;
+
+	i = 0;
+	while (str[i] != '/')
+		i++;
+	new_str = ft_substr(str, 0, i);
+	return (new_str)
 }
 
 t_list	*find_wildcard(char *str)
@@ -136,11 +169,12 @@ t_list	*find_wildcard(char *str)
 	{
 		if (is_match(entry->d_name, str))
 		{
-			char	*str = ft_strdup(entry->d_name);
-			t_list *new = ft_lstnew(str);
+			char	*name = ft_strdup(entry->d_name);
+			t_list *new = ft_lstnew(name);
 			ft_lstadd_back(&wildlist, new);
 		}
 	}
+	closedir(dp);
 	return (wildlist);
 }
 
@@ -155,13 +189,24 @@ int	is_match(char *str, char *pattern)
 	pIdx = 0;
 	sTempIdx = -1;
 	starIdx = -1;
+	// 처음에 밀어버려
+	while (str[sIdx] == '.')
+	{
+		if (str[sIdx] == pattern[pIdx])
+		{
+			sIdx++;
+			pIdx++;
+		}
+		else
+			return (0);
+	}
 	while (sIdx < (int)ft_strlen(str))
 	{
 		if (str[sIdx] && pattern[pIdx] && str[sIdx] == pattern[pIdx])
 		{
 			sIdx++;
 			pIdx++;
-		} else if (pattern[pIdx] && pattern[pIdx] == '\10')
+		} else if (pattern[pIdx] && pattern[pIdx] == '\12')
 		{
 			starIdx = pIdx;
 			sTempIdx = sIdx;
@@ -174,7 +219,9 @@ int	is_match(char *str, char *pattern)
 		else
 			return (0);
 	}
-	while (pattern[pIdx] && pattern[pIdx] == '\10')
+	while (pattern[pIdx] && pattern[pIdx] == '\12')
 		pIdx++;
-	return pIdx == (int)ft_strlen(pattern);
+	if (pIdx == (int)ft_strlen(pattern))
+		return (1);
+	return (0);
 }

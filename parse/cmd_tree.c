@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:56:13 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/18 09:39:52 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/18 18:03:05 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,9 +122,9 @@ t_list	*cmd_tree_rd_list(t_list **rd_list, \
 	{
 		if (token->type == REDIRECT_HEREDOC)
 		{
-			filename = heredoc(token->str, heredoc_count);
-			token->type = REDIRECT_IN;
-			token->str = filename;
+			filename = heredoc(tree->redirect->filename, heredoc_count);
+			tree->redirect->rd_type = REDIRECT_IN;
+			tree->redirect->filename = filename;
 			(*heredoc_count)++;
 		}
 		rd_node = tree->redirect;
