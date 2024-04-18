@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   one_process.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:54:37 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/11 10:19:11 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/18 09:53:31 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	one_process(t_list *node, t_list *env)
 	}
 	cmd = make_list_to_array(exe_cmd);
 	exit_code = execute_builtin(cmd, env);
-	free_list(node);
+	free(cmd);
+	//free_list(node);
 	return (exit_code);
 }
