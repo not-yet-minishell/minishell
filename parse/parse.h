@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:45:34 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/17 17:08:01 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/18 10:13:32 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ t_token		*ft_tokennew(char *str, int tokennum);
 void		ft_del_token_node(t_token *node);
 void		ft_add_token_node(t_list *head, char *str, int tokennum);
 t_list		*tokenizer(char *line);
+void		*tokenizer_free(t_list **head);
 int			ft_tokenizer_metachar(char *line, int *i, int start, t_list *head);
 void		parse_error(void);
 t_tree		*parse_tree(t_list **list);
