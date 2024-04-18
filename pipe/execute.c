@@ -6,15 +6,16 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 19:59:34 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/17 15:00:14 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/18 08:12:38 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static void	check_which(char **exe, char **env_array, t_list *env);
-static void	exec_cmd(char **exe, char **env_array);
-static int	check_access(char *command, char **argument, int idx, char **env_array);
+static void	check_which(char **exe, t_list *env);
+static void	exec_cmd(char **exe, char **env_array, t_list *env);
+static int	check_access(char *command, char **argument, \
+	char *path, char **exe_env);
 
 void	execute(t_list *node, t_list *env)
 {
@@ -27,15 +28,15 @@ void	execute(t_list *node, t_list *env)
 	exit_code = execute_builtin(cmd, env);
 	if (exit_code != -1)
 		exit(exit_code);
-	check_which(cmd, env_array, env);
-	exec_cmd(cmd, env_array);
+	check_which(cmd, env);
+	exec_cmd(cmd, env_array, env);
 }
 
-static void	check_which(char **exe, char **env_array, t_list *env)
+static void	check_which(char **exe, t_list *env)
 {
 	char	*cmd;
 	int		idx;
-	//char	*exe_cmd[2];
+	char	**exe_env;
 
 	(void)env;
 	idx = 0;
@@ -56,19 +57,22 @@ static void	check_which(char **exe, char **env_array, t_list *env)
 			exit(0);
 		idx++;
 	}
-	execve(*exe, exe, env_array);
+	exe_env = make_env_array(env);
+	execve(*exe, exe, exe_env);
 }
 
-static void	exec_cmd(char **exe, char **env_array)
+static void	exec_cmd(char **exe, char **env_array, t_list *env)
 {
 	int		idx;
 	char	*command;
+	char	**exe_env;
 
+	exe_env = make_env_array(env);
 	idx = 0;
 	while (env_array[idx])
 	{
 		command = ft_strjoin(env_array[idx], exe[0], '/');
-		check_access(command, exe, idx, env_array);
+		check_access(command, exe, env_array[idx], exe_env);
 		free(command);
 		idx++;
 	}
@@ -77,13 +81,11 @@ static void	exec_cmd(char **exe, char **env_array)
 }
 
 static int	check_access(char *command, char **argument, \
-	int idx, char **env_array)
+	char *path, char **exe_env)
 {
 	char	*access_path;
 	int		exit_no;
-	char	*path;
 
-	path = env_array[idx];
 	access_path = ft_strjoin(path, argument[0], '/');
 	if (ft_strncmp(argument[0], "exit", 5) == 0)
 	{
@@ -91,7 +93,7 @@ static int	check_access(char *command, char **argument, \
 		exit(exit_no);
 	}
 	if (access(access_path, X_OK) != -1)
-		execve(command, argument, env_array);
+		execve(command, argument, exe_env);
 	free(access_path);
 	return (-1);
 }

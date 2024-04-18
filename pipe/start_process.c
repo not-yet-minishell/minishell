@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 20:30:17 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/17 15:16:02 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/18 17:51:43 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static t_fd	*init_fd(void);
 static void	close_parent_fd(t_fd *fd_info);
 static int	is_builtin(t_list *node);
 
-int	start_process(t_list *head, t_list *env, int *heredoc_count)
+int	start_process(t_list *head, t_list *env)
 {
 	t_fd	*fd_info;
 	int		fork_count;
@@ -41,7 +41,7 @@ int	start_process(t_list *head, t_list *env, int *heredoc_count)
 	}
 	if (fd_info->fds[0] != 0)
 		close(fd_info->fds[0]);
-	((t_builtin *)(env->content))->exit_num = wait_process(fd_info, fork_count, heredoc_count);
+	((t_builtin *)(env->content))->exit_num = wait_process(fd_info, fork_count);
 	return (((t_builtin *)(env->content))->exit_num);
 }
 

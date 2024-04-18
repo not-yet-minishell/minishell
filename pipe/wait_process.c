@@ -6,15 +6,15 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 17:56:12 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/15 15:59:22 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/18 17:51:02 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static void	unlink_heredoc(int *heredoc_count);
+//static void	unlink_heredoc(int *heredoc_count);
 
-int	wait_process(t_fd *fd_info, int fork_count, int *heredoc_count)
+int	wait_process(t_fd *fd_info, int fork_count)
 {
 	int		status;
 	int		ret;
@@ -29,22 +29,22 @@ int	wait_process(t_fd *fd_info, int fork_count, int *heredoc_count)
 				ret = WEXITSTATUS(status);
 		}
 	}
-	unlink_heredoc(heredoc_count);
+	//unlink_heredoc(heredoc_count);
 	return (ret);
 }
 
-static void	unlink_heredoc(int *heredoc_count)
-{
-	char	*filename;
-	char	*num;
+//static void	unlink_heredoc(int *heredoc_count)
+//{
+//	char	*filename;
+//	char	*num;
 
-	while ((*heredoc_count)-- > 0)
-	{
-		num = ft_itoa(*heredoc_count);
-		filename = ft_strjoin("/tmp/heredoc", num, '\0');
-		if (access(filename, F_OK) == 0)
-			unlink(filename);
-		free(num);
-		free(filename);
-	}
-}
+//	while ((*heredoc_count)-- > 0)
+//	{
+//		num = ft_itoa(*heredoc_count);
+//		filename = ft_strjoin("/tmp/heredoc", num, '\0');
+//		if (access(filename, F_OK) == 0)
+//			unlink(filename);
+//		free(num);
+//		free(filename);
+//	}
+//}

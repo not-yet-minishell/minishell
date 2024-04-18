@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:56:13 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/17 15:15:11 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/18 17:52:03 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,12 @@ void	inorder_cmd_tree(t_tree *tree, t_list *envp, \
 		pipelist = make_pipelist(tree->left, heredoc_count);
 		extends_env(envp, &pipelist);
 	}
+	//printf("flag : %d\n", flag);
+	//token
 	if (flag == AND_TRUE || flag == OR_FALSE || flag == START)
-		exit_num = start_process(pipelist, envp, heredoc_count);
+		exit_num = start_process(pipelist, envp);
+	else
+		exit_num = ((t_builtin *)envp->content)->exit_num;
 	if (token && (token->type == OR_OPERATOR
 			|| token->type == AND_OPERATOR))
 	{
@@ -117,7 +121,6 @@ static t_list	*cmd_tree_rd_list(t_list **rd_list, \
 		if (token->type == REDIRECT_HEREDOC)
 		{
 			filename = heredoc(token->str, heredoc_count);
-			token->type = REDIRECT_IN;
 			token->str = filename;
 			(*heredoc_count)++;
 		}

@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 17:43:30 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/15 15:56:28 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/18 17:51:47 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,15 @@ typedef struct s_fd
 }	t_fd;
 
 void	execute(t_list *node, t_list *env);
-int		wait_process(t_fd	*fd_info, int fork_count, int *heredoc_count);
+int		wait_process(t_fd	*fd_info, int fork_count);
 void	start_command(t_list *node, t_fd *fd_info, t_list *env);
 int		redirect(t_rd_node *node);
-int		start_process(t_list *head, t_list *env, int *heredoc_count);
+int		start_process(t_list *head, t_list *env);
 char	**find_path_to_array(t_list *env);
 char	**make_list_to_array(t_list *node);
 t_list	*delete_and_next_node(t_list *node);
 t_list	*free_and_next_rd(t_list *rd_node);
 int		one_process(t_list *node, t_list *env);
+char	**make_env_array(t_list *env);
 
 #endif
