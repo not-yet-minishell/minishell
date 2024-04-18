@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:56:13 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/18 18:03:05 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/18 19:48:20 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	inorder_cmd_tree(t_tree *tree, t_list *envp, \
 	{
 		pipelist = make_pipelist(tree->left, heredoc_count);
 		extends_env(envp, &pipelist);
-		//wildcard(&pipelist);
+		wildcard(&pipelist);
 	}
 	if (flag == AND_TRUE || flag == OR_FALSE || flag == START)
 	{
