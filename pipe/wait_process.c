@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 17:56:12 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/18 19:29:21 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/19 14:52:17 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	wait_process(t_fd *fd_info, int fork_count, int *heredoc_count)
 	{
 		if (wait(&status) == fd_info->pid)
 		{
+			// 여기서 시그널을 중단시켜야하나///?
 			if (WIFEXITED(status))
 			{
 				ret = WEXITSTATUS(status);

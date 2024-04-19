@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 20:30:17 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/17 19:32:53 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/19 14:48:37 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	start_process(t_list *head, t_list *env, int *heredoc_count)
 		fork_count++;
 		if (fd_info->pid > 0)
 			close_parent_fd(fd_info);
-		if (fd_info->pid == 0)
+		if (fd_info->pid == 0) // 0이면 자식프로세스 -> 부모의 시그널을 없애줘야함
 			start_command(head, fd_info, env);
 		fd_info->temp_fd = fd_info->fds[0];
 		head = head->next;
