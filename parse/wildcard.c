@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 17:05:50 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/19 11:15:27 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/19 11:32:36 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ t_list	*find_wildcard_dir(char *str)
 	{
 		if (is_match(entry->d_name, str) && entry->d_type == DT_DIR)
 			make_wildcard_list_dir(&wildlist, entry);
+		entry = readdir(dp);
 	}
 	closedir(dp);
 	free(str);
@@ -83,6 +84,7 @@ t_list	*find_wildcard(char *str)
 	{
 		if (is_match(entry->d_name, str))
 			make_wildcard_list(&wildlist, entry);
+		entry = readdir(dp);
 	}
 	closedir(dp);
 	return (wildlist);

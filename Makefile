@@ -28,6 +28,7 @@ SRCS = main.c\
 		parse/wildcard_match.c\
 		parse/wildcard_rd.c\
 		parse/wildcard_cmd.c\
+		parse/find_exitcode.c\
 		signal/signal.c\
 		parse/free_pipe_list.c\
 		parse/sort_env.c\
