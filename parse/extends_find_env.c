@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 18:50:24 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/17 18:02:12 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/19 10:41:40 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 char	*find_env_value(t_list *head, char *key);
 char	*chage_env_key_to_value(char *str, t_list *env);
 char	*find_exit_code(t_list *env);
+void	value_chage_whildcard(char **value);
+char	*key_has_specialchar(char *str, int *i);
 
 char	*extends_find_env(char *str, int *i, t_list *env)
 {
@@ -34,11 +36,35 @@ char	*extends_find_env(char *str, int *i, t_list *env)
 		env_start = *i;
 		while (ft_isalnum((int)str[*i]))
 			(*i)++;
+		if (env_start == (*i))
+			return (key_has_specialchar(str, i));
 		key = ft_substr(str, env_start, (*i) - env_start);
 		value = find_env_value(env, key);
+		value_chage_whildcard(&value);
+		env_start = *i;
 		free(key);
 	}
 	return (value);
+}
+
+char	*key_has_specialchar(char *str, int *i)
+{
+	while (str[*i] && !ft_isalnum((int)str[*i]))
+		(*i)++;
+	return (ft_strdup(""));
+}
+
+void	value_chage_whildcard(char **value)
+{
+	int idx;
+	
+	idx = 0;
+	while (*value && (*value)[idx])
+	{
+		if ((*value)[idx] == '*')
+			(*value)[idx] = '\12';
+		idx++;
+	}
 }
 
 char	*find_exit_code(t_list *env)

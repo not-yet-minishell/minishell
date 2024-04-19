@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 17:05:50 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/18 20:33:16 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/19 09:30:52 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,7 @@ t_list	*find_wildcard(char *str)
 	if ((dp=opendir(".")) == NULL)
 	{
 		ft_printf(1,"openerror");// error 핸들러로 변경
-		exit(-1);
+		exit(1);
 	}
 	while ((((entry = readdir(dp))) != NULL))
 	{
