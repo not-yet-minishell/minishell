@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 10:55:06 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/19 11:21:55 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:40:23 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,14 @@ char	*delete_dir_flag(char *str)
 		i++;
 	new_str = ft_substr(str, 0, i);
 	return (new_str);
+}
+
+void	make_wildcard_list(t_list **wildlist, struct dirent *entry)
+{
+	char	*name;
+	t_list	*new;
+
+	name = ft_strdup(entry->d_name);
+	new = ft_lstnew(name);
+	ft_lstadd_back(wildlist, new);
 }

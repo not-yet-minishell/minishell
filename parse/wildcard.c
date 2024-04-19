@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 17:05:50 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/19 11:32:36 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:40:29 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,12 +100,3 @@ void	make_wildcard_list_dir(t_list **wildlist, struct dirent *entry)
 	ft_lstadd_back(wildlist, new);
 }
 
-void	make_wildcard_list(t_list **wildlist, struct dirent *entry)
-{
-	char	*name;
-	t_list	*new;
-
-	name = ft_strdup(entry->d_name);
-	new = ft_lstnew(name);
-	ft_lstadd_back(wildlist, new);
-}

@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 10:58:27 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/19 11:16:13 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:40:35 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,5 @@ int		has_wildcard(char *str);
 int		is_wildcard_dirtory(char *str);
 char	*delete_dir_flag(char *str);
 t_list	*find_wildcard(char *str);
+void	make_wildcard_list(t_list **wildlist, struct dirent *entry);
 #endif

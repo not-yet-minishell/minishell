@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:45:34 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/19 11:09:25 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:41:05 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ enum {
 	REDIRECT_APPEND,
 	REDIRECT_HEREDOC,
 	REDIRECT_AM,
+	REDIRECT_DIR,
 	AND_OPERATOR,
 	OR_OPERATOR,
 	L_PAREN,
