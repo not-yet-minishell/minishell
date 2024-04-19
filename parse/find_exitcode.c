@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer_utils.c                                  :+:      :+:    :+:   */
+/*   find_exitcode.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/18 10:12:01 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/19 11:10:33 by soljeong         ###   ########.fr       */
+/*   Created: 2024/04/19 11:09:02 by soljeong          #+#    #+#             */
+/*   Updated: 2024/04/19 11:09:14 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	*tokenizer_free(t_list **head)
+char	*find_exit_code(t_list *env)
 {
-	ft_lstclear(head, (void *)ft_del_token_node);
-	return (NULL);
+	t_builtin	*content;
+	char		*str;
+
+	content = env->content;
+	str = ft_itoa((content->exit_num));
+	return (str);
 }

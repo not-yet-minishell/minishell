@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:51:18 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/19 10:16:24 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/19 11:10:08 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ t_list	*tokenizer(char *line)
 
 int	check_quote_mark(char *line, int *i, t_list *head)
 {
-
 	(void)head;
 	if (line[*i] == '\"' || line[*i] == '\'')
 	{

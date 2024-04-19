@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 18:50:24 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/19 10:41:40 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/19 11:08:15 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ char	*key_has_specialchar(char *str, int *i)
 
 void	value_chage_whildcard(char **value)
 {
-	int idx;
-	
+	int	idx;
+
 	idx = 0;
 	while (*value && (*value)[idx])
 	{
@@ -65,17 +65,6 @@ void	value_chage_whildcard(char **value)
 			(*value)[idx] = '\12';
 		idx++;
 	}
-}
-
-char	*find_exit_code(t_list *env)
-{
-	t_builtin	*content;
-	char		*str;
-
-	content = env->content;
-	printf("%d\n",(content->exit_num));
-	str = ft_itoa((content->exit_num));
-	return (str);
 }
 
 char	*chage_env_key_to_value(char *str, t_list *env)

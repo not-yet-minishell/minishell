@@ -24,6 +24,10 @@ SRCS = main.c\
 		parse/remove_quote_utils.c\
 		parse/extends_find_env.c\
 		parse/wildcard.c\
+		parse/wildcard_utils.c\
+		parse/wildcard_match.c\
+		parse/wildcard_rd.c\
+		parse/wildcard_cmd.c\
 		signal/signal.c\
 		parse/free_pipe_list.c\
 		parse/sort_env.c\

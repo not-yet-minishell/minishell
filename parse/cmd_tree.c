@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:56:13 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/18 19:48:20 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/19 11:06:31 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_cmd_node	*new_cmd_tree_pipeline(t_tree *tree, int *heredoc_count);
 t_list		*cmd_tree_rd_list(t_list **rd_list, \
 					t_tree *tree, int *heredoc_count);
 t_list		*cmd_tree_cmd_list(t_list **cmd_list, t_tree *tree);
-void	wildcard(t_list **cmd_list);
+
 void	inorder_cmd_tree(t_tree *tree, t_list *envp, \
 	int flag, int *heredoc_count)
 {
@@ -48,8 +48,6 @@ void	inorder_cmd_tree(t_tree *tree, t_list *envp, \
 	}
 }
 
-
-
 t_list	*make_pipelist(t_tree *tree, int *heredoc_count)
 {
 	t_list	*pipelist;
@@ -67,7 +65,6 @@ t_cmd_node	*new_cmd_tree_pipeline(t_tree *tree, int *heredoc_count)
 	t_cmd_node	*pipe_node;
 	t_list		*rd_list;
 	t_list		*cmd_list;
-	//char		*filename;
 
 	if (!tree)
 		return (NULL);
@@ -75,7 +72,6 @@ t_cmd_node	*new_cmd_tree_pipeline(t_tree *tree, int *heredoc_count)
 	cmd_list = NULL;
 	rd_list = cmd_tree_rd_list(&rd_list, tree, heredoc_count);
 	cmd_list = cmd_tree_cmd_list(&cmd_list, tree);
-	//printf("%p\n", cmd_list);
 	pipe_node = new_cmd_node(rd_list, cmd_list);
 	return (pipe_node);
 }
