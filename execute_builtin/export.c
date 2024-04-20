@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 15:59:53 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/11 13:22:22 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/20 20:58:28 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,29 @@ static t_env	*devide_key_value(char *env);
 
 void	ft_export(char **cmd, t_list *env_list)
 {
-	char	*env;
 	t_env	*content;
 	t_list	*node;
 
-	env = *(cmd + 1);
 	cmd++;
-	if (env == NULL)
+	change_exit_number(0, env_list);
+	if (*cmd == NULL)
 	{
 		print_export(env_list);
-		change_exit_number(0, env_list);
 		return ;
 	}
 	while (*cmd != NULL)
 	{
-		env = *cmd;
-		cmd++;
-		content = devide_key_value(env);
+		if (check_cmd(*cmd, env_list) == FALSE)
+		{
+			cmd++;
+			continue ;
+		}
+		content = devide_key_value(*cmd);
 		node = ft_lstnew(content);
 		add_envlist(env_list, node);
+		cmd++;
 	}
-	change_exit_number(0, env_list);
+	//change_exit_number(0, env_list);
 }
 
 static void	print_export(t_list *env_list)

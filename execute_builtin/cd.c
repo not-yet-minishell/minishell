@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 04:20:46 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/18 10:59:14 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/20 20:43:48 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ void	ft_cd(char	**cmd, t_list *env_list)
 	old_pwd = getcwd(NULL, 0);
 	if (old_pwd == NULL)
 		old_pwd = ft_strdup(".");
+	if (ft_strncmp(old_pwd, dir, ft_strlen(dir) + 1) == 0)
+	{
+		change_exit_number(0, env_list);
+		free(old_pwd);
+		return ;
+	}
 	if (chdir(dir) == 0)
 	{
 		change_env(env_list, old_pwd);

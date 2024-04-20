@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 18:50:24 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/20 17:22:45 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/20 21:38:51 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ char	*chage_env_key_to_value(char *str, t_list *env)
 	{
 		if (str[i] == '$')
 		{
+			if ((str[i + 1] == '\0' || str[i + 1] == ' '))
+				return (str);
 			str_divide_join(&new, str, start, i);
 			temp = extends_find_env(str, &i, env);
 			str_temp_join(&new, temp);

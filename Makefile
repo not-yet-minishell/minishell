@@ -19,6 +19,7 @@ SRCS = main.c\
 		parse/cmd_tree_utils.c\
 		parse/print_cmd_tree.c\
 		parse/parse_env.c\
+		parse/parse_env2.c\
 		parse/heredoc.c\
 		parse/remove_quote.c\
 		parse/remove_quote_utils.c\
@@ -47,6 +48,7 @@ SRCS = main.c\
 		execute_builtin/execute_builtin.c\
 		execute_builtin/exit.c\
 		execute_builtin/export.c\
+		execute_builtin/export_utile.c\
 		execute_builtin/pwd.c\
 		execute_builtin/unset.c\
 		execute_builtin/utile.c\

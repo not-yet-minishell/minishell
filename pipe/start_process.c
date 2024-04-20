@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 20:30:17 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/20 17:35:39 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/20 21:47:38 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	start_process(t_list *head, t_list *env)
 	int		fork_count;
 
 	fork_count = 0;
+	//printf("cmd : %s\n", ((char *)((t_cmd_node *)head->content)->cmd_list->content));
 	if ((head->next) == NULL && (is_builtin(head) == TRUE))
 		return (one_process(head, env));
 	fd_info = init_fd();

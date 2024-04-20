@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_env.h                                        :+:      :+:    :+:   */
+/*   parse_env2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/27 02:00:55 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/20 18:38:35 by yeoshin          ###   ########.fr       */
+/*   Created: 2024/04/20 18:35:36 by yeoshin           #+#    #+#             */
+/*   Updated: 2024/04/20 18:39:18 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_ENV_H
-# define PARSE_ENV_H
-# include "../minishell.h"
+#include "parse_env.h"
 
-typedef struct s_env
+void	add_path(t_list *env)
 {
-	char	*key;
-	char	*value;
-}	t_env;
+	t_env	*content;
+	t_list	*env_node;
 
-typedef struct s_builtin
-{
-	char	*pwd;
-	int		exit_num;
-}	t_builtin;
-
-t_list	*parse_env(char *env[]);
-t_list	*select_sort(t_list *env_list);
-void	add_path(t_list *env);
-
-#endif
+	content = ft_malloc(sizeof(t_env));
+	content->key = "PATH";
+	content->value = "/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.";
+	env_node = ft_lstnew(content);
+	ft_lstadd_back(&env, env_node);
+}

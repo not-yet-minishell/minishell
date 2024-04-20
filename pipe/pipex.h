@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 17:43:30 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/20 17:35:44 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/20 22:03:40 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <errno.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <sys/stat.h>
 # include "../minishell.h"
 
 typedef struct s_fd

@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 19:59:34 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/18 08:12:38 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/20 22:29:36 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void	check_which(char **exe, t_list *env);
 static void	exec_cmd(char **exe, char **env_array, t_list *env);
 static int	check_access(char *command, char **argument, \
 	char *path, char **exe_env);
+static int		is_dir(char *path);
 
 void	execute(t_list *node, t_list *env)
 {
@@ -59,6 +60,13 @@ static void	check_which(char **exe, t_list *env)
 	}
 	exe_env = make_env_array(env);
 	execve(*exe, exe, exe_env);
+	if (is_dir(exe[0]) == TRUE)
+	{
+		error_handler(exe[0], NULL, "is a directory\n");
+		exit(126);
+	}
+	error_handler(exe[0], NULL, NULL);
+	exit(127);
 }
 
 static void	exec_cmd(char **exe, char **env_array, t_list *env)
@@ -78,6 +86,19 @@ static void	exec_cmd(char **exe, char **env_array, t_list *env)
 	}
 	error_handler(exe[0], NULL, "command not found\n");
 	exit(127);
+}
+
+int	is_dir(char *path)
+{
+	struct stat	dirstat;
+
+	if (stat(path, &dirstat) == -1)
+	{
+		return (FALSE);
+	}
+	if (S_ISDIR(dirstat.st_mode))
+		return (TRUE);
+	return (FALSE);
 }
 
 static int	check_access(char *command, char **argument, \

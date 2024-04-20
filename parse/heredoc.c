@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 17:42:14 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/20 17:33:05 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/20 21:25:13 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static char	*change_env(char *str, t_list *env)
 	new = ft_strdup("\0");
 	while (str[idx])
 	{
-		if (str[idx] == '$')
+		if (str[idx] == '$' && (str[idx + 1] != '\0' || str[idx + 1] != ' '))
 		{
 			str_divide_join(&new, str, start, idx);
 			temp = extends_find_env(str, &idx, env);
@@ -91,6 +91,7 @@ static char	*change_env(char *str, t_list *env)
 	free(str);
 	return (new);
 }
+
 static char	*make_limiter(char *lim)
 {
 	char	*ret;
