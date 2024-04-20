@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:51:18 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/18 10:13:54 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/20 17:24:30 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ t_list	*tokenizer(char *line)
 
 int	check_quote_mark(char *line, int *i, t_list *head)
 {
-
 	(void)head;
 	if (line[*i] == '\"' || line[*i] == '\'')
 	{
