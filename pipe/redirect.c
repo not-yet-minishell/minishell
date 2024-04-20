@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 19:59:20 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/18 18:31:00 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/20 18:01:54 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	redirect(t_rd_node *node)
 		flag = out_redirect(node);
 	else if (type == REDIRECT_APPEND)
 		flag = append_redirect(node);
+	else
+		error_handler("*", NULL, "ambiguous redirect\n");
 	return (flag);
 }
 

@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 17:42:14 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/18 18:54:39 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/20 17:33:05 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static int	open_heredoc(char *filename);
 static void	start_read(char *lim, int fd, t_list *envp);
 static char	*make_limiter(char *lim);
+static char	*change_env(char *str, t_list *env);
 
 char	*heredoc(char *lim, int *heredoc_count, t_list *envp)
 {
@@ -78,7 +79,7 @@ static char	*change_env(char *str, t_list *env)
 		if (str[idx] == '$')
 		{
 			str_divide_join(&new, str, start, idx);
-			temp = check_and_change_str(str, &idx, env);
+			temp = extends_find_env(str, &idx, env);
 			if (temp != NULL)
 				str_temp_join(&new, temp);
 			start = idx;
@@ -87,6 +88,7 @@ static char	*change_env(char *str, t_list *env)
 			idx++;
 	}
 	str_divide_join(&new, str, start, idx);
+	free(str);
 	return (new);
 }
 static char	*make_limiter(char *lim)

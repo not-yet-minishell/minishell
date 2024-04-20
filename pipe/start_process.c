@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 20:30:17 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/20 17:25:19 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/20 17:35:39 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	start_process(t_list *head, t_list *env)
 	}
 	if (fd_info->fds[0] != 0)
 		close(fd_info->fds[0]);
-	((t_builtin *)(env->content))->exit_num = wait_process(fd_info, fork_count, heredoc_count);
+	((t_builtin *)(env->content))->exit_num = wait_process(fd_info, fork_count);
 	free(fd_info);
 	return (((t_builtin *)(env->content))->exit_num);
 }

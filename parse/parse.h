@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:45:34 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/20 17:22:58 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/20 17:30:50 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,6 @@ int			has_wildcard(char *str);
 int			is_wildcard_dirtory(char *str);
 char		*delete_dir_flag(char *str);
 char		*find_exit_code(t_list *env);
+void		str_divide_join(char **new, char *str, int start, int i);
 
 #endif
