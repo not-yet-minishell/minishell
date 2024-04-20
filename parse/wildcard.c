@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 17:05:50 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/18 17:13:59 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:40:29 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 #include <histedit.h>
 #include <dirent.h>
 #include <stdio.h>
-void	wildcard_rd(t_list **rd_list);
-void	wildcard_cmd(t_list **cmd_list);
-int		has_wildcard(char *str);
-t_list	*find_wildcard(char *str);
-int		is_match(char *str, char *pattern);
+
+t_list	*find_wildcard_dir(char *str);
+void	make_wildcard_list_dir(t_list **wildlist, struct dirent *entry);
+void	make_wildcard_list(t_list **wildlist, struct dirent *entry);
+
 void	wildcard(t_list **cmd_list)
 {
 	t_list		*curr;
@@ -36,192 +36,67 @@ void	wildcard(t_list **cmd_list)
 	}
 }
 
-void	wildcard_rd(t_list **rd_list)
+t_list	*find_wildcard_dir(char *str)
 {
-	t_list	*curr_rd;
-	char	*filename;
-	//char	*new_str;
-	t_list	*file_list;
+	t_list			*wildlist;
+	DIR				*dp;
+	struct dirent	*entry;
 
-	curr_rd = *rd_list;
-	while (curr_rd)
+	str = delete_dir_flag(str);
+	dp = opendir(".");
+	wildlist = NULL;
+	if (dp == NULL)
 	{
-		filename = ((t_rd_node *)curr_rd->content)->filename;
-		file_list = find_wildcard(filename);
-		if (ft_lstsize(file_list) > 1)
-		{
-			((t_rd_node *)curr_rd->content)->rd_type = REDIRECT_AM;
-			// free도 해줘야하고 더 처리가 필요함....
-			return ;
-		}
-		if (file_list != NULL)
-		{
-		((t_rd_node *)curr_rd->content)->filename = file_list->content;
-		free(filename);
-		free(file_list);
-		}
-		curr_rd = curr_rd->next;
+		ft_printf(1, "openerror");
+		exit(-1);
 	}
-}
-
-void	wildcard_cmd(t_list **cmd_list)
-{
-	t_list	*prev;
-	t_list	*curr_cmd;
-	t_list	*wild_list;
-	t_list	*temp;
-
-	prev = NULL;
-	curr_cmd = *cmd_list;
-	wild_list =NULL;
-	while (curr_cmd)
+	entry = readdir(dp);
+	while (entry != NULL)
 	{
-		if (has_wildcard(curr_cmd->content))
-		{
-			wild_list = find_wildcard(curr_cmd->content);
-		if (wild_list != NULL)
-		{
-			temp = curr_cmd;
-			ft_lstlast(wild_list)->next = temp->next;
-
-			if (prev)
-				prev->next = wild_list;
-			else
-				*cmd_list = wild_list;
-			curr_cmd = wild_list;
-			free(temp->content);
-			free(temp);
-		}
-		else{
-			int	i = 0;
-			char *str = curr_cmd->content;
-			while (str[i])
-			{
-				if (str[i] == '\12')
-					str[i] = '*';
-				i++;
-			}
-		}
-		}
-		prev = curr_cmd;
-		if (curr_cmd)
-			curr_cmd = curr_cmd->next;
+		if (is_match(entry->d_name, str) && entry->d_type == DT_DIR)
+			make_wildcard_list_dir(&wildlist, entry);
+		entry = readdir(dp);
 	}
-}
-
-int	has_wildcard(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '\12')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int		is_wildcard_dirtory(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '/')
-		i++;
-	if (str[i] == NULL)
-		return (0);
-	while (str[i] == '/')
-		i++;
-	if (str[i] == NULL)
-		return (1);
-	return (0);
-}
-
-char	*delete_dir_flag(char *str)
-{
-	int	i;
-	char	*new_str;
-
-	i = 0;
-	while (str[i] != '/')
-		i++;
-	new_str = ft_substr(str, 0, i);
-	return (new_str)
+	closedir(dp);
+	free(str);
+	return (wildlist);
 }
 
 t_list	*find_wildcard(char *str)
 {
-	t_list	*wildlist;
-	DIR*	dp;
-	struct dirent* entry;
+	t_list			*wildlist;
+	DIR				*dp;
+	struct dirent	*entry;
+	int				flag;
 
-	dp = NULL;
-	entry = NULL;
 	wildlist = NULL;
-	if ((dp=opendir(".")) == NULL)
+	flag = is_wildcard_dirtory(str);
+	if (flag)
+		return (find_wildcard_dir(str));
+	dp = opendir(".");
+	if (dp == NULL)
 	{
-		ft_printf(1,"openerror");// error 핸들러로 변경
-		exit(-1);
+		ft_printf(1, "openerror");// error 핸들러로 변경
+		exit(1);
 	}
-	while ((((entry = readdir(dp))) != NULL))
+	entry = readdir(dp);
+	while (entry != NULL)
 	{
 		if (is_match(entry->d_name, str))
-		{
-			char	*name = ft_strdup(entry->d_name);
-			t_list *new = ft_lstnew(name);
-			ft_lstadd_back(&wildlist, new);
-		}
+			make_wildcard_list(&wildlist, entry);
+		entry = readdir(dp);
 	}
 	closedir(dp);
 	return (wildlist);
 }
 
-int	is_match(char *str, char *pattern)
+void	make_wildcard_list_dir(t_list **wildlist, struct dirent *entry)
 {
-	int	sIdx;
-	int	pIdx;
-	int	sTempIdx;
-	int	starIdx;
+	char	*name;
+	t_list	*new;
 
-	sIdx = 0;
-	pIdx = 0;
-	sTempIdx = -1;
-	starIdx = -1;
-	// 처음에 밀어버려
-	while (str[sIdx] == '.')
-	{
-		if (str[sIdx] == pattern[pIdx])
-		{
-			sIdx++;
-			pIdx++;
-		}
-		else
-			return (0);
-	}
-	while (sIdx < (int)ft_strlen(str))
-	{
-		if (str[sIdx] && pattern[pIdx] && str[sIdx] == pattern[pIdx])
-		{
-			sIdx++;
-			pIdx++;
-		} else if (pattern[pIdx] && pattern[pIdx] == '\12')
-		{
-			starIdx = pIdx;
-			sTempIdx = sIdx;
-			pIdx++;
-		}else if (starIdx != -1)
-		{
-			pIdx = starIdx + 1;
-			sIdx = ++sTempIdx;
-		}
-		else
-			return (0);
-	}
-	while (pattern[pIdx] && pattern[pIdx] == '\12')
-		pIdx++;
-	if (pIdx == (int)ft_strlen(pattern))
-		return (1);
-	return (0);
+	name = ft_strjoin(entry->d_name, "/", 0);
+	new = ft_lstnew(name);
+	ft_lstadd_back(wildlist, new);
 }
+

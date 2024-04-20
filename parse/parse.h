@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:45:34 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/18 10:13:32 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:41:05 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ enum {
 	REDIRECT_APPEND,
 	REDIRECT_HEREDOC,
 	REDIRECT_AM,
+	REDIRECT_DIR,
 	AND_OPERATOR,
 	OR_OPERATOR,
 	L_PAREN,
@@ -97,4 +98,12 @@ void		str_divide_join(char **new, char *str, int start, int i);
 void		str_temp_join(char **new, char *temp);
 char		*chage_env_key_to_value(char *str, t_list *env);
 char		*change_str(char *str, t_list *env);
+int			is_match(char *str, char *pattern);
+void		wildcard_cmd(t_list **cmd_list);
+void		wildcard_rd(t_list **rd_list);
+int			has_wildcard(char *str);
+int			is_wildcard_dirtory(char *str);
+char		*delete_dir_flag(char *str);
+char		*find_exit_code(t_list *env);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:51:18 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/18 10:13:54 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/19 11:10:08 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,13 @@ t_list	*tokenizer(char *line)
 			ft_add_token_node(head, ft_substr(line, start, i - start), WORD);
 		else if (ft_is_metacharacter(line[i]))
 			if (!ft_tokenizer_metachar(line, &i, start, head))
-				return (tokenizer_free(&head));
+				return (0);
 	}
 	return (head);
 }
 
 int	check_quote_mark(char *line, int *i, t_list *head)
 {
-
 	(void)head;
 	if (line[*i] == '\"' || line[*i] == '\'')
 	{

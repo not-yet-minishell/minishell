@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wait_process.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 17:56:12 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/15 15:59:22 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/19 14:52:17 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,15 @@ int	wait_process(t_fd *fd_info, int fork_count, int *heredoc_count)
 	{
 		if (wait(&status) == fd_info->pid)
 		{
+			// 여기서 시그널을 중단시켜야하나///?
 			if (WIFEXITED(status))
+			{
 				ret = WEXITSTATUS(status);
+			}
+			//signal 로 끝났다면? 매크로로 체크
+			// w sigterm으로 어떤시그널로 끝났는지 체크
+			// ret = 128 + sigterm ;
+			// ^C도 찌곡...
 		}
 	}
 	unlink_heredoc(heredoc_count);
