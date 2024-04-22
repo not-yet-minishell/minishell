@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/22 18:48:44 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/22 19:59:43 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	leaks(void)
 {
 	system("leaks minishell");
 }
+
 int	main(int argc, char *argv[], char **envp)
 {
 	char	*line;
@@ -39,6 +40,8 @@ int	main(int argc, char *argv[], char **envp)
 	(void)argc;
 	(void)argv;
 	(void)envp;
+	if (*envp == NULL)
+		exit(1);
 	env_list = parse_env(envp);
 	signalinit();
 	while (idx < 1)
@@ -79,7 +82,6 @@ int	main(int argc, char *argv[], char **envp)
 static void	do_sigterm(void)
 {
 	// set_terminal_print_off();
-	ft_putstr_fd("\033[1A", 1); // 현재 커서의 위치를 한칸 위로 올려줌
-	ft_putstr_fd("\033[11C", 1); // 현재 커서의 위치를 11번째칸으로 이동
+	ft_putstr_fd("\e8\e[B\e[A", 1);
 	ft_putstr_fd("exit\n", 1);
 }

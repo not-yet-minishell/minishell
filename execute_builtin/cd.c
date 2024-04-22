@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 04:20:46 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/22 07:54:45 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/22 19:35:10 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ void	ft_cd(char	**cmd, t_list *env_list)
 	char	*dir;
 	char	*old_pwd;
 
-	dir = cmd[1];
-	if (dir == NULL)
+	if (cmd[1] == NULL)
 	{
 		error_handler("cd", NULL, "HOME not set\n");
 		return ;
 	}
+	dir = cmd[1];
 	old_pwd = getcwd(NULL, 0);
 	if (old_pwd == NULL)
 		old_pwd = ft_strdup(".");

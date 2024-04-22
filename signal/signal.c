@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:50:38 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/22 19:06:50 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/22 19:51:50 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include <termios.h>
 
 volatile sig_atomic_t	g_signal = 0;
-static void				signalhandler(int signum);
 static void				do_sigint();
 
 void	signalinit(void)
@@ -29,7 +28,7 @@ void	signalinit(void)
 	signal(SIGQUIT, SIG_IGN);
 }
 
-static void	signalhandler(int signum)
+void	signalhandler(int signum)
 {
 	g_signal = signum;
 }
@@ -52,6 +51,8 @@ void	signal_readline(void)
 		//rl_event_hook = NULL;
 		g_signal = -1;
 	}
+	// 꼭 안해도 되지만 하면 예쁨.
+	ft_putstr_fd("\e7", 1);
 	// if (g_signal == SIGQUIT)
 	// {
 	// 	signal(SIGQUIT, SIG_IGN);

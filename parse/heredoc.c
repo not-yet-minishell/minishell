@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 17:42:14 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/22 19:12:16 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/22 19:13:19 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ static void	start_read(char *lim, int fd, t_list *envp)
 		}
 		if (read_line == NULL)
 		{
-			ft_putstr_fd("\033[1A", 1); // 현재 커서의 위치를 한칸 위로 올려줌
-			ft_putstr_fd("\033[2C", 1); // 현재 커서의 위치를 11번째칸으로 이동
+			ft_putstr_fd("\033[1A", 1);
+			ft_putstr_fd("\033[2C", 1);
 			break ;
 		}
 		if (ft_strncmp(limiter, read_line, limiter_len) == 0)

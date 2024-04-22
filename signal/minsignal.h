@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 11:07:43 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/22 17:15:29 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/22 19:21:27 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@ void	signalinit(void);
 void	set_terminal_print_off(void);
 void signal_heredoc(void);
 void	signal_readline(void);
+void				signalhandler(int signum);
 
 #endif
