@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/20 20:10:27 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/22 10:03:10 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	main(int argc, char *argv[], char **envp)
 	t_tree	*tree;
 	t_list	*env_list;
 	int		heredoc_count;
-	int		idx = 0;
 
 	heredoc_count = 0;
 	(void)argc;
@@ -41,7 +40,7 @@ int	main(int argc, char *argv[], char **envp)
 	(void)envp;
 	env_list = parse_env(envp);
 	signalinit();
-	while (idx < 1)
+	while (1)
 	{
 		line = readline("minishell: ");
 		if (line == NULL)

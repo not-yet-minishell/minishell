@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:56:13 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/20 18:49:07 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/22 10:26:32 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	inorder_cmd_tree(t_tree *tree, t_list *envp, \
 	if (token && (token->type == OR_OPERATOR
 			|| token->type == AND_OPERATOR))
 	{
+		//괄호 시작되면 끝날 때까지 무시하기
 		flag = divide_flag(token->type, exit_num);
 		inorder_cmd_tree(tree->right, envp, flag, heredoc_count);
 	}
