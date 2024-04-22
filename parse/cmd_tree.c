@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_tree.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:56:13 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/20 18:49:07 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/22 16:04:33 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static t_list		*make_pipelist(t_tree *tree, int *heredoc_count, t_list *envp);
+static t_list	*make_pipelist(t_tree *tree, int *heredoc_count, t_list *envp);
 static t_cmd_node	*new_cmd_tree_pipeline(t_tree *tree, int *heredoc_count, t_list *envp);
 static t_list		*cmd_tree_rd_list(t_list **rd_list, \
 					t_tree *tree, int *heredoc_count, t_list *envp);
 static t_list		*cmd_tree_cmd_list(t_list **cmd_list, t_tree *tree);
 
-void	inorder_cmd_tree(t_tree *tree, t_list *envp, \
+int	inorder_cmd_tree(t_tree *tree, t_list *envp, \
 	int flag, int *heredoc_count)
 {
 	t_token		*token;
@@ -27,26 +27,106 @@ void	inorder_cmd_tree(t_tree *tree, t_list *envp, \
 
 	pipelist = NULL;
 	if (tree == NULL)
-		return ;
+		return 0;
 	token = tree->token;
 	if (tree->left)
 	{
-		pipelist = make_pipelist(tree->left, heredoc_count, envp);
-		extends_env(envp, &pipelist);
-		wildcard(&pipelist);
+		if (!(tree->left->status == LIST && (flag == OR_FALSE || flag == AND_FALSE)))
+			exit_num = inorder_cmd_tree(tree->left, envp, flag, heredoc_count);
 	}
-	if (flag == AND_TRUE || flag == OR_FALSE || flag == START)
+	if (tree->left && tree->left->status == PIPELINE)
 	{
-		exit_num = start_process(pipelist, envp);
-		free_pipe_list(pipelist);
+		//printf("hihi\n");
+		//printf("%d\n",flag);
+		if ((flag == AND_TRUE || flag == OR_TRUE || flag == START))
+		{
+			pipelist = make_pipelist(tree->left, heredoc_count, envp);
+			extends_env(envp, &pipelist);
+			wildcard(&pipelist);
+			exit_num = start_process(pipelist, envp);
+			free_pipe_list(pipelist);
+		}
+		else if (flag == OR_FALSE)
+			exit_num = 0;
+		else if (flag == AND_FALSE)
+			exit_num = 1;
 	}
-	if (token && (token->type == OR_OPERATOR
-			|| token->type == AND_OPERATOR))
+	if (tree->status == LIST)
 	{
-		flag = divide_flag(token->type, exit_num);
-		inorder_cmd_tree(tree->right, envp, flag, heredoc_count);
+		if (tree->token)
+		{
+			if (tree->token->type == AND_OPERATOR)
+			{
+				if (exit_num == 0)
+					flag = AND_TRUE;
+				else
+					flag = AND_FALSE;
+			}
+			else if (tree->token->type == OR_OPERATOR)
+			{
+				if (exit_num != 0)
+					flag = OR_TRUE;
+				else
+					flag = OR_FALSE;
+			}
+		}
 	}
+	if (tree->right)
+		exit_num = inorder_cmd_tree(tree->right, envp, flag, heredoc_count);
+	return exit_num;
 }
+
+// void	inorder_cmd_tree(t_tree *tree, t_list *envp, \
+// 	int flag, int *heredoc_count)
+// {
+// 	t_token		*token;
+// 	t_list		*pipelist;
+// 	int			exit_num;
+
+// 	pipelist = NULL;
+// 	if (tree == NULL)
+// 		return ;
+// 	token = tree->token;
+// 	if (tree->left)
+// 	{
+// 		pipelist = make_pipelist(&pipelist, tree->left, heredoc_count, envp);
+// 		extends_env(envp, &pipelist);
+// 		wildcard(&pipelist);
+// 	}
+// 	if (flag == AND_TRUE || flag == OR_FALSE || flag == START)
+// 	{
+// 		exit_num = start_process(pipelist, envp);
+// 		free_pipe_list(pipelist);
+// 	}
+// 	if (token && (token->type == OR_OPERATOR
+// 			|| token->type == AND_OPERATOR))
+// 	{
+// 		flag = divide_flag(token->type, exit_num);
+// 		inorder_cmd_tree(tree->right, envp, flag, heredoc_count);
+// 	}
+// }
+
+// static t_list	*make_pipelist(t_list **pipelist,t_tree *tree, int *heredoc_count, t_list *envp)
+// {
+// 	t_list	*new_pipelist;
+
+// 	if (!tree)
+// 		return (NULL);
+// 	if (tree->left)
+// 		make_pipelist(pipelist, tree->left, heredoc_count, envp);
+// 	if (tree->status == PIPELINE)
+// 	{
+// 		new_pipelist = ft_lstnew(new_cmd_tree_pipeline(tree->left, heredoc_count, envp));
+// 		if (*pipelist)
+// 			ft_lstadd_back(pipelist, new_pipelist);
+// 		else
+// 			*pipelist = new_pipelist;
+// 	}
+// 	if (tree->right)
+// 		make_pipelist(pipelist, tree->left, heredoc_count, envp);
+// 	return (*pipelist);
+// }
+
 
 static t_list	*make_pipelist(t_tree *tree, int *heredoc_count, t_list *envp)
 {
