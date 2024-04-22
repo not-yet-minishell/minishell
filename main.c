@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/19 15:16:26 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/20 20:10:27 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	main(int argc, char *argv[], char **envp)
 	t_tree	*tree;
 	t_list	*env_list;
 	int		heredoc_count;
+	int		idx = 0;
 
 	heredoc_count = 0;
 	(void)argc;
@@ -40,7 +41,7 @@ int	main(int argc, char *argv[], char **envp)
 	(void)envp;
 	env_list = parse_env(envp);
 	signalinit();
-	while (1)
+	while (idx < 1)
 	{
 		line = readline("minishell: ");
 		if (line == NULL)
@@ -57,13 +58,15 @@ int	main(int argc, char *argv[], char **envp)
 		clear_tree(tree);
 		free(line);
 	}
+	//exit(1);
 	do_sigterm();
+	return (((t_builtin *)env_list->content)->exit_num);
 }
 
 static void	do_sigterm(void)
 {
 	set_terminal_print_off();
-	ft_putstr_fd("\033[1A", 2); // 현재 커서의 위치를 한칸 위로 올려줌
-	ft_putstr_fd("\033[11C", 2); // 현재 커서의 위치를 11번째칸으로 이동
-	ft_putstr_fd("exit\n", 2);
+	ft_putstr_fd("\033[1A", 1); // 현재 커서의 위치를 한칸 위로 올려줌
+	ft_putstr_fd("\033[11C", 1); // 현재 커서의 위치를 11번째칸으로 이동
+	ft_putstr_fd("exit\n", 1);
 }

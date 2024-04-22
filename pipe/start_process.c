@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 20:30:17 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/19 14:48:37 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/22 07:45:20 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static t_fd	*init_fd(void);
 static void	close_parent_fd(t_fd *fd_info);
 static int	is_builtin(t_list *node);
 
-int	start_process(t_list *head, t_list *env, int *heredoc_count)
+int	start_process(t_list *head, t_list *env)
 {
 	t_fd	*fd_info;
 	int		fork_count;
@@ -27,7 +27,7 @@ int	start_process(t_list *head, t_list *env, int *heredoc_count)
 	fd_info = init_fd();
 	while (head != NULL)
 	{
-		 if (head->next != NULL)
+		if (head->next != NULL)
 			pipe(fd_info->fds);
 		fd_info->pid = fork();
 		fork_count++;
@@ -37,11 +37,10 @@ int	start_process(t_list *head, t_list *env, int *heredoc_count)
 			start_command(head, fd_info, env);
 		fd_info->temp_fd = fd_info->fds[0];
 		head = head->next;
-		//delete_and_next_node(head);
 	}
 	if (fd_info->fds[0] != 0)
 		close(fd_info->fds[0]);
-	((t_builtin *)(env->content))->exit_num = wait_process(fd_info, fork_count, heredoc_count);
+	((t_builtin *)(env->content))->exit_num = wait_process(fd_info, fork_count);
 	free(fd_info);
 	return (((t_builtin *)(env->content))->exit_num);
 }

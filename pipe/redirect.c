@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 19:59:20 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/17 14:46:50 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/20 19:14:22 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static int	in_redirect(t_rd_node *node);
 static int	out_redirect(t_rd_node *node);
 static int	append_redirect(t_rd_node *node);
+static int	open_heredoc(t_rd_node *node);
 
 int	redirect(t_rd_node *node)
 {
@@ -27,11 +28,34 @@ int	redirect(t_rd_node *node)
 	type = node->rd_type;
 	if (type == REDIRECT_IN)
 		flag = in_redirect(node);
+	else if (type == REDIRECT_HEREDOC)
+		flag = open_heredoc(node);
 	else if (type == REDIRECT_OUT)
 		flag = out_redirect(node);
 	else if (type == REDIRECT_APPEND)
 		flag = append_redirect(node);
+	else
+	{
+		error_handler("*", NULL, "ambiguous redirect\n");
+		flag = FALSE;
+	}
 	return (flag);
+}
+
+static int	open_heredoc(t_rd_node *node)
+{
+	int	fd;
+
+	fd = open(node->filename, O_RDONLY);
+	if (fd == -1)
+	{
+		error_handler(node->filename, NULL, NULL);
+		return (FALSE);
+	}
+	dup2(fd, STDIN_FILENO);
+	close(fd);
+	unlink(node->filename);
+	return (TRUE);
 }
 
 static int	in_redirect(t_rd_node *node)

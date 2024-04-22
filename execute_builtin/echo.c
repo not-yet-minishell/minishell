@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 16:00:07 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/18 10:33:28 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/20 20:25:43 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ static int	check_flag(char **cmd, int *idx)
 	int	flag_idx;
 
 	ret_flag = FALSE;
-	while (*cmd != NULL)
+	while (cmd[*idx] != NULL)
 	{
 		flag_idx = 0;
-		if (*cmd[flag_idx] != '-')
+		if (cmd[*idx][flag_idx] != '-')
 			return (ret_flag);
 		flag_idx++;
 		while (cmd[*idx][flag_idx] != '\0')

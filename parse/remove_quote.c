@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_quote.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 13:22:24 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/18 11:32:11 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/20 21:27:39 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ char	*change_str(char *str, t_list *env)
 			str[i] = '\12';
 			i++;
 		}
-		else if (str[i] == '\"' || str[i] == '\'' || str[i] == '$')
+		else if (str[i] == '\"' || str[i] == '\'' || \
+		(str[i] == '$' && (str[i + 1] != '\0' && str[i + 1] != ' ')))
 		{
 			str_divide_join(&new, str, start, i);
 			temp = check_and_change_str(str, &i, env);
@@ -59,7 +60,7 @@ char	*check_and_change_str(char *str, int *i, t_list *env)
 		temp = remove_dobulequote(str, i, env);
 	else if (str[*i] == '\'')
 		temp = remove_singlequote(str, i);
-	else if (str[*i] == '$')
+	else if (str[*i] == '$' && (str[*i + 1] != '\0' && str[*i + 1] != ' '))
 		temp = extends_find_env(str, i, env);
 	return (temp);
 }

@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:56:57 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/10 19:23:47 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/20 20:55:11 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ void	ft_echo(char **cmd, t_list *env_list);
 void	ft_env(char **cmd, t_list *env_list);
 void	ft_pwd(t_list *env_list);
 void	free_array(char **arr);
+int		check_cmd(char *cmd, t_list *env_list);
 
 #endif

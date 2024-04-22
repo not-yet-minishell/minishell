@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:45:34 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/19 15:41:05 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/20 17:30:50 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void		tree_parser_error(t_list **list, t_tree *tree);
 int			divide_flag(int type, int exit_num);
 void		free_pipe_list(t_list *pipelist);
 void		free_cmd_list(t_list *cmd);
-char		*heredoc(char *lim, int *heredoc_count);
+char		*heredoc(char *lim, int *heredoc_count, t_list *envp);
 void		extends_env(t_list *env, t_list **cmd_list);
 char		*extends_find_env(char *str, int *i, t_list *env);
 void		str_divide_join(char **new, char *str, int start, int i);
@@ -105,5 +105,6 @@ int			has_wildcard(char *str);
 int			is_wildcard_dirtory(char *str);
 char		*delete_dir_flag(char *str);
 char		*find_exit_code(t_list *env);
+void		str_divide_join(char **new, char *str, int start, int i);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 19:46:28 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/17 20:04:11 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/22 07:47:16 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,6 @@ void	start_command(t_list *cmd_list, t_fd *fd_info, t_list *env)
 		dup2(fd_info->temp_fd, STDIN_FILENO);
 		close(fd_info->temp_fd);
 	}
-	while (rd_node != NULL)
-	{
-		if (redirect(rd_node->content) == FALSE)
-			exit(1);
-		rd_node = free_and_next_rd(rd_node);
-	}
 	if (fd_info->fds[1] != 0)
 	{
 		dup2(fd_info->fds[1], STDOUT_FILENO);
@@ -37,9 +31,12 @@ void	start_command(t_list *cmd_list, t_fd *fd_info, t_list *env)
 	}
 	if (fd_info->fds[0] != 0)
 		close(fd_info->fds[0]);
-	if (exe_cmd == NULL)
-		exit(0);
-	//printf("%p\n", exe_cmd);
+	while (rd_node != NULL)
+	{
+		if (redirect(rd_node->content) == FALSE)
+			exit(1);
+		rd_node = rd_node->next;
+	}
 	execute(exe_cmd, env);
 }
 
