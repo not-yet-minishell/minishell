@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:50:38 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/20 20:09:19 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/22 19:06:50 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,42 +16,51 @@
 #include <termios.h>
 
 volatile sig_atomic_t	g_signal = 0;
-//static void				signalhadnler(int signum);
-//static void				signal_readline(void);
-static void				do_sigint(int signum);
+static void				signalhandler(int signum);
+static void				do_sigint();
 
 void	signalinit(void)
 {
-	//rl_event_hook = (rl_hook_func_t *)signal_readline;
-	set_terminal_print_off();
-	//signal(SIGINT, signalhadnler);
-	signal(SIGINT, do_sigint);
+	rl_event_hook = (rl_hook_func_t *)signal_readline;
+	rl_catch_signals = 0;
+	//set_terminal_print_off();
+	signal(SIGINT, signalhandler);
+	//signal(SIGINT, do_sigint);
 	signal(SIGQUIT, SIG_IGN);
 }
 
-//static void	signalhadnler(int signum)
-//{
-//	g_signal = signum;
-//}
-
-//static void	signal_readline(void)
-//{
-//	if (g_signal == SIGINT)
-//	{
-//		set_terminal_print_off();
-//		do_sigint();
-//		g_signal = 0;
-//	}
-//	if (g_signal == SIGQUIT)
-//	{
-//		signal(SIGQUIT, SIG_IGN);
-//		g_signal = 0;
-//	}
-//}
-
-static void	do_sigint(int signum)
+static void	signalhandler(int signum)
 {
-	(void)signum;
+	g_signal = signum;
+}
+
+void signal_heredoc(void)
+{
+	if (g_signal == SIGINT)
+	{
+		close(STDIN_FILENO);
+		//rl_event_hook = NULL;
+	}
+}
+
+void	signal_readline(void)
+{
+	if (g_signal == SIGINT)
+	{
+		//set_terminal_print_off();
+		do_sigint();
+		//rl_event_hook = NULL;
+		g_signal = -1;
+	}
+	// if (g_signal == SIGQUIT)
+	// {
+	// 	signal(SIGQUIT, SIG_IGN);
+	// 	g_signal = 0;
+	// }
+}
+
+static void	do_sigint()
+{
 	ft_putstr_fd("\n", 2);
 	rl_on_new_line();
 	rl_replace_line("", 0);

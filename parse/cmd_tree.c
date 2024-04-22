@@ -6,11 +6,12 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:56:13 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/22 16:04:33 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/22 16:55:55 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+#include "../signal/minsignal.h"
 
 static t_list	*make_pipelist(t_tree *tree, int *heredoc_count, t_list *envp);
 static t_cmd_node	*new_cmd_tree_pipeline(t_tree *tree, int *heredoc_count, t_list *envp);
@@ -36,8 +37,6 @@ int	inorder_cmd_tree(t_tree *tree, t_list *envp, \
 	}
 	if (tree->left && tree->left->status == PIPELINE)
 	{
-		//printf("hihi\n");
-		//printf("%d\n",flag);
 		if ((flag == AND_TRUE || flag == OR_TRUE || flag == START))
 		{
 			pipelist = make_pipelist(tree->left, heredoc_count, envp);
@@ -198,7 +197,9 @@ static t_list	*cmd_tree_rd_list(t_list **rd_list, \
 	{
 		if (token->type == REDIRECT_HEREDOC)
 		{
+			//signal(SIGINT,SIG_IGN);
 			filename = heredoc(tree->redirect->filename, heredoc_count, envp);
+			//signalinit();
 			token->type = REDIRECT_IN;
 			tree->redirect->filename = filename;
 			(*heredoc_count)++;

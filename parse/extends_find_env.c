@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extends_find_env.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 18:50:24 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/22 09:52:13 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/22 19:05:47 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ char	*extends_find_env(char *str, int *i, t_list *env)
 
 char	*key_has_specialchar(char *str, int *i)
 {
-	(*i)++;
+	// if (str[*i])
+	// 	(*i)++;
 	if (str[(*i)] == '\0' || str[(*i)] == ' ')
 		return (ft_strdup("$"));
 	while (str[*i] && !ft_isalnum((int)str[*i]) && str[*i] != '\"' && str[*i] != '\'')
@@ -92,13 +93,6 @@ char	*chage_env_key_to_value(char *str, t_list *env)
 	{
 		if (str[i] == '$')
 		{
-			//if (str[i + 1] == '\0')
-			//	return (str);
-			//if (str[i + 1] == ' ')
-			//{
-			//	i++;
-			//	continue ;
-			//}
 			str_divide_join(&new, str, start, i);
 			temp = extends_find_env(str, &i, env);
 			str_temp_join(&new, temp);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/20 20:10:27 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/22 18:48:44 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,29 @@ int	main(int argc, char *argv[], char **envp)
 	while (idx < 1)
 	{
 		line = readline("minishell: ");
+		if (g_signal == -1)
+		{
+			g_signal = 0;
+			((t_builtin *)env_list->content)->exit_num = 1;
+		}
 		if (line == NULL)
 			break ;
-		add_history(line);
+		if (ft_strlen(line) != 0)
+			add_history(line);
 		token_head = tokenizer(line);
 		if (!token_head)
 		{
+			((t_builtin *)env_list->content)->exit_num = 258;
 			free(line);
 			continue ;
 		}
 		tree = parse_tree(&token_head);
+		if (!tree)
+		{
+			((t_builtin *)env_list->content)->exit_num = 258;
+			free(line);
+			continue;
+		}
 		inorder_cmd_tree(tree, env_list, START, &heredoc_count);
 		clear_tree(tree);
 		free(line);
@@ -65,7 +78,7 @@ int	main(int argc, char *argv[], char **envp)
 
 static void	do_sigterm(void)
 {
-	set_terminal_print_off();
+	// set_terminal_print_off();
 	ft_putstr_fd("\033[1A", 1); // 현재 커서의 위치를 한칸 위로 올려줌
 	ft_putstr_fd("\033[11C", 1); // 현재 커서의 위치를 11번째칸으로 이동
 	ft_putstr_fd("exit\n", 1);

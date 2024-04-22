@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard_rd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 10:53:56 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/20 18:58:40 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/22 18:58:21 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ void	wildcard_rd(t_list **rd_list)
 			}
 			if (file_list != NULL && file_list->content)
 			{
-				if (flag)
-					((t_rd_node *)curr_rd->content)->rd_type = REDIRECT_DIR;
 				((t_rd_node *)curr_rd->content)->filename = file_list->content;
 				free(filename);
 				free(file_list);
