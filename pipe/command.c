@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 19:46:28 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/20 20:29:57 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/22 07:47:16 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,8 @@ void	start_command(t_list *cmd_list, t_fd *fd_info, t_list *env)
 	{
 		if (redirect(rd_node->content) == FALSE)
 			exit(1);
-		rd_node = rd_node->next;//free_and_next_rd(rd_node);
+		rd_node = rd_node->next;
 	}
-	if (exe_cmd == NULL)
-		exit(0);
-	//printf("%p\n", exe_cmd);
 	execute(exe_cmd, env);
 }
 

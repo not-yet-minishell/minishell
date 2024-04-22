@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extends_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 18:52:03 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/16 09:48:29 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/22 09:00:05 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,6 @@ void	extends_env_rd(t_list *env, t_list *rd_list)
 	while (curr_rd)
 	{
 		str = ((t_rd_node *)curr_rd->content)->filename;
-		// if (str == NULL)
-		// {
-		// 	curr_rd = curr_rd->next;
-		// 	continue ;
-		// } 
 		new_str = change_str(str, env);
 		((t_rd_node *)curr_rd->content)->filename = new_str;
 		free(str);

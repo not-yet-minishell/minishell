@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 13:58:11 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/20 21:47:35 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/22 08:57:29 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	**find_path_to_array(t_list *env)
 		env = env->next;
 	}
 	if (path == NULL)
-		path = "/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:.";
+		return (NULL);
 	return (ft_split(path, ':'));
 }
 

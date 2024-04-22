@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 19:59:34 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/20 22:29:36 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/22 08:58:26 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ static void	check_which(char **exe, t_list *env);
 static void	exec_cmd(char **exe, char **env_array, t_list *env);
 static int	check_access(char *command, char **argument, \
 	char *path, char **exe_env);
-static int		is_dir(char *path);
+static void	is_dir(char *path);
+
 
 void	execute(t_list *node, t_list *env)
 {
@@ -24,6 +25,8 @@ void	execute(t_list *node, t_list *env)
 	char	**env_array;
 	int		exit_code;
 
+	if (node == NULL)
+		exit(0);
 	env_array = find_path_to_array(env);
 	cmd = make_list_to_array(node);
 	exit_code = execute_builtin(cmd, env);
@@ -60,11 +63,7 @@ static void	check_which(char **exe, t_list *env)
 	}
 	exe_env = make_env_array(env);
 	execve(*exe, exe, exe_env);
-	if (is_dir(exe[0]) == TRUE)
-	{
-		error_handler(exe[0], NULL, "is a directory\n");
-		exit(126);
-	}
+	is_dir(exe[0]);
 	error_handler(exe[0], NULL, NULL);
 	exit(127);
 }
@@ -77,7 +76,7 @@ static void	exec_cmd(char **exe, char **env_array, t_list *env)
 
 	exe_env = make_env_array(env);
 	idx = 0;
-	while (env_array[idx])
+	while (env_array != NULL && env_array[idx])
 	{
 		command = ft_strjoin(env_array[idx], exe[0], '/');
 		check_access(command, exe, env_array[idx], exe_env);
@@ -88,17 +87,18 @@ static void	exec_cmd(char **exe, char **env_array, t_list *env)
 	exit(127);
 }
 
-int	is_dir(char *path)
+static void	is_dir(char *path)
 {
 	struct stat	dirstat;
 
 	if (stat(path, &dirstat) == -1)
-	{
-		return (FALSE);
-	}
+		return ;
 	if (S_ISDIR(dirstat.st_mode))
-		return (TRUE);
-	return (FALSE);
+	{
+		error_handler(path, NULL, "is a directory\n");
+		exit(126);
+	}
+	return ;
 }
 
 static int	check_access(char *command, char **argument, \

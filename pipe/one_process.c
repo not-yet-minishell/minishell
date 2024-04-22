@@ -6,11 +6,13 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:54:37 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/20 20:17:08 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/22 07:49:51 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+static void	init_fds(int fds[2]);
 
 int	one_process(t_list *node, t_list *env)
 {
@@ -28,22 +30,23 @@ int	one_process(t_list *node, t_list *env)
 	{
 		if (redirect(rd_node->content) == FALSE)
 		{
-			dup2(fds[0], STDIN_FILENO);
-			dup2(fds[1], STDOUT_FILENO);
-			close(fds[0]);
-			close(fds[1]);
+			init_fds(fds);
 			change_exit_number(1, env);
 			return (1);
 		}
-		rd_node = rd_node->next;//free_and_next_rd(rd_node);
+		rd_node = rd_node->next;
 	}
 	cmd = make_list_to_array(exe_cmd);
 	exit_code = execute_builtin(cmd, env);
 	free(cmd);
+	init_fds(fds);
+	return (exit_code);
+}
+
+static void	init_fds(int fds[2])
+{
 	dup2(fds[0], STDIN_FILENO);
 	dup2(fds[1], STDOUT_FILENO);
 	close(fds[0]);
 	close(fds[1]);
-	//free_list(node);
-	return (exit_code);
 }

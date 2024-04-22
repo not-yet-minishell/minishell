@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 20:30:17 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/20 21:47:38 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/22 07:45:20 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,12 @@ int	start_process(t_list *head, t_list *env)
 	int		fork_count;
 
 	fork_count = 0;
-	//printf("cmd : %s\n", ((char *)((t_cmd_node *)head->content)->cmd_list->content));
 	if ((head->next) == NULL && (is_builtin(head) == TRUE))
 		return (one_process(head, env));
 	fd_info = init_fd();
 	while (head != NULL)
 	{
-		 if (head->next != NULL)
+		if (head->next != NULL)
 			pipe(fd_info->fds);
 		fd_info->pid = fork();
 		fork_count++;
@@ -38,7 +37,6 @@ int	start_process(t_list *head, t_list *env)
 			start_command(head, fd_info, env);
 		fd_info->temp_fd = fd_info->fds[0];
 		head = head->next;
-		//delete_and_next_node(head);
 	}
 	if (fd_info->fds[0] != 0)
 		close(fd_info->fds[0]);
