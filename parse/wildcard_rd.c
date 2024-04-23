@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard_rd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 10:53:56 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/20 18:58:40 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/23 12:32:25 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 #include <histedit.h>
 #include <dirent.h>
 
-t_list	*find_wildcard_rd(char *str, int *flag);
+static void	rd_wildcard_none(t_list **curr_rd);
+static void	file_list_one(char *filename, t_list **file_list, t_list **curr_rd);
+
 void	wildcard_rd(t_list **rd_list)
 {
 	t_list	*curr_rd;
 	char	*filename;
 	t_list	*file_list;
-	int		flag;
 
-	flag = 1;
 	curr_rd = *rd_list;
 	while (curr_rd)
 	{
@@ -34,46 +34,34 @@ void	wildcard_rd(t_list **rd_list)
 			{
 				((t_rd_node *)curr_rd->content)->rd_type = REDIRECT_AM;
 				ft_lstclear(&file_list, free);
-				return ;
 			}
-			if (file_list != NULL && file_list->content)
-			{
-				if (flag)
-					((t_rd_node *)curr_rd->content)->rd_type = REDIRECT_DIR;
-				((t_rd_node *)curr_rd->content)->filename = file_list->content;
-				free(filename);
-				free(file_list);
-			}
+			else if (file_list != NULL && file_list->content)
+				file_list_one(filename, &file_list, &curr_rd);
+			else if (file_list == NULL)
+				rd_wildcard_none(&curr_rd);
 		}
 		curr_rd = curr_rd->next;
 	}
 }
 
-
-t_list	*find_wildcard_rd(char *str, int *flag)
+static void	file_list_one(char *filename, t_list **file_list, t_list **curr_rd)
 {
-	t_list			*wildlist;
-	DIR				*dp;
-	struct dirent	*entry;
+	((t_rd_node *)(*curr_rd)->content)->filename = (*file_list)->content;
+	free(filename);
+	free(*file_list);
+}
 
-	wildlist = NULL;
-	dp = opendir(".");
-	if (dp == NULL)
+static void	rd_wildcard_none(t_list **curr_rd)
+{	
+	int		i;
+	char	*str;
+
+	i = 0;
+	str = ((t_rd_node *)(*curr_rd)->content)->filename;
+	while (str[i])
 	{
-		ft_printf(1, "openerror");// error 핸들러로 변경
-		exit(1);
+		if (str[i] == '\12')
+			str[i] = '*';
+		i++;
 	}
-	entry = readdir(dp);
-	while (entry != NULL)
-	{
-		if (is_match(entry->d_name, str))
-		{
-			make_wildcard_list(&wildlist, entry);
-			if (entry->d_type == DT_DIR)
-				*flag = 1;
-		}
-		entry = readdir(dp);
-	}
-	closedir(dp);
-	return (wildlist);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:51:18 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/20 17:24:30 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/23 17:09:27 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_list	*tokenizer(char *line)
 			ft_add_token_node(head, ft_substr(line, start, i - start), WORD);
 		else if (ft_is_metacharacter(line[i]))
 			if (!ft_tokenizer_metachar(line, &i, start, head))
-				return (tokenizer_free(&head));
+				return (NULL);
 	}
 	return (head);
 }

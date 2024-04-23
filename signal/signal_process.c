@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_exitcode.c                                    :+:      :+:    :+:   */
+/*   signal_process.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/19 11:09:02 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/23 11:16:47 by soljeong         ###   ########.fr       */
+/*   Created: 2024/04/23 12:38:06 by soljeong          #+#    #+#             */
+/*   Updated: 2024/04/23 14:16:38 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+#include "minsignal.h"
 
-char	*find_exit_code(t_list *env)
+void	signal_child_process(t_fd *fd_info, t_list *head, t_list *env)
 {
-	t_builtin	*content;
-	char		*str;
+	if (fd_info->pid == 0)
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+		start_command(head, fd_info, env);
+	}
+}
 
-	content = env->content;
-	str = ft_itoa((content->exit_num));
-	return (str);
+void	signal_original(void)
+{
+	signal(SIGINT, signalhandler);
+	signal(SIGQUIT, SIG_IGN);
 }

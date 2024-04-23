@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   start_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 20:30:17 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/22 07:45:20 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/23 12:41:54 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include "../signal/minsignal.h"
 
 static t_fd	*init_fd(void);
 static void	close_parent_fd(t_fd *fd_info);
@@ -25,6 +26,7 @@ int	start_process(t_list *head, t_list *env)
 	if ((head->next) == NULL && (is_builtin(head) == TRUE))
 		return (one_process(head, env));
 	fd_info = init_fd();
+	signal(SIGINT, SIG_IGN);
 	while (head != NULL)
 	{
 		if (head->next != NULL)
@@ -33,14 +35,14 @@ int	start_process(t_list *head, t_list *env)
 		fork_count++;
 		if (fd_info->pid > 0)
 			close_parent_fd(fd_info);
-		if (fd_info->pid == 0) // 0이면 자식프로세스 -> 부모의 시그널을 없애줘야함
-			start_command(head, fd_info, env);
+		signal_child_process(fd_info, head, env);
 		fd_info->temp_fd = fd_info->fds[0];
 		head = head->next;
 	}
 	if (fd_info->fds[0] != 0)
 		close(fd_info->fds[0]);
 	((t_builtin *)(env->content))->exit_num = wait_process(fd_info, fork_count);
+	signal_original();
 	free(fd_info);
 	return (((t_builtin *)(env->content))->exit_num);
 }

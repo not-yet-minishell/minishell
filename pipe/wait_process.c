@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wait_process.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 17:56:12 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/20 17:25:30 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/22 19:30:27 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,15 @@ int	wait_process(t_fd *fd_info, int fork_count)
 			if (WIFEXITED(status))
 			{
 				ret = WEXITSTATUS(status);
+			}
+			if (WIFSIGNALED(status))
+			{
+				ret = WTERMSIG(status);
+				if (ret == SIGINT)
+					ft_putstr_fd("\n", 1);
+				else if (ret == SIGQUIT)
+					ft_putstr_fd("Quit: 3\n", 1);
+				ret += 128;
 			}
 			//signal 로 끝났다면? 매크로로 체크
 			// w sigterm으로 어떤시그널로 끝났는지 체크
