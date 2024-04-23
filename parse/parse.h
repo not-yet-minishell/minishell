@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:45:34 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/23 11:14:50 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/23 12:20:43 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,4 +111,5 @@ void		tree_status_pipeline(t_tree * tree, int flag, t_list *envp, int *exit_num)
 t_list		*make_pipelist(t_tree *tree);
 char		*extends_find_env_firstnum(char *str, int *i, int *env_start);
 void		extdns_find_exit_code(int *i, char **value, t_list *env);
+void		cmd_wildcard_none(t_list **curr_cmd);
 #endif

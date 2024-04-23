@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 10:53:56 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/23 11:24:54 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/23 12:27:22 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 #include <histedit.h>
 #include <dirent.h>
 
-t_list	*find_wildcard_rd(char *str);
-
+static void		rd_wildcard_none(t_list **curr_rd);
 void	wildcard_rd(t_list **rd_list)
 {
 	t_list	*curr_rd;
@@ -40,31 +39,24 @@ void	wildcard_rd(t_list **rd_list)
 				free(filename);
 				free(file_list);
 			}
+			else if(file_list == NULL)
+				rd_wildcard_none(&curr_rd);
 		}
 		curr_rd = curr_rd->next;
 	}
 }
 
-t_list	*find_wildcard_rd(char *str)
-{
-	t_list			*wildlist;
-	DIR				*dp;
-	struct dirent	*entry;
+static void	rd_wildcard_none(t_list **curr_rd)
+{	
+	int		i;
+	char	*str;
 
-	wildlist = NULL;
-	dp = opendir(".");
-	if (dp == NULL)
+	i = 0;
+	str = ((t_rd_node *)(*curr_rd)->content)->filename;
+	while (str[i])
 	{
-		error_handler(NULL, NULL, "openerror");
-		exit(1);
+		if (str[i] == '\12')
+			str[i] = '*';
+		i++;
 	}
-	entry = readdir(dp);
-	while (entry != NULL)
-	{
-		if (is_match(entry->d_name, str))
-			make_wildcard_list(&wildlist, entry);
-		entry = readdir(dp);
-	}
-	closedir(dp);
-	return (wildlist);
 }
