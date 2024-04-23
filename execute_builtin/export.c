@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 15:59:53 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/23 11:23:01 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/23 13:49:33 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	ft_export(char **cmd, t_list *env_list)
 		print_export(env_list);
 		return ;
 	}
+	if (cmd[0][0] == '-' && cmd[0][1] != '-')
+		return ;
 	while (*cmd != NULL)
 	{
 		if (check_export_cmd(*cmd, env_list) == FALSE)
@@ -43,7 +45,6 @@ void	ft_export(char **cmd, t_list *env_list)
 		add_envlist(env_list, node);
 		cmd++;
 	}
-	//change_exit_number(0, env_list);
 }
 
 static void	print_export(t_list *env_list)
@@ -54,11 +55,16 @@ static void	print_export(t_list *env_list)
 	while (env_list != NULL)
 	{
 		content = (t_env *)env_list->content;
-		ft_printf(1, "declare -x %s", content->key);
+		ft_putstr_fd("declare -x ", STDOUT_FILENO);
+		ft_putstr_fd(content->key, STDOUT_FILENO);
 		if (content->value != NULL)
-			ft_printf(1, "=\"%s\"\n", content->value);
+		{
+			ft_putstr_fd("=\"", STDOUT_FILENO);
+			ft_putstr_fd(content->value, STDOUT_FILENO);
+			ft_putendl_fd("\"", STDOUT_FILENO);
+		}
 		else
-			ft_printf(1, "\n");
+			ft_putstr_fd("\n", STDOUT_FILENO);
 		env_list = env_list->next;
 	}
 }

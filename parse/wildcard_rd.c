@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 10:53:56 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/20 18:58:40 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/23 12:31:06 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ t_list	*find_wildcard_rd(char *str, int *flag)
 	dp = opendir(".");
 	if (dp == NULL)
 	{
-		ft_printf(1, "openerror");// error 핸들러로 변경
+		ft_putstr_fd("openerror", STDOUT_FILENO);
+//		ft_printf(1, "openerror");// error 핸들러로 변경
 		exit(1);
 	}
 	entry = readdir(dp);
