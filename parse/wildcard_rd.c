@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 10:53:56 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/22 18:58:21 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/23 11:24:54 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 #include <histedit.h>
 #include <dirent.h>
 
-t_list	*find_wildcard_rd(char *str, int *flag);
+t_list	*find_wildcard_rd(char *str);
+
 void	wildcard_rd(t_list **rd_list)
 {
 	t_list	*curr_rd;
 	char	*filename;
 	t_list	*file_list;
-	int		flag;
 
-	flag = 1;
 	curr_rd = *rd_list;
 	while (curr_rd)
 	{
@@ -34,9 +33,8 @@ void	wildcard_rd(t_list **rd_list)
 			{
 				((t_rd_node *)curr_rd->content)->rd_type = REDIRECT_AM;
 				ft_lstclear(&file_list, free);
-				return ;
 			}
-			if (file_list != NULL && file_list->content)
+			else if (file_list != NULL && file_list->content)
 			{
 				((t_rd_node *)curr_rd->content)->filename = file_list->content;
 				free(filename);
@@ -47,8 +45,7 @@ void	wildcard_rd(t_list **rd_list)
 	}
 }
 
-
-t_list	*find_wildcard_rd(char *str, int *flag)
+t_list	*find_wildcard_rd(char *str)
 {
 	t_list			*wildlist;
 	DIR				*dp;
@@ -58,18 +55,14 @@ t_list	*find_wildcard_rd(char *str, int *flag)
 	dp = opendir(".");
 	if (dp == NULL)
 	{
-		ft_printf(1, "openerror");// error 핸들러로 변경
+		error_handler(NULL, NULL, "openerror");
 		exit(1);
 	}
 	entry = readdir(dp);
 	while (entry != NULL)
 	{
 		if (is_match(entry->d_name, str))
-		{
 			make_wildcard_list(&wildlist, entry);
-			if (entry->d_type == DT_DIR)
-				*flag = 1;
-		}
 		entry = readdir(dp);
 	}
 	closedir(dp);

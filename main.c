@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/22 19:59:43 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/23 11:40:45 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 #include "signal/minsignal.h"
 #include "parse/parse_test.h"
 
-static void	do_sigterm(void);
-
+static void		signal_exit(t_list *env_list);
+static t_list*	main_init(int argc, char *argv[],char **envp);
 void	leaks(void)
 {
 	system("leaks minishell");
@@ -30,58 +30,48 @@ void	leaks(void)
 int	main(int argc, char *argv[], char **envp)
 {
 	char	*line;
-	t_list	*token_head;
 	t_tree	*tree;
 	t_list	*env_list;
-	int		heredoc_count;
-	int		idx = 0;
 
-	heredoc_count = 0;
-	(void)argc;
-	(void)argv;
-	(void)envp;
-	if (*envp == NULL)
-		exit(1);
-	env_list = parse_env(envp);
+	env_list = main_init(argc,argv,envp);
 	signalinit();
-	while (idx < 1)
+	while (1)
 	{
 		line = readline("minishell: ");
-		if (g_signal == -1)
-		{
-			g_signal = 0;
-			((t_builtin *)env_list->content)->exit_num = 1;
-		}
 		if (line == NULL)
 			break ;
+		signal_exit(env_list);
 		if (ft_strlen(line) != 0)
 			add_history(line);
-		token_head = tokenizer(line);
-		if (!token_head)
-		{
-			((t_builtin *)env_list->content)->exit_num = 258;
-			free(line);
-			continue ;
-		}
-		tree = parse_tree(&token_head);
-		if (!tree)
-		{
-			((t_builtin *)env_list->content)->exit_num = 258;
-			free(line);
-			continue;
-		}
-		inorder_cmd_tree(tree, env_list, START, &heredoc_count);
+		tree = parse(line, env_list);
+		herdoc_tree_init(tree,env_list);
+		inorder_cmd_tree(tree, env_list, START);
 		clear_tree(tree);
 		free(line);
 	}
-	//exit(1);
 	do_sigterm();
 	return (((t_builtin *)env_list->content)->exit_num);
 }
 
-static void	do_sigterm(void)
+static t_list*	main_init(int argc, char *argv[],char **envp)
 {
-	// set_terminal_print_off();
-	ft_putstr_fd("\e8\e[B\e[A", 1);
-	ft_putstr_fd("exit\n", 1);
+	t_list *env_list;
+
+	(void)argc;
+	(void)argv;
+	env_list = NULL;
+	if (*envp == NULL)
+		exit(1);
+	env_list = parse_env(envp);
+	return (env_list);
 }
+
+static void	signal_exit(t_list *env_list)
+{
+	if (g_signal == -1)
+	{
+		g_signal = 0;
+		((t_builtin *)env_list->content)->exit_num = 1;
+	}
+}
+

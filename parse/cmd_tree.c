@@ -6,88 +6,50 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:56:13 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/23 09:48:29 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/23 11:04:00 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include "../signal/minsignal.h"
 
-static t_list	*make_pipelist(t_tree *tree, int *heredoc_count, t_list *envp);
-static t_cmd_node	*new_cmd_tree_pipeline(t_tree *tree, int *heredoc_count, t_list *envp);
-static t_list		*cmd_tree_rd_list(t_list **rd_list, \
-					t_tree *tree, int *heredoc_count, t_list *envp);
+static t_list		*cmd_tree_rd_list(t_list **rd_list, t_tree *tree);
+static t_cmd_node	*new_cmd_tree_pipeline(t_tree *tree);
 static t_list		*cmd_tree_cmd_list(t_list **cmd_list, t_tree *tree);
 
-int	inorder_cmd_tree(t_tree *tree, t_list *envp, \
-	int flag, int *heredoc_count)
+int	inorder_cmd_tree(t_tree *tree, t_list *envp, int flag)
 {
 	t_token		*token;
-	t_list		*pipelist;
 	int			exit_num;
 
-	pipelist = NULL;
 	if (tree == NULL)
-		return 0;
+		return (0);
 	token = tree->token;
-	if (tree->left)
-	{
-		if (!(tree->left->status == LIST && (flag == OR_FALSE || flag == AND_FALSE)))
-			exit_num = inorder_cmd_tree(tree->left, envp, flag, heredoc_count);
-	}
+	if (tree->left && !(tree->left->status == LIST && \
+	(flag == OR_FALSE || flag == AND_FALSE)))
+		exit_num = inorder_cmd_tree(tree->left, envp, flag);
 	if (tree->left && tree->left->status == PIPELINE)
-	{
-		if ((flag == AND_TRUE || flag == OR_TRUE || flag == START))
-		{
-			pipelist = make_pipelist(tree->left, heredoc_count, envp);
-			extends_env(envp, &pipelist);
-			wildcard(&pipelist);
-			exit_num = start_process(pipelist, envp);
-			free_pipe_list(pipelist);
-		}
-		else if (flag == OR_FALSE)
-			exit_num = 0;
-		else if (flag == AND_FALSE)
-			exit_num = 1;
-	}
+		tree_status_pipeline(tree, flag, envp, &exit_num);
 	if (tree->status == LIST)
-	{
-		if (tree->token)
-		{
-			if (tree->token->type == AND_OPERATOR)
-			{
-				if (exit_num == 0)
-					flag = AND_TRUE;
-				else
-					flag = AND_FALSE;
-			}
-			else if (tree->token->type == OR_OPERATOR)
-			{
-				if (exit_num != 0)
-					flag = OR_TRUE;
-				else
-					flag = OR_FALSE;
-			}
-		}
-	}
+		tree_status_list(tree, &flag, exit_num);
 	if (tree->right)
-		exit_num = inorder_cmd_tree(tree->right, envp, flag, heredoc_count);
-	return exit_num;
+		exit_num = inorder_cmd_tree(tree->right, envp, flag);
+	return (exit_num);
 }
 
-static t_list	*make_pipelist(t_tree *tree, int *heredoc_count, t_list *envp)
+t_list	*make_pipelist(t_tree *tree)
 {
 	t_list	*pipelist;
 
 	if (!tree)
 		return (NULL);
-	pipelist = ft_lstnew(new_cmd_tree_pipeline(tree->left, heredoc_count, envp));
+	pipelist = ft_lstnew(new_cmd_tree_pipeline(tree->left));
 	if (tree->right)
-		pipelist->next = make_pipelist(tree->right, heredoc_count, envp);
+		pipelist->next = make_pipelist(tree->right);
 	return (pipelist);
 }
 
-static t_cmd_node	*new_cmd_tree_pipeline(t_tree *tree, int *heredoc_count, t_list *envp)
+static t_cmd_node	*new_cmd_tree_pipeline(t_tree *tree)
 {
 	t_cmd_node	*pipe_node;
 	t_list		*rd_list;
@@ -97,7 +59,7 @@ static t_cmd_node	*new_cmd_tree_pipeline(t_tree *tree, int *heredoc_count, t_lis
 		return (NULL);
 	rd_list = NULL;
 	cmd_list = NULL;
-	rd_list = cmd_tree_rd_list(&rd_list, tree, heredoc_count, envp);
+	rd_list = cmd_tree_rd_list(&rd_list, tree);
 	cmd_list = cmd_tree_cmd_list(&cmd_list, tree);
 	pipe_node = new_cmd_node(rd_list, cmd_list);
 	return (pipe_node);
@@ -128,30 +90,19 @@ t_list	*cmd_tree_cmd_list(t_list **cmd_list, t_tree *tree)
 	return (*cmd_list);
 }
 
-static t_list	*cmd_tree_rd_list(t_list **rd_list, \
-				t_tree *tree, int *heredoc_count, t_list *envp)
+static t_list	*cmd_tree_rd_list(t_list **rd_list, t_tree *tree)
 {
 	t_list		*new_rd_list;
 	t_rd_node	*rd_node;
 	t_token		*token;
-	char		*filename;
 
 	if (!tree)
 		return (NULL);
 	if (tree->left)
-		cmd_tree_rd_list(rd_list, tree->left, heredoc_count, envp);
+		cmd_tree_rd_list(rd_list, tree->left);
 	token = tree->token;
 	if (token && is_redicrtion(token))
 	{
-		if (token->type == REDIRECT_HEREDOC)
-		{
-			//signal(SIGINT,SIG_IGN);
-			filename = heredoc(tree->redirect->filename, heredoc_count, envp);
-			//signalinit();
-			token->type = REDIRECT_IN;
-			tree->redirect->filename = filename;
-			(*heredoc_count)++;
-		}
 		rd_node = tree->redirect;
 		new_rd_list = ft_lstnew(rd_node);
 		if (*rd_list)
@@ -160,6 +111,6 @@ static t_list	*cmd_tree_rd_list(t_list **rd_list, \
 			*rd_list = new_rd_list;
 	}
 	if (tree->right)
-		cmd_tree_rd_list(rd_list, tree->right, heredoc_count, envp);
+		cmd_tree_rd_list(rd_list, tree->right);
 	return (*rd_list);
 }

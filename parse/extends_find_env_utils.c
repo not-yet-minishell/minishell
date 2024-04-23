@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minsignal.h                                        :+:      :+:    :+:   */
+/*   extends_find_env_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/11 11:07:43 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/23 11:45:18 by soljeong         ###   ########.fr       */
+/*   Created: 2024/04/23 11:08:03 by soljeong          #+#    #+#             */
+/*   Updated: 2024/04/23 11:16:27 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINSIGNAL_H
-# define MINSIGNAL_H
-# include <signal.h>
-# include "../minishell.h"
+#include "../minishell.h"
 
-extern volatile sig_atomic_t	g_signal;
-void	signalinit(void);
-void	set_terminal_print_off(void);
-void	signal_heredoc(void);
-void	signal_readline(void);
-void	signalhandler(int signum);
-void	do_sigterm(void);
-int		is_lead_line_null(char *read_line);
-int		is_singint_in_herdoc(int in_fd, t_list *envp);
+char	*extends_find_env_firstnum(char *str, int *i, int *env_start)
+{
+	(*i)++;
+	*env_start = *i;
+	while (ft_isalnum((int)str[*i]))
+		(*i)++;
+	return (ft_substr(str, *env_start, (*i) - *env_start));
+}
 
-#endif
+void	extdns_find_exit_code(int *i, char **value, t_list *env)
+{
+	*value = find_exit_code(env);
+	(*i)++;
+}

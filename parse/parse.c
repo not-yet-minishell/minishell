@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minsignal.h                                        :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/11 11:07:43 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/23 11:45:18 by soljeong         ###   ########.fr       */
+/*   Created: 2024/04/23 10:24:32 by soljeong          #+#    #+#             */
+/*   Updated: 2024/04/23 11:17:27 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINSIGNAL_H
-# define MINSIGNAL_H
-# include <signal.h>
-# include "../minishell.h"
+#include "../minishell.h"
 
-extern volatile sig_atomic_t	g_signal;
-void	signalinit(void);
-void	set_terminal_print_off(void);
-void	signal_heredoc(void);
-void	signal_readline(void);
-void	signalhandler(int signum);
-void	do_sigterm(void);
-int		is_lead_line_null(char *read_line);
-int		is_singint_in_herdoc(int in_fd, t_list *envp);
+t_tree	*parse(char *line, t_list *env_list)
+{
+	t_list	*token_head;
+	t_tree	*tree;
 
-#endif
+	token_head = tokenizer(line);
+	if (!token_head)
+	{
+		((t_builtin *)env_list->content)->exit_num = 258;
+		free(line);
+		return (NULL);
+	}
+	tree = parse_tree(&token_head);
+	if (!tree)
+	{
+		((t_builtin *)env_list->content)->exit_num = 258;
+		free(line);
+		return (NULL);
+	}
+	return (tree);
+}

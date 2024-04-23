@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:45:34 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/22 14:26:44 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/23 11:14:50 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,7 @@ t_tree		*syntax_simple_cmd(t_list **list);
 t_tree		*syntax_redirection(t_list **list);
 t_rd_node	*new_rd_node(int rd_type, char *filename);
 t_cmd_node	*new_cmd_node(t_list *rd_list, t_list *cmd_list);
-int		inorder_cmd_tree(t_tree *tree, t_list *env, \
-			int flag, int *heredoc_count);
+int	inorder_cmd_tree(t_tree *tree, t_list *envp, int flag);
 void		clear_tree(t_tree *tree);
 void		list_shift(t_list **list);
 int			is_redicrtion(t_token *token);
@@ -106,5 +105,10 @@ int			is_wildcard_dirtory(char *str);
 char		*delete_dir_flag(char *str);
 char		*find_exit_code(t_list *env);
 void		str_divide_join(char **new, char *str, int start, int i);
-
+t_tree		*parse(char *line, t_list *env_list);
+void		tree_status_list(t_tree *tree, int *flag, int exit_num);
+void		tree_status_pipeline(t_tree * tree, int flag, t_list *envp, int *exit_num);
+t_list		*make_pipelist(t_tree *tree);
+char		*extends_find_env_firstnum(char *str, int *i, int *env_start);
+void		extdns_find_exit_code(int *i, char **value, t_list *env);
 #endif

@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 17:42:14 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/22 19:13:19 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/23 11:43:35 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	open_heredoc(char *filename);
 static void	start_read(char *lim, int fd, t_list *envp);
 static char	*make_limiter(char *lim);
 static char	*change_env(char *str, t_list *env);
-
+static	void free_and_closing(char *read_line, char *limiter, int in_fd, int fd);
 char	*heredoc(char *lim, int *heredoc_count, t_list *envp)
 {
 	char	*filename;
@@ -56,19 +56,10 @@ static void	start_read(char *lim, int fd, t_list *envp)
 	while (1)
 	{
 		read_line = readline("> ");
-		if (g_signal == SIGINT)
-		{
-			g_signal = 0;
-			dup2(in_fd, STDIN_FILENO);
-			((t_builtin *)envp->content)->exit_num = 1;
+		if (is_singint_in_herdoc(in_fd,envp))
 			break;
-		}
-		if (read_line == NULL)
-		{
-			ft_putstr_fd("\033[1A", 1);
-			ft_putstr_fd("\033[2C", 1);
-			break ;
-		}
+		if (is_lead_line_null(read_line))
+			break;
 		if (ft_strncmp(limiter, read_line, limiter_len) == 0)
 			break ;
 		read_line = change_env(read_line, envp);
@@ -76,6 +67,11 @@ static void	start_read(char *lim, int fd, t_list *envp)
 		free(read_line);
 	}
 	rl_event_hook = (rl_hook_func_t *)signal_readline;
+	free_and_closing(read_line, limiter, in_fd, fd);
+}
+
+static	void free_and_closing(char *read_line, char *limiter, int in_fd, int fd)
+{
 	free(read_line);
 	free(limiter);
 	close(in_fd);
