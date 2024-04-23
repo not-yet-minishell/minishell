@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 10:52:21 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/19 11:17:47 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/23 12:20:30 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	cmd_wildcard_has(t_list **curr_cmd, t_list **cmd_list, \
 	t_list *prev, t_list *wild_list);
-void	cmd_wildcard_none(t_list **curr_cmd);
 
 void	wildcard_cmd(t_list **cmd_list)
 {

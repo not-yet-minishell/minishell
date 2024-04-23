@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/22 10:03:10 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/23 17:30:40 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,52 +20,55 @@
 #include "signal/minsignal.h"
 #include "parse/parse_test.h"
 
-static void	do_sigterm(void);
+static void		signal_exit(t_list *env_list);
+static t_list	*main_init(int argc, char *argv[], char **envp);
 
-void	leaks(void)
-{
-	system("leaks minishell");
-}
 int	main(int argc, char *argv[], char **envp)
 {
 	char	*line;
-	t_list	*token_head;
 	t_tree	*tree;
 	t_list	*env_list;
-	int		heredoc_count;
 
-	heredoc_count = 0;
-	(void)argc;
-	(void)argv;
-	(void)envp;
-	env_list = parse_env(envp);
+	env_list = main_init(argc, argv, envp);
 	signalinit();
 	while (1)
 	{
 		line = readline("minishell: ");
 		if (line == NULL)
 			break ;
-		add_history(line);
-		token_head = tokenizer(line);
-		if (!token_head)
-		{
-			free(line);
+		signal_exit(env_list);
+		if (ft_strlen(line) != 0)
+			add_history(line);
+		tree = parse(line, env_list);
+		if (!tree)
 			continue ;
-		}
-		tree = parse_tree(&token_head);
-		inorder_cmd_tree(tree, env_list, START, &heredoc_count);
+		if (herdoc_tree_init(tree, env_list) == 0)
+			inorder_cmd_tree(tree, env_list, START);
 		clear_tree(tree);
 		free(line);
 	}
-	//exit(1);
 	do_sigterm();
 	return (((t_builtin *)env_list->content)->exit_num);
 }
 
-static void	do_sigterm(void)
+static t_list	*main_init(int argc, char *argv[], char **envp)
 {
-	set_terminal_print_off();
-	ft_putstr_fd("\033[1A", 1); // 현재 커서의 위치를 한칸 위로 올려줌
-	ft_putstr_fd("\033[11C", 1); // 현재 커서의 위치를 11번째칸으로 이동
-	ft_putstr_fd("exit\n", 1);
+	t_list	*env_list;
+
+	(void)argc;
+	(void)argv;
+	env_list = NULL;
+	if (*envp == NULL)
+		exit(1);
+	env_list = parse_env(envp);
+	return (env_list);
+}
+
+static void	signal_exit(t_list *env_list)
+{
+	if (g_signal == -1)
+	{
+		g_signal = 0;
+		((t_builtin *)env_list->content)->exit_num = 1;
+	}
 }

@@ -6,18 +6,20 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 17:42:14 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/22 11:33:13 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/23 17:36:06 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+#include "../signal/minsignal.h"
+#include <readline/readline.h>
 
 static int	open_heredoc(char *filename);
-static void	start_read(char *lim, int fd, t_list *envp);
+static void	start_read(char *lim, int fd, t_list *envp, int *signal_flag);
 static char	*make_limiter(char *lim, int *flag);
 static char	*change_env(char *str, t_list *env);
 
-char	*heredoc(char *lim, int *heredoc_count, t_list *envp)
+char	*heredoc(char *lim, int *heredoc_count, t_list *envp, int *signal_flag)
 {
 	char	*filename;
 	char	*num;
@@ -26,7 +28,8 @@ char	*heredoc(char *lim, int *heredoc_count, t_list *envp)
 	num = ft_itoa((*heredoc_count));
 	filename = ft_strjoin("/tmp/heredoc", num, '\0');
 	fd = open_heredoc(filename);
-	start_read(lim, fd, envp);
+	start_read(lim, fd, envp, signal_flag);
+	free(num);
 	return (filename);
 }
 
@@ -40,20 +43,25 @@ static int	open_heredoc(char *filename)
 	return (fd);
 }
 
-static void	start_read(char *lim, int fd, t_list *envp)
+static void	start_read(char *lim, int fd, t_list *envp, int *signal_flag)
 {
 	char	*read_line;
 	int		limiter_len;
 	char	*limiter;
 	int		flag;
+	int		in_fd;
 
 	flag = 0;
 	limiter = make_limiter(lim, &flag);
 	limiter_len = ft_strlen(lim);
+	rl_event_hook = (rl_hook_func_t *)signal_heredoc;
+	in_fd = dup(STDIN_FILENO);
 	while (1)
 	{
-		read_line = get_next_line(STDIN_FILENO);
-		if (read_line == NULL)
+		read_line = readline("> ");
+		if (is_singint_in_herdoc(in_fd, envp, signal_flag))
+			break ;
+		if (is_lead_line_null(read_line))
 			break ;
 		if (ft_strncmp(limiter, read_line, limiter_len + 1) == 0)
 			break ;
@@ -62,9 +70,8 @@ static void	start_read(char *lim, int fd, t_list *envp)
 		write(fd, read_line, ft_strlen(read_line));
 		free(read_line);
 	}
-	free(read_line);
-	free(limiter);
-	close(fd);
+	rl_event_hook = (rl_hook_func_t *)signal_readline;
+	free_and_closing(read_line, limiter, in_fd, fd);
 }
 
 static char	*change_env(char *str, t_list *env)
@@ -106,7 +113,7 @@ static char	*make_limiter(char *lim, int *flag)
 	while (len-- > 0)
 		ret[len] = lim[len];
 	len = ft_strlen(lim);
-	ret[len] = '\n';
-	ret[len + 1] = '\0';
+	//ret[len] = '\n';
+	ret[len] = '\0';
 	return (ret);
 }

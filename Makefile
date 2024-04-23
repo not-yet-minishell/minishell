@@ -17,21 +17,27 @@ SRCS = main.c\
 		parse/parse_test.c\
 		parse/cmd_tree.c\
 		parse/cmd_tree_utils.c\
+		parse/cmd_tree_traverse.c\
 		parse/print_cmd_tree.c\
 		parse/parse_env.c\
 		parse/parse_env2.c\
 		parse/heredoc.c\
+		parse/heredoc_utils.c\
 		parse/remove_quote.c\
 		parse/remove_quote_heredoc.c\
 		parse/remove_quote_utils.c\
 		parse/extends_find_env.c\
+		parse/extends_find_env_utils.c\
 		parse/wildcard.c\
 		parse/wildcard_utils.c\
 		parse/wildcard_match.c\
 		parse/wildcard_rd.c\
 		parse/wildcard_cmd.c\
 		parse/find_exitcode.c\
+		parse/parse.c\
 		signal/signal.c\
+		signal/signal_heredoc.c\
+		signal/signal_process.c\
 		parse/free_pipe_list.c\
 		parse/sort_env.c\
 		parse/extends_env.c\
@@ -43,6 +49,7 @@ SRCS = main.c\
 		pipe/wait_process.c\
 		pipe/one_process.c\
 		pipe/pipe_utile.c\
+		pipe/heredoc_tree.c\
 		execute_builtin/cd.c\
 		execute_builtin/echo.c\
 		execute_builtin/env.c\

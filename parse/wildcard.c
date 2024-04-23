@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 17:05:50 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/23 12:32:01 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/23 17:37:59 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ t_list	*find_wildcard_dir(char *str)
 	wildlist = NULL;
 	if (dp == NULL)
 	{
-		ft_putendl_fd("openerror", 1);
-		//ft_printf(1, "openerror");
+		error_handler(NULL, NULL, "openerror");
 		exit(-1);
 	}
 	entry = readdir(dp);
@@ -77,7 +76,7 @@ t_list	*find_wildcard(char *str)
 	dp = opendir(".");
 	if (dp == NULL)
 	{
-		ft_printf(1, "openerror");// error 핸들러로 변경
+		error_handler(NULL, NULL, "openerror");
 		exit(1);
 	}
 	entry = readdir(dp);
@@ -100,4 +99,3 @@ void	make_wildcard_list_dir(t_list **wildlist, struct dirent *entry)
 	new = ft_lstnew(name);
 	ft_lstadd_back(wildlist, new);
 }
-

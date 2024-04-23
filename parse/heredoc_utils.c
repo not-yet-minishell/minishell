@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_exitcode.c                                    :+:      :+:    :+:   */
+/*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/19 11:09:02 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/23 11:16:47 by soljeong         ###   ########.fr       */
+/*   Created: 2024/04/23 12:34:08 by soljeong          #+#    #+#             */
+/*   Updated: 2024/04/23 12:36:10 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	*find_exit_code(t_list *env)
+void	free_and_closing(char *read_line, char *limiter, int in_fd, int fd)
 {
-	t_builtin	*content;
-	char		*str;
-
-	content = env->content;
-	str = ft_itoa((content->exit_num));
-	return (str);
+	free(read_line);
+	free(limiter);
+	close(in_fd);
+	close(fd);
 }
