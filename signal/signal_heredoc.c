@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:36:53 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/23 13:25:55 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/23 14:16:26 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "minsignal.h"
 #include <readline/readline.h>
 
-void signal_heredoc(void)
+void	signal_heredoc(void)
 {
 	if (g_signal == SIGINT)
 	{

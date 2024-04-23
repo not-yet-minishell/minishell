@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:50:38 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/23 11:41:03 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/23 14:16:14 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <termios.h>
 
 volatile sig_atomic_t	g_signal = 0;
-static void				do_sigint();
+static void				do_sigint(void);
 
 void	signalinit(void)
 {
@@ -41,24 +41,16 @@ void	signal_readline(void)
 	ft_putstr_fd("\e7", 1);
 }
 
-static void	do_sigint()
+static void	do_sigint(void)
 {
 	ft_putstr_fd("\n", 2);
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
 }
-void	set_terminal_print_off(void)
-{
-	struct termios	term;
-
-	tcgetattr(1, &term);
-	term.c_lflag &= ~(ECHOCTL);
-	tcsetattr(1, 0, &term);
-}
 
 void	do_sigterm(void)
-{;
+{
 	ft_putstr_fd("\e8\e[B\e[A", 1);
 	ft_putstr_fd("exit\n", 1);
 }
