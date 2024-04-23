@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 17:42:14 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/23 17:15:42 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/23 17:36:06 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 static int	open_heredoc(char *filename);
 static void	start_read(char *lim, int fd, t_list *envp, int *signal_flag);
-static char	*make_limiter(char *lim);
+static char	*make_limiter(char *lim, int *flag);
 static char	*change_env(char *str, t_list *env);
 
 char	*heredoc(char *lim, int *heredoc_count, t_list *envp, int *signal_flag)
@@ -48,9 +48,11 @@ static void	start_read(char *lim, int fd, t_list *envp, int *signal_flag)
 	char	*read_line;
 	int		limiter_len;
 	char	*limiter;
+	int		flag;
 	int		in_fd;
 
-	limiter = make_limiter(lim);
+	flag = 0;
+	limiter = make_limiter(lim, &flag);
 	limiter_len = ft_strlen(lim);
 	rl_event_hook = (rl_hook_func_t *)signal_heredoc;
 	in_fd = dup(STDIN_FILENO);
@@ -63,8 +65,9 @@ static void	start_read(char *lim, int fd, t_list *envp, int *signal_flag)
 			break ;
 		if (ft_strncmp(limiter, read_line, limiter_len + 1) == 0)
 			break ;
-		read_line = change_env(read_line, envp);
-		ft_putendl_fd(read_line, fd);
+		if (flag != 1)
+			read_line = change_env(read_line, envp);
+		write(fd, read_line, ft_strlen(read_line));
 		free(read_line);
 	}
 	rl_event_hook = (rl_hook_func_t *)signal_readline;
@@ -99,11 +102,12 @@ static char	*change_env(char *str, t_list *env)
 	return (new);
 }
 
-static char	*make_limiter(char *lim)
+static char	*make_limiter(char *lim, int *flag)
 {
 	char	*ret;
 	int		len;
 
+	lim = change_str_heredoc(lim, flag);
 	len = ft_strlen(lim);
 	ret = malloc(len + 2);
 	while (len-- > 0)

@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 19:44:27 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/03/26 19:21:47 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/23 10:40:26 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	check_long(const char *str, int flag)
 		return (-1);
 	}
 	if (flag == -1 && (ft_strncmp("9223372036854775808", str, 19) < 0))
-		return (0);
+		return (-1);
 	else if (flag == 1 && (ft_strncmp("9223372036854775807", str, 19) < 0))
 		return (-1);
 	return (1);
@@ -49,7 +49,6 @@ int	ft_atoi(const char *str)
 {
 	int			flag;
 	long long	num;
-	int			check;
 
 	flag = 1;
 	num = 0;
@@ -63,13 +62,12 @@ int	ft_atoi(const char *str)
 	}
 	while (*str == '0')
 		str ++;
-	check = check_long(str, flag);
-	if (check != 1)
+	if (check_long(str, flag) != 1)
 		return (-1);
 	while (*str >= '0' && *str <= '9')
 	{
 		num = num * 10 + *str - 48;
 		str ++;
 	}
-	return ((unsigned char)flag * num);
+	return (flag * num);
 }

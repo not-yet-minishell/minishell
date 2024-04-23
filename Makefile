@@ -24,6 +24,7 @@ SRCS = main.c\
 		parse/heredoc.c\
 		parse/heredoc_utils.c\
 		parse/remove_quote.c\
+		parse/remove_quote_heredoc.c\
 		parse/remove_quote_utils.c\
 		parse/extends_find_env.c\
 		parse/extends_find_env_utils.c\

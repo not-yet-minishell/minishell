@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 04:28:54 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/04 16:31:46 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/23 12:27:48 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ void	ft_env(char **cmd, t_list *env_list)
 			temp_list = temp_list->next;
 			continue ;
 		}
-		ft_printf(STDOUT_FILENO, "%s=%s\n", content->key, content->value);
+		ft_putstr_fd(content->key, STDOUT_FILENO);
+		ft_putstr_fd("=", STDOUT_FILENO);
+		ft_putendl_fd(content->value, STDOUT_FILENO);
 		temp_list = temp_list->next;
 	}
 	change_exit_number(0, env_list);

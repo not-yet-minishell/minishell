@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 19:59:34 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/22 08:58:26 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/23 17:25:13 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,9 @@ static void	check_which(char **exe, t_list *env)
 
 	(void)env;
 	idx = 0;
-	if (exe[1] != NULL)
-		return ;
 	cmd = *exe;
-	if (!((ft_strchr(cmd, '/') || (ft_strncmp(cmd, "./", 2) == 0)) && \
-	access(cmd, F_OK) != -1))
+	if (!((ft_strchr(cmd, '/') || \
+	(ft_strncmp(cmd, "./", 2) == 0)) && access(cmd, F_OK) != -1))
 		return ;
 	if (access(cmd, X_OK) == -1)
 	{
@@ -57,9 +55,8 @@ static void	check_which(char **exe, t_list *env)
 	}
 	while (cmd[idx] != '\0')
 	{
-		if (cmd[idx] == ' ')
+		if (cmd[idx++] == ' ')
 			exit(0);
-		idx++;
 	}
 	exe_env = make_env_array(env);
 	execve(*exe, exe, exe_env);
@@ -74,6 +71,11 @@ static void	exec_cmd(char **exe, char **env_array, t_list *env)
 	char	*command;
 	char	**exe_env;
 
+	if (ft_strchr(exe[0], '/') || (ft_strncmp(exe[0], "./", 2) == 0))
+	{
+		error_handler(exe[0], NULL, "No such file or directory\n");
+		exit(127);
+	}
 	exe_env = make_env_array(env);
 	idx = 0;
 	while (env_array != NULL && env_array[idx])

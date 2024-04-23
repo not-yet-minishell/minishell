@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:45:34 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/23 13:24:58 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/23 17:36:29 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ enum {
 	R_PAREN,
 	PIPE,
 	WORD,
+	HEREDOC_NOT_EXTEND,
 };
 
 enum {
@@ -105,6 +106,7 @@ int			is_wildcard_dirtory(char *str);
 char		*delete_dir_flag(char *str);
 char		*find_exit_code(t_list *env);
 void		str_divide_join(char **new, char *str, int start, int i);
+char		*change_str_heredoc(char *str, int *flag);
 t_tree		*parse(char *line, t_list *env_list);
 void		tree_status_list(t_tree *tree, int *flag, int exit_num);
 void		tree_status_pipeline(t_tree * tree, int flag, t_list *envp, int *exit_num);

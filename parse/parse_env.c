@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 01:59:48 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/22 08:06:12 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/23 11:49:04 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ t_list	*parse_env(char *env[])
 		ft_lstadd_back(&env_head, env_node);
 		idx++;
 	}
-	//if (path_flag == 0)
-	//	add_path(env_head);
+	if (path_flag == 0)
+		add_oldpwd(env_head);
 	env_node = ft_lstnew(init_head_content());
 	ft_lstadd_front(&env_head, env_node);
 	return (select_sort(env_head));
@@ -81,7 +81,7 @@ static char	*make_key(char *env, int *path_flag)
 		idx++;
 	}
 	key[idx] = '\0';
-	if (ft_strncmp(key, "PATH", 5) == 0)
+	if (ft_strncmp(key, "OLDPWD", 7) == 0)
 		(*path_flag) = 1;
 	return (key);
 }

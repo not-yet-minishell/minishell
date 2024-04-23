@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   remove_quote.c                                     :+:      :+:    :+:   */
+/*   remove_quote_heredoc.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 13:22:24 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/22 11:08:24 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/22 11:30:23 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 // #include "../libft/libft.h"
 // #include "parse.h"
 
-char	*remove_singlequote(char *str, int *i);
-char	*remove_dobulequote(char *str, int *i, t_list *env);
-char	*check_and_change_str(char *str, int *i, t_list *env);
+static char	*remove_singlequote(char *str, int *i);
+static char	*remove_dobulequote(char *str, int *i);
+static char	*check_and_change_str(char *str, int *i);
 
-char	*change_str(char *str, t_list *env)
+char	*change_str_heredoc(char *str, int *flag)
 {
 	int		i;
 	int		start;
@@ -30,16 +30,11 @@ char	*change_str(char *str, t_list *env)
 	new = ft_strdup("\0");
 	while (str[i])
 	{
-		if (str[i] == '*')
+		if (str[i] == '\"' || str[i] == '\'')
 		{
-			str[i] = '\12';
-			i++;
-		}
-		else if (str[i] == '\"' || str[i] == '\'' || \
-		(str[i] == '$' && (str[i + 1] != '\0' && str[i + 1] != ' ')))
-		{
+			(*flag) = 1;
 			str_divide_join(&new, str, start, i);
-			temp = check_and_change_str(str, &i, env);
+			temp = check_and_change_str(str, &i);
 			if (temp != NULL)
 				str_temp_join(&new, temp);
 			start = i;
@@ -51,21 +46,19 @@ char	*change_str(char *str, t_list *env)
 	return (new);
 }
 
-char	*check_and_change_str(char *str, int *i, t_list *env)
+static char	*check_and_change_str(char *str, int *i)
 {
 	char	*temp;
 
 	temp = NULL;
 	if (str[*i] == '\"')
-		temp = remove_dobulequote(str, i, env);
+		temp = remove_dobulequote(str, i);
 	else if (str[*i] == '\'')
 		temp = remove_singlequote(str, i);
-	else if (str[*i] == '$' && (str[*i + 1] != '\0' && str[*i + 1] != ' '))
-		temp = extends_find_env(str, i, env);
 	return (temp);
 }
 
-char	*remove_dobulequote(char *str, int *i, t_list *env)
+static char	*remove_dobulequote(char *str, int *i)
 {
 	char	*removed_str;
 	int		start;
@@ -78,14 +71,14 @@ char	*remove_dobulequote(char *str, int *i, t_list *env)
 		{
 			removed_str = ft_substr(str, start, (*i) - start);
 			(*i)++;
-			return (chage_env_key_to_value(removed_str, env));
+			return (removed_str);
 		}
 		(*i)++;
 	}
 	return (NULL);
 }
 
-char	*remove_singlequote(char *str, int *i)
+static char	*remove_singlequote(char *str, int *i)
 {
 	char	*removed_str;
 	int		start;

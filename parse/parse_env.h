@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 02:00:55 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/20 18:38:35 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/23 11:49:19 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ typedef struct s_builtin
 
 t_list	*parse_env(char *env[]);
 t_list	*select_sort(t_list *env_list);
-void	add_path(t_list *env);
+void	add_oldpwd(t_list *env);
 
 #endif
