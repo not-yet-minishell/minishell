@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:59:27 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/20 21:40:27 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/22 12:39:20 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ int	execute_builtin(char **cmd, t_list *env_list)
 {
 	int	exit_num;
 
+	if (*cmd == NULL)
+	{
+		((t_builtin *)env_list->content)->exit_num = 0;
+		return (0);
+	}
 	if (ft_strncmp(*cmd, "exit", 5) == 0)
 		ft_exit(cmd, env_list);
 	else if (ft_strncmp(*cmd, "pwd", 4) == 0)

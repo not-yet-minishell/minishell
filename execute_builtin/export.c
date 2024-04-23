@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 15:59:53 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/20 20:58:28 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/23 11:23:01 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_export(char **cmd, t_list *env_list)
 	}
 	while (*cmd != NULL)
 	{
-		if (check_cmd(*cmd, env_list) == FALSE)
+		if (check_export_cmd(*cmd, env_list) == FALSE)
 		{
 			cmd++;
 			continue ;

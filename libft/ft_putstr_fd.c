@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 17:13:01 by yeoshin           #+#    #+#             */
-/*   Updated: 2023/11/05 20:57:38 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/23 11:47:49 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,5 @@ void	ft_putstr_fd(char *s, int fd)
 {
 	if (s == NULL)
 		return ;
-	while (*s)
-	{
-		write(fd, s, 1);
-		s ++;
-	}
+	write(fd, s, ft_strlen(s));
 }

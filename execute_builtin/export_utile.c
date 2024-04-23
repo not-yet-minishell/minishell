@@ -6,13 +6,13 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 20:48:43 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/20 20:54:55 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/23 10:51:27 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute_builtin.h"
 
-int	check_cmd(char *cmd, t_list *env_list)
+int	check_export_cmd(char *cmd, t_list *env_list)
 {
 	int	idx;
 
@@ -20,7 +20,7 @@ int	check_cmd(char *cmd, t_list *env_list)
 	if (*cmd == '=' || (*cmd >= '0' && *cmd <= '9'))
 	{
 		change_exit_number(1, env_list);
-		error_handler("export", cmd, "not a valid identifier");
+		error_handler("export", cmd, "not a valid identifier\n");
 		return (FALSE);
 	}
 	while (cmd[idx] && cmd[idx] != '=')
@@ -28,7 +28,7 @@ int	check_cmd(char *cmd, t_list *env_list)
 		if (cmd[idx] == '-')
 		{
 			change_exit_number(1, env_list);
-			error_handler("export", cmd, "not a valid identifier");
+			error_handler("export", cmd, "not a valid identifier\n");
 			return (FALSE);
 		}
 		idx++;

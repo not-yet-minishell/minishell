@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 18:50:24 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/22 09:52:13 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/22 12:29:11 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ char	*extends_find_env(char *str, int *i, t_list *env)
 
 char	*key_has_specialchar(char *str, int *i)
 {
-	(*i)++;
+	if (str[(*i)] != '\0')
+		(*i)++;
 	if (str[(*i)] == '\0' || str[(*i)] == ' ')
 		return (ft_strdup("$"));
 	while (str[*i] && !ft_isalnum((int)str[*i]) && str[*i] != '\"' && str[*i] != '\'')
