@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 17:42:14 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/23 13:25:14 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/23 17:15:42 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ char	*heredoc(char *lim, int *heredoc_count, t_list *envp, int *signal_flag)
 	filename = ft_strjoin("/tmp/heredoc", num, '\0');
 	fd = open_heredoc(filename);
 	start_read(lim, fd, envp, signal_flag);
+	free(num);
 	return (filename);
 }
 
@@ -60,7 +61,7 @@ static void	start_read(char *lim, int fd, t_list *envp, int *signal_flag)
 			break ;
 		if (is_lead_line_null(read_line))
 			break ;
-		if (ft_strncmp(limiter, read_line, limiter_len) == 0)
+		if (ft_strncmp(limiter, read_line, limiter_len + 1) == 0)
 			break ;
 		read_line = change_env(read_line, envp);
 		ft_putendl_fd(read_line, fd);
@@ -108,7 +109,7 @@ static char	*make_limiter(char *lim)
 	while (len-- > 0)
 		ret[len] = lim[len];
 	len = ft_strlen(lim);
-	ret[len] = '\n';
-	ret[len + 1] = '\0';
+	//ret[len] = '\n';
+	ret[len] = '\0';
 	return (ret);
 }
