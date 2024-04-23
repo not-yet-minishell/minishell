@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 10:53:56 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/23 12:27:22 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/23 12:32:25 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 #include <histedit.h>
 #include <dirent.h>
 
-static void		rd_wildcard_none(t_list **curr_rd);
+static void	rd_wildcard_none(t_list **curr_rd);
+static void	file_list_one(char *filename, t_list **file_list, t_list **curr_rd);
+
 void	wildcard_rd(t_list **rd_list)
 {
 	t_list	*curr_rd;
@@ -34,16 +36,19 @@ void	wildcard_rd(t_list **rd_list)
 				ft_lstclear(&file_list, free);
 			}
 			else if (file_list != NULL && file_list->content)
-			{
-				((t_rd_node *)curr_rd->content)->filename = file_list->content;
-				free(filename);
-				free(file_list);
-			}
-			else if(file_list == NULL)
+				file_list_one(filename, &file_list, &curr_rd);
+			else if (file_list == NULL)
 				rd_wildcard_none(&curr_rd);
 		}
 		curr_rd = curr_rd->next;
 	}
+}
+
+static void	file_list_one(char *filename, t_list **file_list, t_list **curr_rd)
+{
+	((t_rd_node *)(*curr_rd)->content)->filename = (*file_list)->content;
+	free(filename);
+	free(*file_list);
 }
 
 static void	rd_wildcard_none(t_list **curr_rd)

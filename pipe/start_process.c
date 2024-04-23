@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 20:30:17 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/22 19:21:40 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/23 12:41:54 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	start_process(t_list *head, t_list *env)
 		return (one_process(head, env));
 	fd_info = init_fd();
 	signal(SIGINT, SIG_IGN);
-	//signal(SIGQUIT, sig)
 	while (head != NULL)
 	{
 		if (head->next != NULL)
@@ -36,22 +35,14 @@ int	start_process(t_list *head, t_list *env)
 		fork_count++;
 		if (fd_info->pid > 0)
 			close_parent_fd(fd_info);
-		if (fd_info->pid == 0) // 0이면 자식프로세스 -> 부모의 시그널을 없애줘야함
-		{
-			signal(SIGINT, SIG_DFL);
-			signal(SIGQUIT, SIG_DFL);
-			start_command(head, fd_info, env);
-		}
+		signal_child_process(fd_info, head, env);
 		fd_info->temp_fd = fd_info->fds[0];
 		head = head->next;
 	}
 	if (fd_info->fds[0] != 0)
 		close(fd_info->fds[0]);
 	((t_builtin *)(env->content))->exit_num = wait_process(fd_info, fork_count);
-	signal(SIGINT, signalhandler);
-	//signal(SIGINT, do_sigint);
-	signal(SIGQUIT, SIG_IGN);
-	//if (fd_info->pid )
+	signal_original();
 	free(fd_info);
 	return (((t_builtin *)(env->content))->exit_num);
 }

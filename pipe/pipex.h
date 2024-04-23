@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 17:43:30 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/23 10:34:49 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/23 13:08:21 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,6 @@ t_list	*delete_and_next_node(t_list *node);
 t_list	*free_and_next_rd(t_list *rd_node);
 int		one_process(t_list *node, t_list *env);
 char	**make_env_array(t_list *env);
-void	herdoc_tree_init(t_tree *tree, t_list *envp);
+int		herdoc_tree_init(t_tree *tree, t_list *envp);
 
 #endif

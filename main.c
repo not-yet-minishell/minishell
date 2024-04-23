@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/23 11:40:45 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/23 13:15:01 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,10 @@ int	main(int argc, char *argv[], char **envp)
 		if (ft_strlen(line) != 0)
 			add_history(line);
 		tree = parse(line, env_list);
-		herdoc_tree_init(tree,env_list);
-		inorder_cmd_tree(tree, env_list, START);
+		if (!tree)
+			continue;
+		if (herdoc_tree_init(tree,env_list) == 0)
+			inorder_cmd_tree(tree, env_list, START);
 		clear_tree(tree);
 		free(line);
 	}

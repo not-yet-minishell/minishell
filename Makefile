@@ -1,6 +1,6 @@
 NAME = minishell
 CC = cc
-CFLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 SRCS = main.c\
 		parse/ft_tokennew.c\
 		parse/ft_add_token_node.c\
@@ -22,6 +22,7 @@ SRCS = main.c\
 		parse/parse_env.c\
 		parse/parse_env2.c\
 		parse/heredoc.c\
+		parse/heredoc_utils.c\
 		parse/remove_quote.c\
 		parse/remove_quote_utils.c\
 		parse/extends_find_env.c\
@@ -35,6 +36,7 @@ SRCS = main.c\
 		parse/parse.c\
 		signal/signal.c\
 		signal/signal_heredoc.c\
+		signal/signal_process.c\
 		parse/free_pipe_list.c\
 		parse/sort_env.c\
 		parse/extends_env.c\

@@ -1,38 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   signal_process.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 10:24:32 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/23 12:54:57 by soljeong         ###   ########.fr       */
+/*   Created: 2024/04/23 12:38:06 by soljeong          #+#    #+#             */
+/*   Updated: 2024/04/23 12:40:44 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+#include "minsignal.h"
 
-t_tree	*parse(char *line, t_list *env_list)
+void	signal_child_process(t_fd *fd_info, t_list *head, t_list *env)
 {
-	t_list	*token_head;
-	t_tree	*tree;
-	// int		i;
+	if (fd_info->pid == 0)
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+		start_command(head, fd_info, env);
+	}
+}
 
-	// i = 0;
-	// while (line[i] == ' ')
-	token_head = tokenizer(line);
-	if (!token_head)
-	{
-		((t_builtin *)env_list->content)->exit_num = 258;
-		free(line);
-		return (NULL);
-	}
-	tree = parse_tree(&token_head);
-	if (!tree)
-	{
-		((t_builtin *)env_list->content)->exit_num = 258;
-		free(line);
-		return (NULL);
-	}
-	return (tree);
+void	signal_original(void)
+{
+	signal(SIGINT, signalhandler);
+	signal(SIGQUIT, SIG_IGN);
 }

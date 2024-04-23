@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 17:42:14 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/23 11:43:35 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/23 13:25:14 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 #include <readline/readline.h>
 
 static int	open_heredoc(char *filename);
-static void	start_read(char *lim, int fd, t_list *envp);
+static void	start_read(char *lim, int fd, t_list *envp, int *signal_flag);
 static char	*make_limiter(char *lim);
 static char	*change_env(char *str, t_list *env);
-static	void free_and_closing(char *read_line, char *limiter, int in_fd, int fd);
-char	*heredoc(char *lim, int *heredoc_count, t_list *envp)
+
+char	*heredoc(char *lim, int *heredoc_count, t_list *envp, int *signal_flag)
 {
 	char	*filename;
 	char	*num;
@@ -28,7 +28,7 @@ char	*heredoc(char *lim, int *heredoc_count, t_list *envp)
 	num = ft_itoa((*heredoc_count));
 	filename = ft_strjoin("/tmp/heredoc", num, '\0');
 	fd = open_heredoc(filename);
-	start_read(lim, fd, envp);
+	start_read(lim, fd, envp, signal_flag);
 	return (filename);
 }
 
@@ -42,7 +42,7 @@ static int	open_heredoc(char *filename)
 	return (fd);
 }
 
-static void	start_read(char *lim, int fd, t_list *envp)
+static void	start_read(char *lim, int fd, t_list *envp, int *signal_flag)
 {
 	char	*read_line;
 	int		limiter_len;
@@ -56,10 +56,10 @@ static void	start_read(char *lim, int fd, t_list *envp)
 	while (1)
 	{
 		read_line = readline("> ");
-		if (is_singint_in_herdoc(in_fd,envp))
-			break;
+		if (is_singint_in_herdoc(in_fd, envp, signal_flag))
+			break ;
 		if (is_lead_line_null(read_line))
-			break;
+			break ;
 		if (ft_strncmp(limiter, read_line, limiter_len) == 0)
 			break ;
 		read_line = change_env(read_line, envp);
@@ -68,14 +68,6 @@ static void	start_read(char *lim, int fd, t_list *envp)
 	}
 	rl_event_hook = (rl_hook_func_t *)signal_readline;
 	free_and_closing(read_line, limiter, in_fd, fd);
-}
-
-static	void free_and_closing(char *read_line, char *limiter, int in_fd, int fd)
-{
-	free(read_line);
-	free(limiter);
-	close(in_fd);
-	close(fd);
 }
 
 static char	*change_env(char *str, t_list *env)

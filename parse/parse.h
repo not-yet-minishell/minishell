@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:45:34 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/23 12:20:43 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/23 13:24:58 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_tree		*syntax_simple_cmd(t_list **list);
 t_tree		*syntax_redirection(t_list **list);
 t_rd_node	*new_rd_node(int rd_type, char *filename);
 t_cmd_node	*new_cmd_node(t_list *rd_list, t_list *cmd_list);
-int	inorder_cmd_tree(t_tree *tree, t_list *envp, int flag);
+int			inorder_cmd_tree(t_tree *tree, t_list *envp, int flag);
 void		clear_tree(t_tree *tree);
 void		list_shift(t_list **list);
 int			is_redicrtion(t_token *token);
@@ -90,7 +90,7 @@ void		tree_parser_error(t_list **list, t_tree *tree);
 int			divide_flag(int type, int exit_num);
 void		free_pipe_list(t_list *pipelist);
 void		free_cmd_list(t_list *cmd);
-char		*heredoc(char *lim, int *heredoc_count, t_list *envp);
+char		*heredoc(char *lim, int *heredoc_count, t_list *envp, int *signal_flag);
 void		extends_env(t_list *env, t_list **cmd_list);
 char		*extends_find_env(char *str, int *i, t_list *env);
 void		str_divide_join(char **new, char *str, int start, int i);
@@ -112,4 +112,5 @@ t_list		*make_pipelist(t_tree *tree);
 char		*extends_find_env_firstnum(char *str, int *i, int *env_start);
 void		extdns_find_exit_code(int *i, char **value, t_list *env);
 void		cmd_wildcard_none(t_list **curr_cmd);
+void		free_and_closing(char *read_line, char *limiter, int in_fd, int fd);
 #endif
