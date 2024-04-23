@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:56:13 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/22 16:55:55 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/23 09:43:23 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,58 +74,6 @@ int	inorder_cmd_tree(t_tree *tree, t_list *envp, \
 		exit_num = inorder_cmd_tree(tree->right, envp, flag, heredoc_count);
 	return exit_num;
 }
-
-// void	inorder_cmd_tree(t_tree *tree, t_list *envp, \
-// 	int flag, int *heredoc_count)
-// {
-// 	t_token		*token;
-// 	t_list		*pipelist;
-// 	int			exit_num;
-
-// 	pipelist = NULL;
-// 	if (tree == NULL)
-// 		return ;
-// 	token = tree->token;
-// 	if (tree->left)
-// 	{
-// 		pipelist = make_pipelist(&pipelist, tree->left, heredoc_count, envp);
-// 		extends_env(envp, &pipelist);
-// 		wildcard(&pipelist);
-// 	}
-// 	if (flag == AND_TRUE || flag == OR_FALSE || flag == START)
-// 	{
-// 		exit_num = start_process(pipelist, envp);
-// 		free_pipe_list(pipelist);
-// 	}
-// 	if (token && (token->type == OR_OPERATOR
-// 			|| token->type == AND_OPERATOR))
-// 	{
-// 		flag = divide_flag(token->type, exit_num);
-// 		inorder_cmd_tree(tree->right, envp, flag, heredoc_count);
-// 	}
-// }
-
-// static t_list	*make_pipelist(t_list **pipelist,t_tree *tree, int *heredoc_count, t_list *envp)
-// {
-// 	t_list	*new_pipelist;
-
-// 	if (!tree)
-// 		return (NULL);
-// 	if (tree->left)
-// 		make_pipelist(pipelist, tree->left, heredoc_count, envp);
-// 	if (tree->status == PIPELINE)
-// 	{
-// 		new_pipelist = ft_lstnew(new_cmd_tree_pipeline(tree->left, heredoc_count, envp));
-// 		if (*pipelist)
-// 			ft_lstadd_back(pipelist, new_pipelist);
-// 		else
-// 			*pipelist = new_pipelist;
-// 	}
-// 	if (tree->right)
-// 		make_pipelist(pipelist, tree->left, heredoc_count, envp);
-// 	return (*pipelist);
-// }
-
 
 static t_list	*make_pipelist(t_tree *tree, int *heredoc_count, t_list *envp)
 {
