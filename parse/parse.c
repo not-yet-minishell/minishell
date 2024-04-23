@@ -6,33 +6,36 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 10:24:32 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/23 12:54:57 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:38:28 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+static void	*parsing_error_exit_free(t_list *env_list, char *line, int exit_num);
 
 t_tree	*parse(char *line, t_list *env_list)
 {
 	t_list	*token_head;
 	t_tree	*tree;
-	// int		i;
+	int		i;
 
-	// i = 0;
-	// while (line[i] == ' ')
+	i = 0;
+	while (line[i] == ' ')
+		i++;
+	if (line[i] == '\0')
+		return (parsing_error_exit_free(env_list, line, 0));
 	token_head = tokenizer(line);
 	if (!token_head)
-	{
-		((t_builtin *)env_list->content)->exit_num = 258;
-		free(line);
-		return (NULL);
-	}
+		return (parsing_error_exit_free(env_list, line, 258));
 	tree = parse_tree(&token_head);
 	if (!tree)
-	{
-		((t_builtin *)env_list->content)->exit_num = 258;
-		free(line);
-		return (NULL);
-	}
+		return (parsing_error_exit_free(env_list, line, 258));
 	return (tree);
+}
+
+static void	*parsing_error_exit_free(t_list *env_list, char *line, int exit_num)
+{
+	((t_builtin *)env_list->content)->exit_num = exit_num;
+	free(line);
+	return (NULL);
 }
