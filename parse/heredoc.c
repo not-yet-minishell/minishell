@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 17:42:14 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/23 17:36:06 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/23 17:40:39 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	start_read(char *lim, int fd, t_list *envp, int *signal_flag)
 	flag = 0;
 	limiter = make_limiter(lim, &flag);
 	limiter_len = ft_strlen(lim);
-	rl_event_hook = (rl_hook_func_t *)signal_heredoc;
+	//rl_event_hook = (rl_hook_func_t *)signal_heredoc;
 	in_fd = dup(STDIN_FILENO);
 	while (1)
 	{
@@ -70,7 +70,7 @@ static void	start_read(char *lim, int fd, t_list *envp, int *signal_flag)
 		write(fd, read_line, ft_strlen(read_line));
 		free(read_line);
 	}
-	rl_event_hook = (rl_hook_func_t *)signal_readline;
+	//rl_event_hook = (rl_hook_func_t *)signal_readline;
 	free_and_closing(read_line, limiter, in_fd, fd);
 }
 

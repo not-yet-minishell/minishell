@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/23 17:30:40 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/23 17:40:22 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int argc, char *argv[], char **envp)
 	t_list	*env_list;
 
 	env_list = main_init(argc, argv, envp);
-	signalinit();
+	//signalinit();
 	while (1)
 	{
 		line = readline("minishell: ");
