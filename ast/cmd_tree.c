@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_tree.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:56:13 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/23 17:30:59 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/24 11:47:40 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ static t_list	*cmd_tree_rd_list(t_list **rd_list, t_tree *tree)
 	if (token && is_redicrtion(token))
 	{
 		rd_node = tree->redirect;
+		rd_node = new_rd_node(rd_node->rd_type, ft_strdup(rd_node->filename));
 		new_rd_list = ft_lstnew(rd_node);
 		if (*rd_list)
 			ft_lstadd_back(rd_list, new_rd_list);

@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 18:29:18 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/15 20:29:18 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/24 13:19:43 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	select_sort_selectsmall(t_list **head, t_list **new_list)
 	{
 		if (ft_strncmp(((t_env *)small->content)->key, \
 		((t_env *)curr->content)->key, \
-		ft_strlen(((t_env *)curr->content)->key)) > 0)
+		ft_strlen(((t_env *)curr->content)->key) + 1) > 0)
 		{
 			small = curr;
 			small_prev = prev;

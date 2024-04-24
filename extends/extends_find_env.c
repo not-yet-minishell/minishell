@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 18:50:24 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/24 10:37:59 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/24 13:18:21 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ static char	*find_env_value(t_list *head, char *key)
 	while (curr != NULL)
 	{
 		content = curr->content;
-		if (ft_strncmp(key, content->key, ft_strlen(key)) == 0)
+		if (ft_strncmp(key, content->key, ft_strlen(key) + 1) == 0)
 		{
 			return (ft_strdup(content->value));
 		}

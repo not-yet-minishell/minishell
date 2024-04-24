@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 04:20:46 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/24 09:07:41 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/24 12:57:46 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ static void	change_env(t_list *env_list, char *old_pwd)
 		cmd[1] = add_env;
 		cmd[2] = NULL;
 		ft_export(cmd, env_list);
+		free(add_env);
 	}
 	if (find_env(env_list, "PWD") == TRUE)
 	{
@@ -85,6 +86,7 @@ static void	change_env(t_list *env_list, char *old_pwd)
 		add_env = ft_strjoin("PWD=", pwd, '\0');
 		cmd[1] = add_env;
 		ft_export(cmd, env_list);
+		free(add_env);
 		free(pwd);
 	}
 	change_exit_number(0, env_list);
