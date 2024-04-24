@@ -6,12 +6,12 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:12:37 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/24 12:09:49 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/24 19:38:20 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-
+#include <stdio.h>
 void	clear_tree(t_tree *tree)
 {
 	if (!tree)
@@ -24,8 +24,10 @@ void	clear_tree(t_tree *tree)
 		ft_del_token_node(tree->token);
 	if (tree->redirect && tree->redirect->filename)
 	{
+		printf("%s\n", tree->redirect->filename);
+		printf("%d\n", tree->redirect->rd_type);
 		if (tree->redirect->rd_type == REDIRECT_HEREDOC \
-		&& access(tree->redirect->filename, F_OK))
+		&& access(tree->redirect->filename, F_OK) == 0)
 			unlink(tree->redirect->filename);
 		free(tree->redirect->filename);
 	}
