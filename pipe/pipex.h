@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 17:43:30 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/24 10:44:57 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/24 15:02:06 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ char	**make_env_array(t_list *env);
 int		herdoc_tree_init(t_tree *tree, t_list *envp);
 char	*heredoc(char *lim, int *heredoc_count, t_list *envp, int *signal_flag);
 void	free_and_closing(char *read_line, char *limiter, int in_fd, int fd);
+void	error_handler(char *cmd_name, char *option_name, char *msg);
 
 #endif

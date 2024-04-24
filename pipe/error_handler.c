@@ -6,12 +6,12 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 17:00:13 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/24 09:10:28 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/24 15:01:59 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
-#include "minishell.h"
+#include "pipex.h"
 
 void	error_handler(char *cmd_name, char *option_name, char *msg)
 {
