@@ -6,11 +6,15 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 14:12:37 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/23 10:10:50 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/24 10:23:50 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
+#include "../ast/cmd_tree.h"
+
+static t_tree	*syntax_simple_cmd(t_list **list);
+static t_tree	*syntax_redirection(t_list **list);
 
 t_tree	*syntax_cmd(t_list **list)
 {
@@ -39,7 +43,7 @@ t_tree	*syntax_cmd(t_list **list)
 	return (tree);
 }
 
-t_tree	*syntax_simple_cmd(t_list **list)
+static t_tree	*syntax_simple_cmd(t_list **list)
 {
 	t_token	*token;
 	t_tree	*tree;
@@ -58,7 +62,7 @@ t_tree	*syntax_simple_cmd(t_list **list)
 		return (syntax_redirection(list));
 }
 
-t_tree	*syntax_redirection(t_list **list)
+static t_tree	*syntax_redirection(t_list **list)
 {
 	t_token		*token;
 	t_tree		*tree;

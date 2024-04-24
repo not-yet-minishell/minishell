@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 20:00:50 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/01 15:45:33 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/24 10:00:44 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+void			list_shift(t_list **list);
 void			*ft_malloc(int size);
 void			*ft_calloc(size_t count, size_t size);
 int				ft_isalnum(int alnum);

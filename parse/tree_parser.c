@@ -6,12 +6,17 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 13:40:49 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/23 10:11:00 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/24 10:22:01 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 #include "../minishell.h"
+
+static t_tree	*syntax_list(t_list **list);
+static t_tree	*syntax_paren(t_list **list, t_token *token);
+static t_tree	*syntax_sublist(t_list **list);
+static t_tree	*syntax_pipeline(t_list **list);
 
 t_tree	*parse_tree(t_list **list)
 {
@@ -31,7 +36,7 @@ t_tree	*parse_tree(t_list **list)
 	return (tree);
 }
 
-t_tree	*syntax_list(t_list **list)
+static t_tree	*syntax_list(t_list **list)
 {
 	t_token	*token;
 	t_tree	*tree;
@@ -60,7 +65,7 @@ t_tree	*syntax_list(t_list **list)
 	return (tree);
 }
 
-t_tree	*syntax_paren(t_list **list, t_token *token)
+static t_tree	*syntax_paren(t_list **list, t_token *token)
 {
 	t_tree	*tree;
 
@@ -84,7 +89,7 @@ t_tree	*syntax_paren(t_list **list, t_token *token)
 	return (0);
 }
 
-t_tree	*syntax_sublist(t_list **list)
+static t_tree	*syntax_sublist(t_list **list)
 {
 	t_token	*token;
 
@@ -97,7 +102,7 @@ t_tree	*syntax_sublist(t_list **list)
 		return (syntax_pipeline(list));
 }
 
-t_tree	*syntax_pipeline(t_list **list)
+static t_tree	*syntax_pipeline(t_list **list)
 {
 	t_token	*token;
 	t_tree	*tree;

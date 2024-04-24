@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   extends_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 18:52:03 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/23 17:31:04 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/24 10:04:50 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	extends_env_cmd(t_list *env, t_list *cmd_list);
-void	extends_env_rd(t_list *env, t_list *rd_list);
+static void	extends_env_cmd(t_list *env, t_list *cmd_list);
+static void	extends_env_rd(t_list *env, t_list *rd_list);
 
 void	extends_env(t_list *env, t_list **cmd_list)
 {
@@ -28,7 +28,7 @@ void	extends_env(t_list *env, t_list **cmd_list)
 	}
 }
 
-void	extends_env_rd(t_list *env, t_list *rd_list)
+static void	extends_env_rd(t_list *env, t_list *rd_list)
 {
 	t_list	*curr_rd;
 	char	*str;
@@ -45,7 +45,7 @@ void	extends_env_rd(t_list *env, t_list *rd_list)
 	}
 }
 
-void	extends_env_cmd(t_list *env, t_list *cmd_list)
+static void	extends_env_cmd(t_list *env, t_list *cmd_list)
 {
 	t_list	*curr_cmd;
 	char	*str;
