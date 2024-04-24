@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:12:37 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/24 19:41:56 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/24 19:42:21 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	clear_tree(t_tree *tree)
 		ft_del_token_node(tree->token);
 	if (tree->redirect && tree->redirect->filename)
 	{
-		printf("%s\n", tree->redirect->filename);
-		printf("%d\n", tree->redirect->rd_type);
 		if (tree->redirect->rd_type == REDIRECT_HEREDOC \
 		&& access(tree->redirect->filename, F_OK) == 0)
 			unlink(tree->redirect->filename);
