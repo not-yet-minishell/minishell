@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 10:53:56 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/24 09:36:54 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/24 15:07:49 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 #include <histedit.h>
 #include <dirent.h>
 
-static void	rd_wildcard_none(t_list **curr_rd);
-static void	file_list_one(char *filename, t_list **file_list, t_list **curr_rd);
+static void		rd_wildcard_none(t_list **curr_rd);
+static void		file_list_one(char *filename, t_list **file_list, \
+t_list **curr_rd);
 
 void	wildcard_rd(t_list **rd_list)
 {
 	t_list	*curr_rd;
-	char	*filename;
 	t_list	*file_list;
+	char	*filename;
 
 	curr_rd = *rd_list;
 	while (curr_rd)
@@ -29,7 +30,7 @@ void	wildcard_rd(t_list **rd_list)
 		filename = ((t_rd_node *)curr_rd->content)->filename;
 		if (has_wildcard(filename))
 		{
-			file_list = find_wildcard(filename);
+			file_list = wildcard_file_list(filename);
 			if (ft_lstsize(file_list) > 1)
 			{
 				((t_rd_node *)curr_rd->content)->rd_type = REDIRECT_AM;
@@ -42,6 +43,20 @@ void	wildcard_rd(t_list **rd_list)
 		}
 		curr_rd = curr_rd->next;
 	}
+}
+
+t_list	*wildcard_file_list(char *filename)
+{
+	char	*str;
+	char	*front;
+	t_list	*file_list;
+
+	str = make_new_str(filename);
+	front = make_new_front(filename);
+	file_list = find_wildcard(str, front);
+	free(str);
+	free(front);
+	return (file_list);
 }
 
 static void	file_list_one(char *filename, t_list **file_list, t_list **curr_rd)

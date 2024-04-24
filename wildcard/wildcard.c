@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 17:05:50 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/24 10:45:03 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/24 15:08:17 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 #include <dirent.h>
 #include <stdio.h>
 
-static t_list	*find_wildcard_dir(char *str);
-static void		make_wildcard_list_dir(t_list **wildlist, struct dirent *entry);
+static t_list	*find_wildcard_dir(char *str, char *front);
+static void		make_wildcard_list_dir(t_list **wildlist, \
+struct dirent *entry, char *front);
 
 void	wildcard(t_list **cmd_list)
 {
@@ -35,7 +36,7 @@ void	wildcard(t_list **cmd_list)
 	}
 }
 
-static t_list	*find_wildcard_dir(char *str)
+static t_list	*find_wildcard_dir(char *str, char *front)
 {
 	t_list			*wildlist;
 	DIR				*dp;
@@ -53,7 +54,7 @@ static t_list	*find_wildcard_dir(char *str)
 	while (entry != NULL)
 	{
 		if (is_match(entry->d_name, str) && entry->d_type == DT_DIR)
-			make_wildcard_list_dir(&wildlist, entry);
+			make_wildcard_list_dir(&wildlist, entry, front);
 		entry = readdir(dp);
 	}
 	closedir(dp);
@@ -61,7 +62,7 @@ static t_list	*find_wildcard_dir(char *str)
 	return (wildlist);
 }
 
-t_list	*find_wildcard(char *str)
+t_list	*find_wildcard(char *str, char *front)
 {
 	t_list			*wildlist;
 	DIR				*dp;
@@ -71,7 +72,7 @@ t_list	*find_wildcard(char *str)
 	wildlist = NULL;
 	flag = is_wildcard_dirtory(str);
 	if (flag)
-		return (find_wildcard_dir(str));
+		return (find_wildcard_dir(str, front));
 	dp = opendir(".");
 	if (dp == NULL)
 	{
@@ -82,19 +83,34 @@ t_list	*find_wildcard(char *str)
 	while (entry != NULL)
 	{
 		if (is_match(entry->d_name, str))
-			make_wildcard_list(&wildlist, entry);
+			make_wildcard_list(&wildlist, entry, front);
 		entry = readdir(dp);
 	}
 	closedir(dp);
 	return (wildlist);
 }
 
-static void	make_wildcard_list_dir(t_list **wildlist, struct dirent *entry)
+void	make_wildcard_list(t_list **wildlist, \
+struct dirent *entry, char *front)
 {
 	char	*name;
 	t_list	*new;
 
-	name = ft_strjoin(entry->d_name, "/", 0);
+	name = ft_strjoin(front, entry->d_name, 0);
 	new = ft_lstnew(name);
 	ft_lstadd_back(wildlist, new);
+}
+
+static void	make_wildcard_list_dir(t_list **wildlist, \
+struct dirent *entry, char *front)
+{
+	char	*name;
+	char	*prev;
+	t_list	*new;
+
+	prev = ft_strjoin(front, entry->d_name, 0);
+	name = ft_strjoin(prev, "/", 0);
+	new = ft_lstnew(name);
+	ft_lstadd_back(wildlist, new);
+	free(prev);
 }
