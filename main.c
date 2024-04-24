@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/24 09:50:45 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/24 15:09:02 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	main(int argc, char *argv[], char **envp)
 		free(line);
 	}
 	do_sigterm();
-	return (((t_builtin *)env_list->content)->exit_num);
+	exit (((t_builtin *)env_list->content)->exit_num);
 }
 
 static t_list	*main_init(int argc, char *argv[], char **envp)
