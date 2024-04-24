@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 10:52:21 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/24 10:16:25 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/24 15:03:27 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	wildcard_cmd(t_list **cmd_list)
 	{
 		if (has_wildcard(curr_cmd->content))
 		{
-			wild_list = find_wildcard(curr_cmd->content);
+			wild_list = wildcard_file_list(curr_cmd->content);
 			if (wild_list != NULL)
 				cmd_wildcard_has(&curr_cmd, cmd_list, prev, wild_list);
 			else

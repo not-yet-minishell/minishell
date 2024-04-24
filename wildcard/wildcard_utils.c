@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 10:55:06 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/20 17:31:42 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/24 15:08:40 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,32 @@ char	*delete_dir_flag(char *str)
 	return (new_str);
 }
 
-void	make_wildcard_list(t_list **wildlist, struct dirent *entry)
+char	*make_new_front(char *str)
 {
-	char	*name;
-	t_list	*new;
+	int	i;
 
-	name = ft_strdup(entry->d_name);
-	new = ft_lstnew(name);
-	ft_lstadd_back(wildlist, new);
+	i = 0;
+	if (str[i] != '.')
+		return (ft_strdup(""));
+	i++;
+	if (str[i] != '/')
+		return (ft_strdup(""));
+	while (str[i] == '/')
+		i++;
+	return (ft_substr(str, 0, i));
+}
+
+char	*make_new_str(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[i] != '.')
+		return (ft_strdup(str));
+	i++;
+	if (str[i] != '/')
+		return (ft_strdup(str));
+	while (str[i] == '/')
+		i++;
+	return (ft_substr(str, i, ft_strlen(str) - i));
 }
