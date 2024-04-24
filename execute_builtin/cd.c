@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 04:20:46 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/22 19:35:10 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/24 09:07:41 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	change_env(t_list *env_list, char *old_pwd);
 static int	find_env(t_list *env_list, char *key);
+static void	cd_error(char *cmd, t_list *env_list);
 
 void	ft_cd(char	**cmd, t_list *env_list)
 {
@@ -23,6 +24,7 @@ void	ft_cd(char	**cmd, t_list *env_list)
 	if (cmd[1] == NULL)
 	{
 		error_handler("cd", NULL, "HOME not set\n");
+		change_exit_number(1, env_list);
 		return ;
 	}
 	dir = cmd[1];
@@ -36,16 +38,16 @@ void	ft_cd(char	**cmd, t_list *env_list)
 		return ;
 	}
 	if (chdir(dir) == 0)
-	{
 		change_env(env_list, old_pwd);
-		change_exit_number(0, env_list);
-	}
 	else
-	{
-		error_handler(*cmd, NULL, NULL);
-		change_exit_number(1, env_list);
-	}
+		cd_error(*cmd, env_list);
 	free(old_pwd);
+}
+
+static void	cd_error(char *cmd, t_list *env_list)
+{
+	error_handler(cmd, NULL, NULL);
+	change_exit_number(1, env_list);
 }
 
 static int	find_env(t_list *env_list, char *key)
@@ -85,4 +87,5 @@ static void	change_env(t_list *env_list, char *old_pwd)
 		ft_export(cmd, env_list);
 		free(pwd);
 	}
+	change_exit_number(0, env_list);
 }

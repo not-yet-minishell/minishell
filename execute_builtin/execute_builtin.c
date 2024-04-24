@@ -6,13 +6,11 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:59:27 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/22 12:39:20 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/24 08:59:35 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute_builtin.h"
-
-// static void	free_cmd(char **cmd);
 
 int	execute_builtin(char **cmd, t_list *env_list)
 {
@@ -39,21 +37,6 @@ int	execute_builtin(char **cmd, t_list *env_list)
 		ft_echo(cmd + 1, env_list);
 	else
 		return (-1);
-	//free_cmd(cmd);
 	exit_num = (((t_builtin *)env_list->content)->exit_num);
 	return (exit_num);
 }
-
-// static void	free_cmd(char **cmd)
-// {
-// 	int	idx;
-
-// 	idx = 0;
-// 	while (cmd[idx] != NULL)
-// 	{
-// 		//printf("cmd : %s, idx : %d\n", cmd[idx], idx);
-// 		free(cmd[idx]);
-// 		idx++;
-// 	}
-// 	free(cmd);
-// }
