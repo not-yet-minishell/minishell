@@ -6,12 +6,12 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:12:37 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/24 19:38:20 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/24 19:41:56 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-#include <stdio.h>
+
 void	clear_tree(t_tree *tree)
 {
 	if (!tree)
