@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 13:40:49 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/24 10:22:01 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/24 13:28:39 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,10 @@ static t_tree	*syntax_pipeline(t_list **list)
 		list_shift(list);
 		tree->right = syntax_pipeline(list);
 		if (!(tree->right))
+		{
+			tree_parser_error(list, tree);
 			return (0);
+		}
 	}
 	return (tree);
 }

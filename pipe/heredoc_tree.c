@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_tree.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 10:11:48 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/24 09:09:52 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/24 12:48:42 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ int	herdoc_tree_init(t_tree *tree, t_list *envp)
 	signal_flag = 0;
 	heredoc_tree(tree, envp, &heredoc_count, &signal_flag);
 	if (signal_flag == SIGINT)
+	{
 		((t_builtin *)envp->content)->exit_num = 1;
+	}
 	return (signal_flag);
 }
 
@@ -41,7 +43,6 @@ static void	heredoc_tree(t_tree *tree, t_list *envp, \
 	{
 		filename = heredoc(tree->redirect->filename, \
 		heredoc_count, envp, signal_flag);
-		tree->token->type = REDIRECT_IN;
 		free(tree->redirect->filename);
 		tree->redirect->filename = filename;
 		(*heredoc_count)++;

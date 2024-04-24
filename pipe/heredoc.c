@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 17:42:14 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/24 09:46:14 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/24 11:32:42 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,6 @@ static char	*make_limiter(char *lim, int *flag)
 		ret[len] = lim[len];
 	len = ft_strlen(lim);
 	ret[len] = '\0';
+	free(lim);
 	return (ret);
 }

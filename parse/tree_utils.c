@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tree_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:12:37 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/20 17:24:35 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/24 12:09:49 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,15 @@ void	clear_tree(t_tree *tree)
 		clear_tree(tree->right);
 	if (tree->token)
 		ft_del_token_node(tree->token);
+	if (tree->redirect && tree->redirect->filename)
+	{
+		if (tree->redirect->rd_type == REDIRECT_HEREDOC \
+		&& access(tree->redirect->filename, F_OK))
+			unlink(tree->redirect->filename);
+		free(tree->redirect->filename);
+	}
+	if (tree->redirect)
+		free(tree->redirect);
 	if (tree)
 		free(tree);
 }
