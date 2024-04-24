@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 20:24:51 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/23 10:44:27 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/24 13:03:51 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static int			isnum(char *content);
 static long long	ft_atoll(char *str, t_list *env_list);
 static int			check_long(char *str, t_list *env_list);
+static int			is_sign(char *content);
 
 void	ft_exit(char **cmd, t_list *env_list)
 {
@@ -23,7 +24,7 @@ void	ft_exit(char **cmd, t_list *env_list)
 	if (cmd[1] == NULL)
 		exit(((t_builtin *)env_list->content)->exit_num);
 	ft_printf(STDOUT_FILENO, "%s\n", *cmd);
-	if (isnum(cmd[1]) == FALSE)
+	if (isnum(cmd[1]) == FALSE || is_sign(cmd[1]) == TRUE)
 	{
 		exit_num = 255;
 		change_exit_number(exit_num, env_list);
@@ -33,13 +34,22 @@ void	ft_exit(char **cmd, t_list *env_list)
 	if (cmd[2] != NULL)
 	{
 		error_handler(*cmd, NULL, "too many arguments\n");
-		free_array(cmd);
 		change_exit_number(1, env_list);
-		exit(1);
+		return ;
 	}
 	exit_num = ft_atoll(cmd[1], env_list);
 	change_exit_number(exit_num, env_list);
 	exit(exit_num % 256);
+}
+
+static int	is_sign(char *content)
+{
+	if (content[0] == '+' || content[0] == '-')
+	{
+		if (content[1] == '\0')
+			return (TRUE);
+	}
+	return (FALSE);
 }
 
 static int	isnum(char *content)
