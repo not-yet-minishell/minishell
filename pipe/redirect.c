@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 19:59:20 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/22 18:58:23 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/24 09:27:33 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ int	redirect(t_rd_node *node)
 	int		flag;
 
 	flag = TRUE;
-	//if (fd_info->temp_fd != -1)
-		//dup2(fd_info->temp_fd, STDIN_FILENO);
 	type = node->rd_type;
 	if (type == REDIRECT_IN)
 		flag = in_redirect(node);
@@ -34,7 +32,7 @@ int	redirect(t_rd_node *node)
 		flag = out_redirect(node);
 	else if (type == REDIRECT_APPEND)
 		flag = append_redirect(node);
-	else 
+	else
 	{
 		error_handler("*", NULL, "ambiguous redirect\n");
 		flag = FALSE;

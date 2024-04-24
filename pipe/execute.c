@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 19:59:34 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/23 17:25:13 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/24 09:30:03 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static void	exec_cmd(char **exe, char **env_array, t_list *env);
 static int	check_access(char *command, char **argument, \
 	char *path, char **exe_env);
 static void	is_dir(char *path);
-
 
 void	execute(t_list *node, t_list *env)
 {
