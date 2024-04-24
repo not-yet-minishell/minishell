@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 15:59:53 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/23 13:49:33 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/24 08:58:53 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ static t_list	*find_insert(t_list *env_list, char *key);
 static void		print_export(t_list *env_list);
 static void		add_envlist(t_list *env_list, t_list *new_node);
 static t_env	*devide_key_value(char *env);
-
-//따옴표 처리
 
 void	ft_export(char **cmd, t_list *env_list)
 {

@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 17:42:14 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/23 17:36:06 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/24 09:46:14 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,9 @@ static void	start_read(char *lim, int fd, t_list *envp, int *signal_flag)
 	while (1)
 	{
 		read_line = readline("> ");
-		if (is_singint_in_herdoc(in_fd, envp, signal_flag))
-			break ;
-		if (is_lead_line_null(read_line))
-			break ;
-		if (ft_strncmp(limiter, read_line, limiter_len + 1) == 0)
+		if (is_singint_in_herdoc(in_fd, envp, signal_flag) \
+		|| is_lead_line_null(read_line) \
+		|| ft_strncmp(limiter, read_line, limiter_len + 1) == 0)
 			break ;
 		if (flag != 1)
 			read_line = change_env(read_line, envp);
@@ -113,7 +111,6 @@ static char	*make_limiter(char *lim, int *flag)
 	while (len-- > 0)
 		ret[len] = lim[len];
 	len = ft_strlen(lim);
-	//ret[len] = '\n';
 	ret[len] = '\0';
 	return (ret);
 }

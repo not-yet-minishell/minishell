@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:45:34 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/23 17:36:29 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/24 09:49:10 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ void		str_divide_join(char **new, char *str, int start, int i);
 void		str_temp_join(char **new, char *temp);
 char		*chage_env_key_to_value(char *str, t_list *env);
 char		*change_str(char *str, t_list *env);
+char		*remove_singlequote(char *str, int *i);
+char		*remove_dobulequote(char *str, int *i, t_list *env);
 int			is_match(char *str, char *pattern);
 void		wildcard_cmd(t_list **cmd_list);
 void		wildcard_rd(t_list **rd_list);

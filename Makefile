@@ -23,6 +23,7 @@ SRCS = main.c\
 		parse/parse_env2.c\
 		parse/heredoc.c\
 		parse/heredoc_utils.c\
+		parse/remove_quote_chage.c\
 		parse/remove_quote.c\
 		parse/remove_quote_heredoc.c\
 		parse/remove_quote_utils.c\

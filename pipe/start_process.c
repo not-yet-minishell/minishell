@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 20:30:17 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/23 12:41:54 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/24 09:38:20 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 static t_fd	*init_fd(void);
 static void	close_parent_fd(t_fd *fd_info);
 static int	is_builtin(t_list *node);
+static void	do_fork(t_fd *fd_info, int *fork_count, t_list *head, t_list *env);
 
 int	start_process(t_list *head, t_list *env)
 {
@@ -29,14 +30,7 @@ int	start_process(t_list *head, t_list *env)
 	signal(SIGINT, SIG_IGN);
 	while (head != NULL)
 	{
-		if (head->next != NULL)
-			pipe(fd_info->fds);
-		fd_info->pid = fork();
-		fork_count++;
-		if (fd_info->pid > 0)
-			close_parent_fd(fd_info);
-		signal_child_process(fd_info, head, env);
-		fd_info->temp_fd = fd_info->fds[0];
+		do_fork(fd_info, &fork_count, head, env);
 		head = head->next;
 	}
 	if (fd_info->fds[0] != 0)
@@ -45,6 +39,18 @@ int	start_process(t_list *head, t_list *env)
 	signal_original();
 	free(fd_info);
 	return (((t_builtin *)(env->content))->exit_num);
+}
+
+static void	do_fork(t_fd *fd_info, int *fork_count, t_list *head, t_list *env)
+{
+	if (head->next != NULL)
+		pipe(fd_info->fds);
+	fd_info->pid = fork();
+	(*fork_count)++;
+	if (fd_info->pid > 0)
+		close_parent_fd(fd_info);
+	signal_child_process(fd_info, head, env);
+	fd_info->temp_fd = fd_info->fds[0];
 }
 
 static void	close_parent_fd(t_fd *fd_info)
@@ -89,4 +95,3 @@ static int	is_builtin(t_list *node)
 		return (TRUE);
 	return (FALSE);
 }
-

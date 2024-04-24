@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard_rd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 10:53:56 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/23 17:38:31 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/24 09:36:54 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static void	file_list_one(char *filename, t_list **file_list, t_list **curr_rd)
 	free(filename);
 	free(*file_list);
 }
+
 static void	rd_wildcard_none(t_list **curr_rd)
 {	
 	int		i;

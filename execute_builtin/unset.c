@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 04:36:18 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/23 11:16:06 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/24 08:59:03 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	ft_unset(char **cmd, t_list *env_list)
 			unset_env(*cmd, env_list);
 		cmd++;
 	}
-	//change_exit_number(0, env_list);
 }
 
 static int	check_unset_cmd(char *cmd, t_list *env_list)

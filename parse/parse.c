@@ -6,12 +6,14 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 10:24:32 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/23 18:38:28 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/24 09:36:07 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-static void	*parsing_error_exit_free(t_list *env_list, char *line, int exit_num);
+
+static void	*parsing_error_exit_free(t_list *env_list, char *line, \
+int exit_num);
 
 t_tree	*parse(char *line, t_list *env_list)
 {
