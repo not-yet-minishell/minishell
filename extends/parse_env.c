@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 01:59:48 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/23 11:49:04 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/24 10:06:51 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse_env.h"
+#include "extends.h"
 
 static char			*make_key(char *env, int *path_flag);
 static char			*make_value(char *env);

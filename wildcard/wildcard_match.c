@@ -6,15 +6,15 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 10:45:01 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/19 11:21:11 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/24 10:16:42 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int		match_point(char *str, int *sIdx, char *pattern, int *pIdx);
-int		match_str_pattern(char *str, int *sIdx, char *pattern, int *pIdx);
-void	idxplus(int *s_idx, int *p_idx);
+static int	match_point(char *str, int *sIdx, char *pattern, int *pIdx);
+static int	match_str_pattern(char *str, int *sIdx, char *pattern, int *pIdx);
+static void	idxplus(int *s_idx, int *p_idx);
 
 int	is_match(char *str, char *pattern)
 {

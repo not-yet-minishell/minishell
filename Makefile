@@ -12,35 +12,33 @@ SRCS = main.c\
 		parse/token_test.c\
 		parse/tree_parser.c\
 		parse/tree_parser2.c\
-		parse/list_utils.c\
 		parse/tree_utils.c\
 		parse/parse_test.c\
-		parse/cmd_tree.c\
-		parse/cmd_tree_utils.c\
-		parse/cmd_tree_traverse.c\
-		parse/print_cmd_tree.c\
-		parse/parse_env.c\
-		parse/parse_env2.c\
-		parse/heredoc.c\
-		parse/heredoc_utils.c\
-		parse/remove_quote.c\
-		parse/remove_quote_heredoc.c\
-		parse/remove_quote_utils.c\
-		parse/extends_find_env.c\
-		parse/extends_find_env_utils.c\
-		parse/wildcard.c\
-		parse/wildcard_utils.c\
-		parse/wildcard_match.c\
-		parse/wildcard_rd.c\
-		parse/wildcard_cmd.c\
 		parse/find_exitcode.c\
+		parse/print_cmd_tree.c\
 		parse/parse.c\
+		ast/cmd_tree.c\
+		ast/cmd_tree_utils.c\
+		ast/cmd_tree_traverse.c\
+		ast/free_pipe_list.c\
+		extends/remove_quote_chage.c\
+		extends/remove_quote.c\
+		extends/remove_quote_heredoc.c\
+		extends/remove_quote_utils.c\
+		extends/extends_find_env.c\
+		extends/extends_find_env_utils.c\
+		extends/parse_env.c\
+		extends/parse_env2.c\
+		wildcard/wildcard.c\
+		wildcard/wildcard_utils.c\
+		wildcard/wildcard_match.c\
+		wildcard/wildcard_rd.c\
+		wildcard/wildcard_cmd.c\
 		signal/signal.c\
 		signal/signal_heredoc.c\
 		signal/signal_process.c\
-		parse/free_pipe_list.c\
-		parse/sort_env.c\
-		parse/extends_env.c\
+		extends/sort_env.c\
+		extends/extends_env.c\
 		pipe/command.c\
 		pipe/execute_parse.c\
 		pipe/execute.c\
@@ -50,6 +48,8 @@ SRCS = main.c\
 		pipe/one_process.c\
 		pipe/pipe_utile.c\
 		pipe/heredoc_tree.c\
+		pipe/heredoc.c\
+		pipe/heredoc_utils.c\
 		execute_builtin/cd.c\
 		execute_builtin/echo.c\
 		execute_builtin/env.c\
