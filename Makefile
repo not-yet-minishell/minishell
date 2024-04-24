@@ -89,6 +89,9 @@ EXECUTE_BUILTIN_SRCS = 	execute_builtin.c\
 EXECUTE_BUILTIN = $(addprefix $(EXECUTE_BUILTIN_DIR),$(EXECUTE_BUILTIN_SRCS))
 EXECUTE_BUILTIN_OBJS  = $(EXECUTE_BUILTIN:.c=.o)
 
+LIBFT_DIR = ./libft/
+LIB = $(LIBFT_DIR)libft.a
+
 SRCS = main.c		
 OBJS = $(SRCS:.c=.o)
 MAKE = make
@@ -98,19 +101,18 @@ all : $(NAME)
 %.o: %.c
 	$(CC) $(CFLAGS) -c  $< -o $@ 
 
-$(NAME) : $(OBJS) $(EXECUTE_BUILTIN_OBJS) $(PIPE_OBJS) $(SIGNAL_OBJS) $(WILDCARD_OBJS) $(EXTENDS_OBJS) $(AST_OBJS) $(PARSE_OBJS)
-	$(MAKE) -C libft
-	$(MAKE) -C printf
-	$(CC) $(CFLAGS) -o $@ $^ -Llibft -Lprintf -lft -lftprintf -lreadline
+$(NAME) : $(OBJS) $(LIB) $(EXECUTE_BUILTIN_OBJS) $(PIPE_OBJS) $(SIGNAL_OBJS) $(WILDCARD_OBJS) $(EXTENDS_OBJS) $(AST_OBJS) $(PARSE_OBJS)
+	$(CC) $(CFLAGS) -o $@ $^ -lreadline
+
+$(LIB) :
+	$(MAKE) -C $(LIBFT_DIR) bonus
 
 clean:
 	$(MAKE) -C libft clean
-	$(MAKE) -C printf clean
 	rm -f $(OBJS) $(EXECUTE_BUILTIN_OBJS) $(PIPE_OBJS) $(SIGNAL_OBJS) $(WILDCARD_OBJS) $(EXTENDS_OBJS) $(AST_OBJS) $(PARSE_OBJS) $(BONUS_OBJS)
 
 fclean: clean
 	rm -f libft/libft.a
-	rm -f printf/libftprintf.a
 	rm -f $(NAME)
 
 re: fclean all
