@@ -6,15 +6,15 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:46:18 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/24 09:48:04 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/24 10:07:33 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	check_spacial_char(char *str, int i);
-void	change_wildcard(char **str, int *i);
-char	*check_and_change_str(char *str, int *i, t_list *env);
+static int	check_spacial_char(char *str, int i);
+static void	change_wildcard(char **str, int *i);
+static char	*check_and_change_str(char *str, int *i, t_list *env);
 
 char	*change_str(char *str, t_list *env)
 {

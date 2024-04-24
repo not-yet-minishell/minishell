@@ -3,20 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   extends_find_env.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 18:50:24 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/23 17:32:40 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/24 10:37:59 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	*find_env_value(t_list *head, char *key);
-char	*chage_env_key_to_value(char *str, t_list *env);
-char	*find_exit_code(t_list *env);
-void	value_chage_whildcard(char **value);
-char	*key_has_specialchar(char *str, int *i);
+static char	*find_env_value(t_list *head, char *key);
+static void	value_chage_whildcard(char **value);
+static char	*key_has_specialchar(char *str, int *i);
 
 char	*extends_find_env(char *str, int *i, t_list *env)
 {
@@ -46,7 +44,7 @@ char	*extends_find_env(char *str, int *i, t_list *env)
 	return (value);
 }
 
-char	*key_has_specialchar(char *str, int *i)
+static char	*key_has_specialchar(char *str, int *i)
 {
 	if (str[(*i)] == '\0' || str[(*i)] == ' ')
 		return (ft_strdup("$"));
@@ -56,7 +54,7 @@ char	*key_has_specialchar(char *str, int *i)
 	return (ft_strdup(""));
 }
 
-void	value_chage_whildcard(char **value)
+static void	value_chage_whildcard(char **value)
 {
 	int	idx;
 
@@ -96,7 +94,7 @@ char	*chage_env_key_to_value(char *str, t_list *env)
 	return (new);
 }
 
-char	*find_env_value(t_list *head, char *key)
+static char	*find_env_value(t_list *head, char *key)
 {
 	t_list	*curr;
 	t_env	*content;

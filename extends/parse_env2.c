@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_env2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 18:35:36 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/23 11:51:40 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/24 10:33:03 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse_env.h"
+#include "extends.h"
 
 void	add_oldpwd(t_list *env)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 17:05:50 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/23 17:37:59 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/24 10:45:03 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 #include <dirent.h>
 #include <stdio.h>
 
-t_list	*find_wildcard_dir(char *str);
-void	make_wildcard_list_dir(t_list **wildlist, struct dirent *entry);
-void	make_wildcard_list(t_list **wildlist, struct dirent *entry);
+static t_list	*find_wildcard_dir(char *str);
+static void		make_wildcard_list_dir(t_list **wildlist, struct dirent *entry);
 
 void	wildcard(t_list **cmd_list)
 {
@@ -36,7 +35,7 @@ void	wildcard(t_list **cmd_list)
 	}
 }
 
-t_list	*find_wildcard_dir(char *str)
+static t_list	*find_wildcard_dir(char *str)
 {
 	t_list			*wildlist;
 	DIR				*dp;
@@ -90,7 +89,7 @@ t_list	*find_wildcard(char *str)
 	return (wildlist);
 }
 
-void	make_wildcard_list_dir(t_list **wildlist, struct dirent *entry)
+static void	make_wildcard_list_dir(t_list **wildlist, struct dirent *entry)
 {
 	char	*name;
 	t_list	*new;

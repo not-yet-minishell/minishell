@@ -3,19 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   remove_quote_heredoc.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 13:22:24 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/22 11:30:23 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/24 10:37:41 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-// #include "../libft/libft.h"
-// #include "parse.h"
 
-static char	*remove_singlequote(char *str, int *i);
-static char	*remove_dobulequote(char *str, int *i);
+static char	*remove_singlequote_heredoc(char *str, int *i);
+static char	*remove_dobulequote_heredoc(char *str, int *i);
 static char	*check_and_change_str(char *str, int *i);
 
 char	*change_str_heredoc(char *str, int *flag)
@@ -52,13 +50,13 @@ static char	*check_and_change_str(char *str, int *i)
 
 	temp = NULL;
 	if (str[*i] == '\"')
-		temp = remove_dobulequote(str, i);
+		temp = remove_dobulequote_heredoc(str, i);
 	else if (str[*i] == '\'')
-		temp = remove_singlequote(str, i);
+		temp = remove_singlequote_heredoc(str, i);
 	return (temp);
 }
 
-static char	*remove_dobulequote(char *str, int *i)
+static char	*remove_dobulequote_heredoc(char *str, int *i)
 {
 	char	*removed_str;
 	int		start;
@@ -78,7 +76,7 @@ static char	*remove_dobulequote(char *str, int *i)
 	return (NULL);
 }
 
-static char	*remove_singlequote(char *str, int *i)
+static char	*remove_singlequote_heredoc(char *str, int *i)
 {
 	char	*removed_str;
 	int		start;
