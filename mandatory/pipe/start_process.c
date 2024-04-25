@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 20:30:17 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/24 09:38:20 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/25 11:30:46 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static t_fd	*init_fd(void)
 {
 	t_fd	*init_fd;
 
-	init_fd = (t_fd *)malloc(sizeof(t_fd));
+	init_fd = (t_fd *)ft_malloc(sizeof(t_fd));
 	if (init_fd == NULL)
 		exit(1);
 	init_fd->temp_fd = -1;

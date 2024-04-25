@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_tree_traverse.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 10:52:24 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/23 11:05:05 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/25 11:41:13 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "cmd_tree.h"
 
 void	tree_status_list(t_tree *tree, int *flag, int exit_num)
 {

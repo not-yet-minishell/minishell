@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 20:24:51 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/24 13:03:51 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/25 11:36:24 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_exit(char **cmd, t_list *env_list)
 
 	if (cmd[1] == NULL)
 		exit(((t_builtin *)env_list->content)->exit_num);
-	ft_printf(STDOUT_FILENO, "%s\n", *cmd);
+	ft_putendl_fd(*cmd, STDOUT_FILENO);
 	if (isnum(cmd[1]) == FALSE || is_sign(cmd[1]) == TRUE)
 	{
 		exit_num = 255;

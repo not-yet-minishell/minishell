@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:45:34 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/24 10:29:42 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/25 11:46:17 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 # define PARSE_H
 # define ERROR -1
 # define TRUE 1
-# include "../libft/libft.h"
-//# include "../ast/cmd_tree.h"
-//# include <stdio.h>
+//# include "../minishell.h"
+# include "../../libft/libft.h"
 
 enum {
 	REDIRECT_IN = 1,

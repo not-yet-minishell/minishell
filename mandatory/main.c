@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/24 15:09:02 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:08:49 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 #include <stdlib.h>
 #include "minishell.h"
 #include "signal/minsignal.h"
-#include "parse/parse_test.h"
 
 static void		signal_exit(t_list *env_list);
 static t_list	*main_init(int argc, char *argv[], char **envp);

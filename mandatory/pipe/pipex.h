@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 17:43:30 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/24 15:02:06 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/25 12:31:23 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,12 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <sys/stat.h>
-# include "../minishell.h"
+# include "../parse/parse.h"
+# include "../ast/cmd_tree.h"
+# include "../extends/extends.h"
+
+# define FALSE -1
+# define TRUE 1
 
 typedef struct s_fd
 {

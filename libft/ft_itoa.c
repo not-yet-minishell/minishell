@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 22:07:06 by yeoshin           #+#    #+#             */
-/*   Updated: 2023/10/29 16:42:43 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/25 11:30:46 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char	*zero(void)
 {
 	char	*str;
 
-	str = (char *)malloc(2);
+	str = (char *)ft_malloc(2);
 	if (str == NULL)
 		return (NULL);
 	str[0] = '0';
@@ -68,7 +68,7 @@ char	*ft_itoa(int n)
 		temp = temp / 10;
 		length += 1;
 	}
-	ret = (char *)malloc(length + 1);
+	ret = (char *)ft_malloc(length + 1);
 	if (ret == NULL)
 		return (NULL);
 	return (make_str(ret, length, (long long)n, flag));

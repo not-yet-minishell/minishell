@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 17:05:50 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/24 15:08:17 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:37:15 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <histedit.h>
 #include <dirent.h>
-#include <stdio.h>
 
 static t_list	*find_wildcard_dir(char *str, char *front);
 static void		make_wildcard_list_dir(t_list **wildlist, \

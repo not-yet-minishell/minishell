@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 18:25:17 by yeoshin           #+#    #+#             */
-/*   Updated: 2023/10/21 17:56:10 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/25 11:30:46 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strdup(const char *str)
 	int			len;
 
 	len = ft_strlen(str);
-	cpy = (char *)malloc(sizeof(char) * (len + 1));
+	cpy = (char *)ft_malloc(sizeof(char) * (len + 1));
 	if (cpy == NULL)
 		return (NULL);
 	temp = cpy;

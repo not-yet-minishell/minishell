@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:42:16 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/10 19:42:20 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/25 11:30:46 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strjoin(char const *s1, char const *s2, char const a)
 	count = ft_strlen(s1) + ft_strlen(s2) + 1;
 	if (a != '\0')
 		count++;
-	ret_str = malloc(count);
+	ret_str = ft_malloc(count);
 	if (ret_str == NULL)
 		return (NULL);
 	count = -1;

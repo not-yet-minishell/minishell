@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 17:42:14 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/24 19:28:51 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/25 11:30:46 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ static char	*make_limiter(char *lim, int *flag)
 
 	lim = change_str_heredoc(lim, flag);
 	len = ft_strlen(lim);
-	ret = malloc(len + 2);
+	ret = ft_malloc(len + 2);
 	while (len-- > 0)
 		ret[len] = lim[len];
 	len = ft_strlen(lim);

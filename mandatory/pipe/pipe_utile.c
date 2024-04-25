@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:57:40 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/22 08:58:29 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/25 11:30:46 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	**make_env_array(t_list *env_list)
 
 	idx = 0;
 	env_list = env_list->next;
-	env_array = malloc(sizeof(char *) * (ft_lstsize(env_list) + 1));
+	env_array = ft_malloc(sizeof(char *) * (ft_lstsize(env_list) + 1));
 	while (env_list != NULL)
 	{
 		content = env_list->content;

@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_tree.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 17:34:23 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/24 10:43:55 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/25 11:41:38 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CMD_TREE_H
 # define CMD_TREE_H
 
-# include "../libft/libft.h"
+# include "../../libft/libft.h"
 # include "../parse/parse.h"
+# include "../pipe/pipex.h"
 
 typedef struct s_cmd_node {
 	t_list	*rd_list;

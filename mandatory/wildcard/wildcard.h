@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 10:58:27 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/24 15:08:27 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/25 11:33:43 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WILDCARD_H
 # define WILDCARD_H
-# include "../libft/libft.h"
+# include "../../libft/libft.h"
 # include <histedit.h>
 # include <dirent.h>
 

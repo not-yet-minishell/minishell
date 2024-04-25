@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_tree_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 12:44:02 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/24 10:12:56 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/25 11:36:34 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
+#include "../../libft/libft.h"
 #include "cmd_tree.h"
 
 t_rd_node	*new_rd_node(int rd_type, char *filename)

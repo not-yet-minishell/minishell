@@ -1,0 +1,6 @@
+{
+	"files.associations": {
+		"minishell_bonus.h": "c",
+		"cmd_tree_bonus.h": "c"
+	}
+}
