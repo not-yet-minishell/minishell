@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extends.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 02:00:55 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/25 14:56:07 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/25 15:26:43 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_builtin
 void	extends_env(t_list *env, t_list **cmd_list);
 t_list	*parse_env(char *env[]);
 t_list	*select_sort(t_list *env_list);
-void	add_head_oldpwd(t_list *env);
+void	add_head_oldpwd(t_list **env);
 char	*extends_find_env_firstnum(char *str, int *i, int *env_start);
 void	extdns_find_exit_code(int *i, char **value, t_list *env);
 char	*extends_find_env(char *str, int *i, t_list *env);

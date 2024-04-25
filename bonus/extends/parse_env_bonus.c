@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_env_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 01:59:48 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/25 15:00:00 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/25 15:28:50 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_list	*parse_env(char *env[])
 		idx++;
 	}
 	if (path_flag == 0)
-		add_oldpwd(env_head);
+		add_oldpwd(&env_head);
 	find_and_add_path(&env_head);
 	find_and_add_pwd(env_head);
 	find_and_add_oldpwd(env_head);
