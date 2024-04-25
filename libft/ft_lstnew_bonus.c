@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 16:21:56 by yeoshin           #+#    #+#             */
-/*   Updated: 2023/10/28 18:42:32 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/25 11:06:59 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_list	*ft_lstnew(void *content)
 {
 	t_list		*new;
 
-	new = (t_list *)malloc(sizeof(t_list));
+	new = (t_list *)ft_malloc(sizeof(t_list));
 	if (new == NULL)
 		return (NULL);
 	new->next = NULL;
