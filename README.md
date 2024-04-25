@@ -30,7 +30,10 @@ ex ) Feat : Add tokenizer#2
 
  - 파싱 트리 제작 : 솔
  - 빌트인 함수 제작 : 영기
- - 따옴표 제거 : 영기
+ - 파이프 제작 :  영기
+ - heredoc : 영기
+ - wildcard : 솔
+ - 따옴표 제거 : 솔
  - 시그널 처리 : 솔
 
 ## 🌟 1차 deadline
@@ -40,4 +43,8 @@ ex ) Feat : Add tokenizer#2
 
 ## 🐞 1차 Bug fix
  - 2024. 4. 18
+
+
+## 1차 완성
+ - 2024. 4. 25
  
