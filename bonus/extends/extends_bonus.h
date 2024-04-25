@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 13:51:27 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/25 14:16:57 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/25 14:59:36 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,7 @@ char	*remove_singlequote(char *str, int *i);
 t_list	*select_sort(t_list *env_list);
 char	*chage_env_key_to_value(char *str, t_list *env);
 void	find_and_add_path(t_list **env);
+void	find_and_add_pwd(t_list *env);
+void	find_and_add_oldpwd(t_list *env);
 
 #endif
