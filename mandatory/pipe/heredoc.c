@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 17:42:14 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/24 11:32:42 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/24 19:28:51 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,20 @@ char	*heredoc(char *lim, int *heredoc_count, t_list *envp, int *signal_flag)
 	char	*filename;
 	char	*num;
 	int		fd;
+	int		number;
 
-	num = ft_itoa((*heredoc_count));
+	(void)heredoc_count;
+	number = 0;
+	num = ft_itoa(number);
 	filename = ft_strjoin("/tmp/heredoc", num, '\0');
+	while (access(filename, F_OK) == 0)
+	{
+		free(num);
+		free(filename);
+		num = ft_itoa(number);
+		filename = ft_strjoin("/tmp/heredoc", num, '\0');
+		number++;
+	}
 	fd = open_heredoc(filename);
 	start_read(lim, fd, envp, signal_flag);
 	free(num);
@@ -65,7 +76,7 @@ static void	start_read(char *lim, int fd, t_list *envp, int *signal_flag)
 			break ;
 		if (flag != 1)
 			read_line = change_env(read_line, envp);
-		write(fd, read_line, ft_strlen(read_line));
+		ft_putendl_fd(read_line, fd);
 		free(read_line);
 	}
 	rl_event_hook = (rl_hook_func_t *)signal_readline;

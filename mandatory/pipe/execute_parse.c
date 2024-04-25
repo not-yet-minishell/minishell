@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_parse.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 13:58:11 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/22 08:57:29 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/25 10:49:06 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ char	**find_path_to_array(t_list *env)
 	char	*path;
 
 	path = NULL;
+	env = env->next;
 	while (env != NULL)
 	{
 		if (ft_strncmp(((t_env *)env->content)->key, "PATH", 5) == 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 15:59:53 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/24 08:58:53 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/25 10:42:58 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,10 @@ static void	add_envlist(t_list *env_list, t_list *new_node)
 	pre = env_list;
 	current = env_list->next;
 	if (current == NULL)
+	{
 		pre->next = new_node;
+		return ;
+	}
 	pre = find_insert(env_list, ((t_env *)new_node->content)->key);
 	temp = pre->next;
 	pre->next = new_node;
@@ -123,7 +126,7 @@ static t_env	*devide_key_value(char *env)
 	if (env[idx] == '\0')
 		value = NULL;
 	else if (env[idx] == '=' && env[idx + 1] == '\0')
-		value = "\0";
+		value = ft_strdup("\0");
 	else
 		value = ft_substr(env, idx + 1, ft_strlen(env) - idx - 1);
 	content->key = key;
