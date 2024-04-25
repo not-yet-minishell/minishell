@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 19:59:20 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/24 09:27:33 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/24 19:39:54 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static int	open_heredoc(t_rd_node *node)
 	}
 	dup2(fd, STDIN_FILENO);
 	close(fd);
-	unlink(node->filename);
 	return (TRUE);
 }
 

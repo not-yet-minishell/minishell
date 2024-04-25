@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/24 15:09:02 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/25 11:16:57 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ static t_list	*main_init(int argc, char *argv[], char **envp)
 	(void)argc;
 	(void)argv;
 	env_list = NULL;
-	if (*envp == NULL)
-		exit(1);
 	env_list = parse_env(envp);
 	return (env_list);
 }
