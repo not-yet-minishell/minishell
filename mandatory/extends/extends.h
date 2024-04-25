@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extends.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 02:00:55 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/24 10:44:20 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:13:39 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ char	*remove_dobulequote(char *str, int *i, t_list *env);
 char	*remove_singlequote(char *str, int *i);
 t_list	*select_sort(t_list *env_list);
 char	*chage_env_key_to_value(char *str, t_list *env);
+void	find_and_add_path(t_list **env);
 
 #endif

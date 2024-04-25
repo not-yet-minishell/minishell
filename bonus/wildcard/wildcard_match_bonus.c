@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 10:45:01 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/25 12:53:35 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/25 14:28:00 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	is_match(char *str, char *pattern)
 
 int	match_point(char *str, int *s_idx, char *pattern, int *p_idx)
 {
-	while (str[*s_idx] == '.')
+	if (str[*s_idx] == '.')
 	{
 		if (str[*s_idx] == pattern[*p_idx])
 		{
