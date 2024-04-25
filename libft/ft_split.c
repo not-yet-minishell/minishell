@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 19:55:58 by yeoshin           #+#    #+#             */
-/*   Updated: 2023/11/05 21:50:04 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/25 11:30:46 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static	char	*find_str(char *temp, char const *str, char sep, int *idx)
 			break ;
 		(*idx)++;
 	}
-	temp = (char *)malloc(count + 1);
+	temp = (char *)ft_malloc(count + 1);
 	if (temp == NULL)
 		return (NULL);
 	temp = put_str(temp, str, count, idx_start);
@@ -105,7 +105,7 @@ char	**ft_split(char const *str, char c)
 	if (str == NULL)
 		return (NULL);
 	count = count_word((char *)str, c);
-	ret_str = (char **)malloc(sizeof(char *) * (count + 1));
+	ret_str = (char **)ft_malloc(sizeof(char *) * (count + 1));
 	if (ret_str == NULL)
 		return (NULL);
 	while (len < count)

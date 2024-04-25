@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 17:29:34 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/03/22 16:16:43 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/25 11:30:46 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 		return (ft_strdup(""));
 	while (ft_strchr(set, (int)string[ft_strlen(s1) - end - 1]) != NULL)
 		end ++;
-	ret_string = (char *)malloc(ft_strlen(s1) - end - start + 1);
+	ret_string = (char *)ft_malloc(ft_strlen(s1) - end - start + 1);
 	if (ret_string == NULL)
 		return (NULL);
 	while (start <= (int)ft_strlen(s1) - end - 1)

@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 18:52:34 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/04 19:34:48 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/25 11:30:46 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (ft_strlen(s) - start < len)
 		len = ft_strlen(s) - start;
 	if (len < 0)
-		return ((char *)malloc(0));
+		return ((char *)ft_malloc(0));
 	if ((unsigned int)ft_strlen(s) <= start)
 	{
 		string = (char *)ft_malloc(1);

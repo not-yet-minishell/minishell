@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 15:13:46 by yeoshin           #+#    #+#             */
-/*   Updated: 2023/11/05 20:51:54 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/25 11:30:46 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 		return (NULL);
 	count = 0;
 	length = ft_strlen(s);
-	ret_str = (char *)malloc(length + 1);
+	ret_str = (char *)ft_malloc(length + 1);
 	if (ret_str == NULL)
 		return (NULL);
 	while (count < length)
