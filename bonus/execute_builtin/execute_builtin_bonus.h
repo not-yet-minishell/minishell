@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 12:57:48 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/25 12:58:35 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/27 00:59:15 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ void	ft_env(char **cmd, t_list *env_list);
 void	ft_pwd(t_list *env_list);
 void	free_array(char **arr);
 int		check_export_cmd(char *cmd, t_list *env_list);
+int	check_valid_key(char *cmd);
 
 #endif

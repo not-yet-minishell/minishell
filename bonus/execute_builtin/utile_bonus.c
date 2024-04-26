@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 18:57:50 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/25 12:50:21 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/27 00:58:59 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,18 @@ void	free_array(char **arr)
 		idx++;
 	}
 	free(arr);
+}
+
+int	check_valid_key(char *cmd)
+{
+	int	idx;
+
+	idx = 0;
+	while (cmd[idx] != '\0' && cmd[idx] != '=')
+	{
+		if (ft_isalnum(cmd[idx]) == 0 && cmd[idx] != '_')
+			return (FALSE);
+		idx++;
+	}
+	return (TRUE);
 }

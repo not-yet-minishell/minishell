@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 04:36:18 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/26 18:40:33 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/27 00:59:40 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,12 @@ static int	check_unset_cmd(char *cmd, t_list *env_list)
 	int	idx;
 
 	idx = 0;
-	if (*cmd == '=' || (*cmd >= '0' && *cmd <= '9') || *cmd == '/')
+	if (*cmd == '=' || (*cmd >= '0' && *cmd <= '9') || \
+		check_valid_key(cmd) == FALSE)
 	{
 		change_exit_number(1, env_list);
 		error_handler("unset", cmd, "not a valid identifier\n");
 		return (FALSE);
-	}
-	while (cmd[idx] != '\0')
-	{
-		if (cmd[idx] == '-' || cmd[idx] == '=')
-		{
-			change_exit_number(1, env_list);
-			error_handler("unset", cmd, "not a valid identifier\n");
-			return (FALSE);
-		}
-		idx++;
 	}
 	return (TRUE);
 }
