@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard_match.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 10:45:01 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/24 10:16:42 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:28:01 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	is_match(char *str, char *pattern)
 
 int	match_point(char *str, int *s_idx, char *pattern, int *p_idx)
 {
-	while (str[*s_idx] == '.')
+	if (str[*s_idx] == '.')
 	{
 		if (str[*s_idx] == pattern[*p_idx])
 		{

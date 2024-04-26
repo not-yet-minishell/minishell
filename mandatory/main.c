@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:44:52 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/25 13:08:49 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/25 14:20:52 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ static t_list	*main_init(int argc, char *argv[], char **envp)
 	(void)argc;
 	(void)argv;
 	env_list = NULL;
-	if (*envp == NULL)
-		exit(1);
 	env_list = parse_env(envp);
 	return (env_list);
 }

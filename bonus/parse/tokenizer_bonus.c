@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:51:18 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/25 12:50:21 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/26 16:09:23 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_list	*tokenizer(char *line)
 	return (head);
 }
 
-int	check_quote_mark(char *line, int *i, t_list *head)
+int	check_quote_mark(char *line, int *i, t_list *head) // debug
 {
 	(void)head;
 	if (line[*i] == '\"' || line[*i] == '\'')
