@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minsignal_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 13:52:01 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/25 13:52:02 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/29 10:08:18 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 
 extern volatile sig_atomic_t	g_signal;
 void	signalinit(void);
-void	set_terminal_print_off(void);
 void	signal_heredoc(void);
 void	signal_readline(void);
 void	signalhandler(int signum);

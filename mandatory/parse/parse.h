@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:45:34 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/25 11:46:17 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/29 10:13:58 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define PARSE_H
 # define ERROR -1
 # define TRUE 1
-//# include "../minishell.h"
 # include "../../libft/libft.h"
 
 enum {
@@ -34,7 +33,7 @@ enum {
 };
 
 enum {
-	START = 0,
+	START = 14,
 	AND_TRUE,
 	AND_FALSE,
 	OR_TRUE,
@@ -42,7 +41,7 @@ enum {
 };
 
 enum {
-	LIST = 11,
+	LIST = 19,
 	SUBLIST,
 	PIPELINE,
 	CMD,

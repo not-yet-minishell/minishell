@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 04:20:46 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/24 12:57:46 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/04/29 10:02:51 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ static void	change_env(t_list *env_list, char *old_pwd)
 	if (find_env(env_list, "PWD") == TRUE)
 	{
 		pwd = getcwd(NULL, 0);
+		if (pwd == NULL)
+			pwd = ft_strdup("");
 		add_env = ft_strjoin("PWD=", pwd, '\0');
 		cmd[1] = add_env;
 		ft_export(cmd, env_list);

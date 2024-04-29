@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_builtin.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:56:57 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/26 23:53:43 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/29 10:10:21 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # define TRUE 1
 
 # include "../minishell.h"
-//# include "../../libft/libft.h"
 
 void	free_list(t_list *head);
 void	ft_exit(char **cmd, t_list *env_list);
