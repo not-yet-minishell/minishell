@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 19:59:20 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/25 12:50:21 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/26 18:38:38 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static int	open_heredoc(t_rd_node *node)
 		error_handler(node->filename, NULL, NULL);
 		return (FALSE);
 	}
+	unlink(node->filename);
 	dup2(fd, STDIN_FILENO);
 	close(fd);
 	return (TRUE);
@@ -67,7 +68,6 @@ static int	in_redirect(t_rd_node *node)
 	}
 	dup2(fd, STDIN_FILENO);
 	close(fd);
-	unlink(node->filename);
 	return (TRUE);
 }
 

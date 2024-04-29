@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 16:00:07 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/24 09:00:04 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/26 18:33:23 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ static int	check_flag(char **cmd, int *idx)
 	{
 		flag_idx = 0;
 		if (cmd[*idx][flag_idx] != '-')
+			return (ret_flag);
+		if (cmd[*idx][flag_idx + 1] == '\0')
 			return (ret_flag);
 		flag_idx++;
 		while (cmd[*idx][flag_idx] != '\0')

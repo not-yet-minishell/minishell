@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 10:24:32 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/25 12:50:21 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/25 14:24:12 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,13 @@ t_tree	*parse(char *line, t_list *env_list)
 	int		i;
 
 	i = 0;
-	while (line[i] == ' ')
+	while (line[i] == ' ' || line[i] == '\t' || line[i] == '\n')
 		i++;
 	if (line[i] == '\0')
-		return (parsing_error_exit_free(env_list, line, 0));
+	{
+		free(line);
+		return (NULL);
+	}
 	token_head = tokenizer(line);
 	if (!token_head)
 		return (parsing_error_exit_free(env_list, line, 258));

@@ -6,7 +6,7 @@
 /*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:12:37 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/25 12:50:21 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/25 14:26:14 by yeoshin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	clear_tree(t_tree *tree)
 	if (tree->redirect && tree->redirect->filename)
 	{
 		if (tree->redirect->rd_type == REDIRECT_HEREDOC \
-		&& access(tree->redirect->filename, F_OK))
+		&& access(tree->redirect->filename, F_OK) == 0)
 			unlink(tree->redirect->filename);
 		free(tree->redirect->filename);
 	}
