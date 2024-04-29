@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:51:18 by soljeong          #+#    #+#             */
-/*   Updated: 2024/04/27 00:48:30 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/29 10:06:32 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse_bonus.h"
 
-int	ft_is_ifs(char c);
-int	ft_is_metacharacter(char c);
-int	ft_quotemarks(char *line, int *i, char quote);
-int	check_quote_mark(char *line, int *i, t_list *head);
+static int	ft_is_ifs(char c);
+static int	ft_is_metacharacter(char c);
+static int	ft_quotemarks(char *line, int *i, char quote);
+static int	check_quote_mark(char *line, int *i, t_list *head);
 
 t_list	*tokenizer(char *line)
 {
@@ -45,7 +45,7 @@ t_list	*tokenizer(char *line)
 	return (head);
 }
 
-int	check_quote_mark(char *line, int *i, t_list *head)
+static int	check_quote_mark(char *line, int *i, t_list *head)
 {
 	(void)head;
 	if (line[*i] == '\"' || line[*i] == '\'')
@@ -58,14 +58,14 @@ int	check_quote_mark(char *line, int *i, t_list *head)
 	return (0);
 }
 
-int	ft_is_ifs(char c)
+static int	ft_is_ifs(char c)
 {
 	if (c == ' ' || c == '\t' || c == '\n')
 		return (1);
 	return (0);
 }
 
-int	ft_is_metacharacter(char c)
+static int	ft_is_metacharacter(char c)
 {
 	if (c == '|' || c == '&' || c == '(' || c == ')'
 		|| c == '>' || c == '<')
@@ -73,7 +73,7 @@ int	ft_is_metacharacter(char c)
 	return (0);
 }
 
-int	ft_quotemarks(char *line, int *i, char quote)
+static int	ft_quotemarks(char *line, int *i, char quote)
 {
 	*i += 1;
 	while (line[*i] && line[*i] != quote)

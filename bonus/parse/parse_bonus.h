@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yeoshin <yeoshin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 13:51:41 by yeoshin           #+#    #+#             */
-/*   Updated: 2024/04/25 13:51:42 by yeoshin          ###   ########.fr       */
+/*   Updated: 2024/04/29 10:14:11 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ enum {
 };
 
 enum {
-	START = 0,
+	START = 14,
 	AND_TRUE,
 	AND_FALSE,
 	OR_TRUE,
@@ -41,7 +41,7 @@ enum {
 };
 
 enum {
-	LIST = 11,
+	LIST = 19,
 	SUBLIST,
 	PIPELINE,
 	CMD,
