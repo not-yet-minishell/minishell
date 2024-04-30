@@ -35,6 +35,7 @@ ex ) Feat : Add tokenizer#2
  - wildcard : 솔
  - 따옴표 제거 : 솔
  - 시그널 처리 : 솔
+ - tester : 영기
 
 ## 🌟 1차 deadline  
 
