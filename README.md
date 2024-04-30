@@ -54,4 +54,4 @@ ex ) Feat : Add tokenizer#2
  - redirect in 상태일 때 파일을 읽고 unlink로 날려버림
 
 ## 2차 평가
-2024. 04. 30 통과!!
+2024. 4. 30 통과!!
