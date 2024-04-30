@@ -51,4 +51,7 @@ ex ) Feat : Add tokenizer#2
  ## 1차 평가 -> fail!!
  - env 뒤에 인자가 와도 실행함  
  - echo - n asd -> n asd를 개행 없이 출력함  
- - redirect in 상태일 때 파일을 읽고 unlink로 날려버림  
+ - redirect in 상태일 때 파일을 읽고 unlink로 날려버림
+
+## 2차 평가
+2024. 04. 30 통과!!
